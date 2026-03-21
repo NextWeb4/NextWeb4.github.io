@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>模块文章 · 自我刻度</title>
+<link href="../uploads/icon.jpg" rel="icon" type="image/jpeg"/>
+<link href="../uploads/icon.jpg" rel="apple-touch-icon"/>
+<style>
+        * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+        input,textarea { user-select:auto !important; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            color: #1d1d1f;
+            background-color: #1a1a1e;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .apple-blog {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 17px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 18px;
+            border-radius: 40px;
+            border: 0.5px solid rgba(255,255,255,0.2);
+            transition: background-color 0.2s;
+        }
+        .back-link:hover { background: rgba(255,255,255,0.25); }
+        .module-title {
+            font-size: 42px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        /* 搜索框样式 */
+        .search-wrapper {
+            margin-bottom: 30px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px 18px;
+            border: 0.5px solid rgba(255,255,255,0.3);
+            width: 100%;
+            transition: box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .search-container:focus-within {
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.3);
+            background-color: rgba(255,255,255,0.25);
+        }
+        .search-icon {
+            font-size: 20px;
+            color: rgba(255,255,255,0.8);
+            margin-right: 12px;
+        }
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 17px;
+            font-weight: 400;
+            color: #ffffff;
+            outline: none;
+            font-family: inherit;
+        }
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        .clear-btn {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            padding: 0 6px;
+            visibility: hidden;
+        }
+        .search-container.has-text .clear-btn {
+            visibility: visible;
+        }
+        .clear-btn:hover {
+            color: #ffffff;
+        }
+        .article-list {
+            list-style: none;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(16px);
+            border-radius: 36px;
+            padding: 30px;
+            border: 0.5px solid rgba(255,255,255,0.2);
+        }
+        .article-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-decoration: none;
+            color: white;
+            transition: background 0.2s;
+        }
+        .article-item:last-child { border-bottom: none; }
+        .article-item:hover { background: rgba(255,255,255,0.15); border-radius: 12px; }
+        .article-title { font-size: 20px; font-weight: 500; }
+        .article-date { font-size: 16px; color: rgba(255,255,255,0.7); }
+        .no-articles {
+            text-align: center;
+            padding: 60px;
+            color: rgba(255,255,255,0.6);
+            font-size: 18px;
+        }
+        .bg-loading {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="bg-loading" id="bg-loading">壁纸加载中...</div>
+<div class="apple-blog">
+<a class="back-link" href="../index.html">← 返回主页</a>
+<h1 class="module-title" id="module-title">📁 投资与思想</h1>
+<!-- 新增搜索框 -->
+<div class="search-wrapper">
+<div class="search-container" id="search-container">
+<span class="search-icon">🔍</span>
+<input class="search-input" id="module-search" placeholder="搜索本模块文章..." type="text"/>
+<span class="clear-btn" id="clear-search">✕</span>
+</div>
+</div>
+<div class="article-list" id="article-list"><a class="article-item" href="../article/%E6%84%9F%E6%83%B3%E4%B8%80%E5%88%9926.3.19.html"><span class="article-title">感想一则26.3.19</span><span class="article-date">2026-03-19</span></a><a class="article-item" href="../article/%E6%84%9F%E6%83%B3%E4%B8%80%E5%88%9925.6.21.html"><span class="article-title">感想一则25.6.21</span><span class="article-date">2025-06-21</span></a><a class="article-item" href="../article/%E6%84%9F%E6%83%B3%E4%B8%80%E5%88%9925.5.11.html"><span class="article-title">感想一则25.5.11</span><span class="article-date">2025-05-11</span></a><a class="article-item" href="../article/%E6%84%9F%E6%83%B3%E4%B8%80%E5%88%9925.4.30.html"><span class="article-title">感想一则25.4.30</span><span class="article-date">2025-04-30</span></a><a class="article-item" href="../article/%E6%84%9F%E6%83%B3%E4%B8%80%E5%88%9925.3.15.html"><span class="article-title">感想一则25.3.15</span><span class="article-date">2025-03-15</span></a></div>
+</div>
+
+
+<script>
+(function() {
+    function setBingWallpaper() {
+        const bingImageUrl = `https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN`;
+        const img = new Image();
+        img.onload = function() {
+            document.body.style.backgroundImage = `url('${bingImageUrl}')`;
+        };
+        img.onerror = function() {
+            document.body.style.background = '#1a1a1e';
+        };
+        img.src = bingImageUrl;
+    }
+    setBingWallpaper();
+
+    function isInputElement(t) { return t.closest('input,textarea'); }
+    document.addEventListener('contextmenu', e => { if (!isInputElement(e.target)) e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (isInputElement(e.target)) return;
+        const k = e.key.toLowerCase();
+        if ((e.ctrlKey||e.metaKey) && ['c','x','a','v','s'].includes(k)) e.preventDefault();
+        if (e.key==='F12'||(e.ctrlKey&&e.shiftKey&&k==='i')||(e.ctrlKey&&k==='u')) e.preventDefault();
+    });
+    ['copy','cut','selectstart','dragstart'].forEach(ev => document.addEventListener(ev, e => { if (!isInputElement(e.target)) e.preventDefault(); }));
+    document.body.style.webkitUserSelect = 'none';
+    document.body.style.userSelect = 'none';
+
+    const allArticles = [{"title": "感想一则26.3.19", "date": "2026-03-19", "module": "投资思想", "sticky": false, "content": "<!--StartFragment--><p><span data-tt=\"{}\" style=\"white-space-collapse: preserve;\"> 市场是一个大课堂，我们总想把自己经历过的失败和挫折总结成经验，用文字的形式去教诲给热衷于激流勇进的后来人，也只希望他们能少走一些弯路。可这市场纸醉金迷也诱惑丛生，他们也因怀揣着憧憬和对未来的期望，所以对此置若罔闻，但终在未来的某一天的某一时刻，他们会真正明白，最初的道理已在此时形成闭环。在我之前的前辈是如此，在我之后的后来人也是同样，所以一代代人才把当年在三尺讲台上理解到的道理，继续传递了下去。</span></p><!--EndFragment--><!--EndFragment-->", "password": ""}, {"title": "感想一则25.6.21", "date": "2025-06-21", "module": "投资思想", "sticky": false, "content": "做人要大爱，大爱就是慈悲，慈悲必喜舍，喜舍同布施。\r<div>做股如做人，常人不明了，只想求钱财，钱财不外来，皆有此心出。\r</div><div>所谓“凡我所失，皆非我所有；凡我所求，皆受其所困。万物皆为我所用，而非我所属。君子使物，不为物使。大道至简，无欲则刚，无为则无所不为”\r</div><div>唯谨记“先为不可胜，以待敌之可胜”。手持实体资源，静观能源之变，便是当下“不可胜”之拙策。</div>", "password": ""}, {"title": "感想一则25.5.11", "date": "2025-05-11", "module": "投资思想", "sticky": false, "content": "<div>一</div><div>\r</div><div>每当面临亏损时，便会想起“下下人有上上智”这七个字。它揭露了我们普通人最质朴的生存规律——那些看似平凡的人，或许没有受过良好的教育，却能从生活实践中总结出朴素又深刻的经验，在日复一日的生计中练就解决实际问题的能力。\r</div><div>上上智，绝非单指书面知识，更多是一种贴近现实的智慧——通过对人性的观察、对事物发展规律的把握，引发新的思考。</div><div><br></div><div>二</div><div>自古以来，农民可以根据节气变更预测农作物的生长进度，运用的便是千百年积累出来的“上上智”。也因此，他们素来执行着春耕、夏长、秋收、冬藏。\r</div><div>其中最重要的，莫过于冬藏。因为如果来年可能出现危机，今年的粮食储备就是支撑渡过的生存保障。民以食为天，能有饭吃这件事，比任何丰收都来得重要。\r</div><div>这便是体现在交易中的纪律。道理极好理解，可为何换位到交易中，却让无数人迷失？\r</div><div>储藏的粮食，就是本金。绝不能今日丰收便肆意挥霍——没人知道明天会是什么样。只有把每一粒粮食合理规划，才能应对将来可能出现的任何局面。学习农民，就是要学习他们在种植农作物时遵循的四个季节规律。一分耕耘一分收获，春耕时耐心等待夏长，秋收时不要忘记冬藏，即是对交易本质的理解。</div><div><br></div><div>三</div><div>我前几年自诩聪明，总喜欢走捷径，却从未想过那不过是假聪明。到头来，竹篮打水一场空。\r</div><div>可我又不喜欢笨人——他们只懂一味播种和收获，不懂变通。虽然活得久，却付出了更多辛劳，区别也不过是相比于前者，多了些煎熬的时间。\r</div><div>很显然，两者皆不可取。\r</div><div>若想获得更丰厚的利润，又减少重复劳作，就得既遵循大局发展，又要动脑思考——找到能产生更高效率的规律和方法。</div><div>四\r</div><div>所谓登顶者，不必是天才，但其必有持之以恒的耐力和决心。<br></div><div><br></div><div>五</div><div><span style=\"white-space-collapse: preserve;\">“Trees don't grow to the sky”说的是“树长不过天”。投资界常常用这个谚语告诫，任何投资标的不可能永远上涨。尽管大家都知道或听过这个说法，但估计没人仔细研究过，树木会不会永远上长这个问题。</span></div><div><span style=\"white-space-collapse: preserve;\">那么问题来了:世界上最高的树长到了多少米?树木太高了就停止生长了吗?如果树木太高了就停止了生长，是什么原因造成的呢?树木有没有生命周期?</span></div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div><div>\r</div>", "password": ""}, {"title": "感想一则25.4.30", "date": "2025-04-30", "module": "投资思想", "sticky": true, "content": "所谓 “见日月不为明目 闻雷霆不为聪耳”\n<div>&nbsp; 当你看见河，你已在河之外。当你看见山，你已在山之外。人生的些许痛苦在于,    当我们能够真正理解一件事情中蕴藏的道理,我们往往就已经错过了一次机遇。但幸运的是，人生是很长久的，几十年的漫长经历，总会有让我们融会贯通的瞬间，让我们总结出智慧和方法。\n</div><div>&nbsp; 不做什么比做什么更重要，忘记什么比记得什么更重要。学会做时间的朋友，做自己的传奇。\n</div><div>&nbsp; 最后附一首诗吧\n</div><div>骤起风波卷万金，沉舟未惧千层浪。\n</div><div>胸中丘壑自峥嵘，袖揽乾坤吞四海。</div><div>矢志能崩百丈溪，扫平千仞辟新天。\n</div><div>安得长缨缚苍龙，几时倒海卷西东？</div><div style=\"text-align: justify; text-indent: 28px;\">注:此文发布时 账户浮亏超20w美元 系接触加密货币以来最大一笔亏损 虽然后续透过对冲和微策略扭亏为盈 但心态与心境早已不同 特此置顶 权为反省！</div><!--StartFragment--><!--EndFragment--><!--StartFragment--><!--EndFragment-->", "password": ""}, {"title": "感想一则25.3.15", "date": "2025-03-15", "module": "投资思想", "sticky": false, "content": "过去一段时间最让我烦闷的是自己的知行不一，知道什么是对的但是做不到，知道什么是错的但是管不住。归根到底是心。\n<div>&nbsp;繁重的情绪、惆怅的心态和臃肿的体态都是身体的负担，这些负担到最后都会压垮自己。健康永远是最可贵的。\n</div><div>&nbsp;心平气和的面对一切事情，金钱也不过是贪欲的一部分，是认知的变现，不要舍本逐末。在任何情绪将要产生的时候消化掉它，顺其自然而又不被其所压制左右。\n</div><div>&nbsp;世间所有的事情都是执念，放下我执，万般自在。 交易的不是技巧，交易的是心，交易的是心境，这是我最想说的。\n</div><div>不多被短暂的多巴胺挟持，不做什么比做什么更重要，忘记什么比记得什么更重要。\n</div><div>为了复盘而复盘，为了操作而操作，为了模式而模式，一直都在追求术，无论是情绪接力和低位补涨都是术的层面，可是所有的术都是基于道去提取的，没有树干的树枝是活不下去的，顺势而为，何为势？势是基于道的判断，再好的模式和技术与势逆行终将失败，只要你是顺势，顺道而为，那么无论是哪种操作手法都是对的。谋定而后动\n</div><div>这两天回撤了一部分利润 虽然还是盈利，但是如果这个状态继续操作下去，必定会亏损。今天平掉了所有仓位，冷静观望一两个月。</div>", "password": ""}];
+    const searchInput = document.getElementById('module-search');
+    const clearBtn = document.getElementById('clear-search');
+    const searchContainer = document.getElementById('search-container');
+
+    function renderArticles(articles) {
+        const listEl = document.getElementById('article-list');
+        if (articles.length === 0) {
+            listEl.innerHTML = '<div class="no-articles">暂无文章</div>';
+            return;
+        }
+        listEl.innerHTML = articles.map(a => `
+            <a class="article-item" href="../article/${encodeURIComponent(a.title)}.html">
+                <span class="article-title">${escapeHtml(a.title)}</span>
+                <span class="article-date">${a.date}</span>
+            </a>
+        `).join('');
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            const keyword = e.target.value.trim().toLowerCase();
+            searchContainer.classList.toggle('has-text', keyword !== '');
+            if (!keyword) {
+                renderArticles(allArticles);
+                return;
+            }
+            const filtered = allArticles.filter(a => a.title.toLowerCase().includes(keyword));
+            renderArticles(filtered);
+        });
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            searchContainer.classList.remove('has-text');
+            renderArticles(allArticles);
+            searchInput.focus();
+        });
+    }
+}());
+</script>
+</body>
+</html>

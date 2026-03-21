@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>个人简介 · 自我刻度</title>
+<link href="uploads/icon.jpg" rel="icon" type="image/jpeg"/>
+<link href="uploads/icon.jpg" rel="apple-touch-icon"/>
+<style>
+        * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+        input,textarea { user-select:auto !important; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background-color: #1a1a1e;
+            color: #e5e5e7;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .apple-blog {
+            max-width: 800px;
+            width: 100%;
+            padding: 40px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 17px;
+            background: rgba(60,60,70,0.3);
+            backdrop-filter: blur(10px);
+            padding: 8px 18px;
+            border-radius: 40px;
+            border: 0.5px solid rgba(255,255,255,0.1);
+            transition: background-color 0.2s;
+        }
+        .back-link:hover { background: rgba(80,80,90,0.4); }
+
+        .profile-card {
+            background: rgba(40,40,45,0.4);
+            backdrop-filter: blur(16px);
+            border-radius: 36px;
+            padding: 40px;
+            border: 0.5px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .profile-header {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar-container {
+            width: 200px;
+            height: 250px;
+            background: #3a3a3c;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #2c2c2e;
+        }
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #8e8e93;
+            background: #3a3a3c;
+        }
+
+        .name-title {
+            flex: 1;
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .name {
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.9;
+            line-height: 1.2;
+        }
+
+        .divider {
+            margin: 20px 0 30px;
+            border: none;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .bio {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+            border: 0.5px solid rgba(255,255,255,0.2);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 16px;
+            color: white;
+        }
+
+        .bg-loading {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .profile-header { flex-direction: column; text-align: center; }
+            .avatar-container { width: 150px; height: 200px; }
+            .name-title { justify-content: center; }
+            .name { font-size: 36px; }
+            .title { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="apple-blog">
+<a class="back-link" href="index.html">← 返回主页</a>
+<div class="profile-card">
+<div class="profile-header">
+<div class="avatar-container">
+<img alt="头像" class="avatar" id="profile-avatar" src="/uploads/42cc117d-a7d9-4f0f-adf3-c63bcd28c619.png" style="display: block;"/>
+<div class="avatar-placeholder" id="avatar-placeholder" style="display: none;">👤</div>
+</div>
+<div class="name-title">
+<span class="name" id="profile-name" style="color: #d0cfd4;">黄浩翔</span>
+<span class="title" id="profile-title" style="color: #d0cfd4;">Alpha证券投资顾问股份有限公司 创投</span>
+</div>
+</div>
+<hr class="divider"/>
+<div class="section">
+<h2>📝 个人简介</h2>
+<div class="bio" id="profile-bio">暂无简介</div>
+</div>
+<div class="section">
+<h2>🔧 技能</h2>
+<div class="skills" id="profile-skills"><span class="skill">量化</span><span class="skill">私募</span><span class="skill">汇编</span><span class="skill">网络安全</span><span class="skill">VC</span><span class="skill">系统集成</span><span class="skill">项目管理</span><span class="skill">PA</span><span class="skill">SMC</span><span class="skill">ICT</span><span class="skill">均线</span><span class="skill">价格行为</span><span class="skill">缠论</span><span class="skill">Prompt Project</span><span class="skill">NLP</span><span class="skill">OpenWrt</span><span class="skill">OpenClaw</span><span class="skill">CodeX</span><span class="skill">Fintech</span><span class="skill">波浪理论</span><span class="skill">Macd</span><span class="skill">Web3</span><span class="skill">交易系统</span><span class="skill">CTF</span><span class="skill">MA</span><span class="skill">PE</span></div>
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+    function setBingWallpaper() {
+        const bingImageUrl = `https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN`;
+        const img = new Image();
+        img.onload = function() {
+            document.body.style.backgroundImage = `url('${bingImageUrl}')`;
+        };
+        img.onerror = function() {
+            document.body.style.background = '#1a1a1e';
+        };
+        img.src = bingImageUrl;
+    }
+    setBingWallpaper();
+
+    function isInputElement(t) { return t.closest('input,textarea'); }
+    document.addEventListener('contextmenu', e => { if (!isInputElement(e.target)) e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (isInputElement(e.target)) return;
+        const k = e.key.toLowerCase();
+        if ((e.ctrlKey||e.metaKey) && ['c','x','a','v','s'].includes(k)) e.preventDefault();
+        if (e.key==='F12'||(e.ctrlKey&&e.shiftKey&&k==='i')||(e.ctrlKey&&k==='u')) e.preventDefault();
+    });
+    ['copy','cut','selectstart','dragstart'].forEach(ev => document.addEventListener(ev, e => { if (!isInputElement(e.target)) e.preventDefault(); }));
+    document.body.style.webkitUserSelect = 'none';
+    document.body.style.userSelect = 'none';
+})();
+</script>
+</body>
+</html>

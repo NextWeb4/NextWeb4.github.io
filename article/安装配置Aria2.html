@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>自我刻度·文章详情</title>
+<link href="../uploads/icon.jpg" rel="icon" type="image/jpeg"/>
+<link href="../uploads/icon.jpg" rel="apple-touch-icon"/>
+<style>
+        /* 原有样式保持不变，请复制您原来的所有样式 */
+        * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+        input,textarea { user-select:auto !important; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            color: #e5e5e7;
+            background-color: #1a1a1e;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .apple-blog {
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+        .blog-header { margin-bottom:30px; padding:0 12px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+        .blog-header h1 { font-size:36px; font-weight:600; letter-spacing:-0.015em; line-height:1.2; color:#ffffff; margin-right:20px; flex:1 1 auto; text-shadow:0 2px 10px rgba(0,0,0,0.3); }
+        .blog-header h1 .thin { font-weight:400; color:rgba(255,255,255,0.8); display:block; font-size:24px; margin-top:4px; }
+        .search-wrapper { position:relative; max-width:320px; width:100%; flex-shrink:0; }
+        .search-container { display:flex; align-items:center; background-color:rgba(60,60,70,0.3); backdrop-filter:blur(10px); border-radius:50px; padding:8px 18px; border:0.5px solid rgba(255,255,255,0.1); width:100%; transition:box-shadow 0.2s ease, background-color 0.2s ease; }
+        .search-container:focus-within { box-shadow:0 0 0 4px rgba(10,132,255,0.3); background-color:rgba(80,80,90,0.4); }
+        .search-icon { font-size:20px; color:rgba(255,255,255,0.8); margin-right:12px; cursor:pointer; }
+        .search-input { flex:1; border:none; background:transparent; font-size:17px; font-weight:400; color:#ffffff; outline:none; font-family:inherit; min-width:150px; }
+        .search-input::placeholder { color:rgba(255,255,255,0.5); }
+        .clear-btn { font-size:18px; color:rgba(255,255,255,0.8); cursor:pointer; padding:0 6px; visibility:hidden; }
+        .search-container.has-text .clear-btn { visibility:visible; }
+        .clear-btn:hover { color:#ffffff; }
+        .suggestions { position:absolute; top:100%; left:0; right:0; background:rgba(40,40,45,0.95); backdrop-filter:blur(20px); border-radius:20px; margin-top:8px; padding:8px 0; border:0.5px solid rgba(255,255,255,0.1); max-height:300px; overflow-y:auto; z-index:1000; display:none; box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+        .suggestion-item { padding:10px 18px; color:#e5e5e7; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:15px; transition:background 0.1s; }
+        .suggestion-item:hover, .suggestion-item.selected { background:rgba(255,255,255,0.1); }
+        .suggestion-item .suggestion-date { font-size:13px; color:rgba(255,255,255,0.5); }
+        .back-link { display:inline-flex; align-items:center; gap:8px; margin-bottom:20px; color:rgba(255,255,255,0.8); text-decoration:none; font-size:17px; background:rgba(60,60,70,0.3); backdrop-filter:blur(10px); padding:8px 18px; border-radius:40px; border:0.5px solid rgba(255,255,255,0.1); transition:background-color 0.2s; }
+        .back-link:hover { background:rgba(80,80,90,0.4); }
+        .article-layout { display:flex; gap:30px; align-items:flex-start; }
+        .main-column { flex:2; min-width:0; }
+        .side-column { flex:1; min-width:240px; background:rgba(40,40,45,0.3); backdrop-filter:blur(16px); border-radius:28px; padding:24px 20px; border:0.5px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.2); }
+        .article-card { background:rgba(40,40,45,0.4); backdrop-filter:blur(16px); border-radius:36px; padding:40px; border:0.5px solid rgba(255,255,255,0.1); box-shadow:0 20px 40px rgba(0,0,0,0.3); }
+        .article-title { font-size:42px; font-weight:600; color:#ffffff; margin-bottom:16px; line-height:1.2; text-shadow:0 2px 10px rgba(0,0,0,0.3); }
+        .article-meta { display:flex; gap:16px; font-size:17px; color:rgba(255,255,255,0.6); margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .article-content { color:rgba(255,255,255,0.9); font-size:18px; line-height:1.6; margin-bottom:40px; }
+        .article-content p { margin-bottom:1.2em; }
+        .password-overlay { text-align:center; padding:40px; background:rgba(255,255,255,0.1); backdrop-filter:blur(16px); border-radius:36px; margin-bottom:30px; }
+        .password-input { background:#3a3a3c; border:1px solid #4a4a4e; color:#e5e5e7; border-radius:30px; padding:12px 20px; font-size:16px; width:300px; margin:20px auto; display:block; }
+        .password-btn { background:#0a84ff; color:white; border:none; border-radius:30px; padding:12px 30px; font-size:16px; cursor:pointer; }
+        .error-message { color:#ff6b6b; margin-top:10px; }
+        .side-title { font-size:20px; font-weight:600; color:#ffffff; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .related-list { list-style:none; }
+        .related-item { margin-bottom:16px; padding-bottom:12px; border-bottom:0.5px solid rgba(255,255,255,0.1); }
+        .related-item:last-child { border-bottom:none; }
+        .related-link { display:flex; justify-content:space-between; align-items:center; text-decoration:none; color:rgba(255,255,255,0.9); transition:background-color 0.2s; padding:8px 10px; border-radius:12px; margin:-8px -10px; }
+        .related-link:hover { background-color:rgba(255,255,255,0.1); }
+        .related-title { font-size:16px; font-weight:450; max-width:70%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .related-date { font-size:14px; color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.1); padding:2px 10px; border-radius:30px; border:0.5px solid rgba(255,255,255,0.2); }
+        .no-related { color:rgba(255,255,255,0.5); font-style:italic; text-align:center; padding:20px 0; }
+        .nav-buttons { display:flex; justify-content:space-between; margin-top:30px; gap:20px; }
+        .nav-button { background:rgba(60,60,70,0.3); backdrop-filter:blur(10px); border:0.5px solid rgba(255,255,255,0.1); color:white; padding:12px 24px; border-radius:40px; text-decoration:none; font-size:16px; transition:background 0.2s; flex:1; text-align:center; min-width:120px; }
+        .nav-button:hover:not(.disabled) { background:rgba(80,80,90,0.4); }
+        .nav-button.disabled { opacity:0.3; pointer-events:none; background:rgba(40,40,45,0.2); }
+        .bg-loading { position:fixed; top:20px; right:20px; background:rgba(0,0,0,0.5); color:white; padding:5px 12px; border-radius:30px; font-size:12px; z-index:100; backdrop-filter:blur(5px); display:none; }
+        @media (max-width:800px) { .article-layout { flex-direction:column; } .main-column, .side-column { width:100%; } .side-column { margin-top:30px; } }
+        @media (max-width:600px) { .article-card { padding:30px 20px; } .article-title { font-size:32px; } }
+    </style>
+</head>
+<body>
+<div class="bg-loading" id="bg-loading">壁纸加载中...</div>
+
+<div class="apple-blog">
+<header class="blog-header">
+<h1>
+                自我刻度·记录
+                <span class="thin">文章详情</span>
+</h1>
+<div class="search-wrapper">
+<div class="search-container" id="search-container">
+<span class="search-icon">🔍</span>
+<input class="search-input" id="global-search" placeholder="搜索文章..." type="text"/>
+<span class="clear-btn">✕</span>
+</div>
+<div class="suggestions" id="suggestions"></div>
+</div>
+</header>
+<a class="back-link" href="../index.html">← 返回主页</a>
+<div class="article-layout">
+<div class="main-column">
+<div class="article-card">
+<h1 class="article-title" id="article-title">安装配置Aria2</h1>
+<div class="article-meta">
+<span id="article-date">📅 2020-08-07</span>
+<span id="article-module">📁 技术网络</span>
+</div>
+<div class="article-content" id="article-content">官网下载Aria2程序: https://aria2.github.io/<div>解压↓</div><div><img alt="image" src="/uploads/3b50f19d-fc19-445f-b62d-295ba92f3d0d.png" style="max-width:100%;"/><br/></div><div>其实我们只需要其中的aria2c这个可执行文件，这就是最新64位版本的Aria2</div><div>Aria2 相关下载-Windows 懒人包下载↓</div><div>http://211.143.146.215:82/1Q2W3E4R5T6Y7U8I9O0P1Z2X3C4V5B/aria2c.com/archiver/aria2.zip</div><div><img alt="image" src="/uploads/986f5588-3862-454f-aca3-65b534e52b92.png" style="max-width:100%;"/><br/></div><div>这个可执行文件的作用是让你不用写命令行就可以运行Aria2，可以简单理解为 Aira2的启动器或快捷方式，添加到快捷启动栏后，需要下载时点击一下这个图标，Aria2就启动了。启动后会图标会现实中右下角的通知区域，不需要使用Aria2时，右键退出就行。</div><div><img alt="image" src="/uploads/555caedf-aa3a-46fc-9894-5b48acba7a63.png" style="max-width:100%;"/><br/></div><div>所下载的Windows懒人包里的Aria2并不一定是最新版。所以要用官网下载的最新版aria2c.exe替换。或者也可以新建一个文件夹，把最新版的aria2c.exe、和黑色图标的aria2.exe放入，这个文件夹可视为绿色版的下载软件了，按照你的习惯放到软件存放目录。可以跟你的下载文件夹在不同盘符，没有影响的。</div><div>添加aria2.session文件。这个文件记录了任务记录，必须在下载目标文件夹中。用记事本新建一个空白文件，然后另存为-，保存类型为：所有文件即可</div><div><img alt="image" src="/uploads/e51f9dd6-7d77-4bb1-bf64-5da111e479f1.png" style="max-width:100%;"/><br/></div><div>把这个文件放到你的下载目标文件夹</div><div>在Aria2软件存放文件夹，放置了两个可执行文件的那个。用记事本新建一个空白文件，然后另存为-aria2.conf，保存类型为：所有文件即可。</div><div>用记事本打开用aria2.conf，此时是空白的，粘贴如下代码，此代码引用自《Aria2 &amp; YAAW 使用说明》，按需修改保存即可。当中#号代表注释内容，删除了#号的注释项才会生效。</div><div>## '#'开头为注释内容, 选项都有相应的注释说明, 根据需要修改 ##</div><div>## 被注释的选项填写的是默认值, 建议在需要修改时再取消注释  ##</div><div>## 文件保存相关 ##</div><div># 文件的保存路径(可使用绝对路径或相对路径), 默认: 当前启动位置</div><div>dir=~/downloads</div><div># 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M</div><div>#disk-cache=32M</div><div># 文件预分配方式, 能有效降低磁盘碎片, 默认:prealloc</div><div># 预分配所需时间: none &lt; falloc ? trunc &lt; prealloc</div><div># falloc和trunc则需要文件系统和内核支持</div><div># NTFS建议使用falloc, EXT3/4建议trunc, MAC 下需要注释此项</div><div>#file-allocation=none</div><div># 断点续传</div><div>continue=true</div><div>## 下载连接相关 ##</div><div># 最大同时下载任务数, 运行时可修改, 默认:5</div><div>#max-concurrent-downloads=5</div><div># 同一服务器连接数, 添加时可指定, 默认:1</div><div>max-connection-per-server=5</div><div># 最小文件分片大小, 添加时可指定, 取值范围1M -1024M, 默认:20M</div><div># 假定size=10M, 文件为20MiB 则使用两个来源下载; 文件为15MiB 则使用一个来源下载</div><div>min-split-size=10M</div><div># 单个任务最大线程数, 添加时可指定, 默认:5</div><div>#split=5</div><div># 整体下载速度限制, 运行时可修改, 默认:0</div><div>#max-overall-download-limit=0</div><div># 单个任务下载速度限制, 默认:0</div><div>#max-download-limit=0</div><div># 整体上传速度限制, 运行时可修改, 默认:0</div><div>#max-overall-upload-limit=0</div><div># 单个任务上传速度限制, 默认:0</div><div>#max-upload-limit=0</div><div># 禁用IPv6, 默认:false</div><div>#disable-ipv6=true</div><div># 连接超时时间, 默认:60</div><div>#timeout=60</div><div># 最大重试次数, 设置为0表示不限制重试次数, 默认:5</div><div>#max-tries=5</div><div># 设置重试等待的秒数, 默认:0</div><div>#retry-wait=0</div><div>## 进度保存相关 ##</div><div># 从会话文件中读取下载任务</div><div>input-file=/etc/aria2/aria2.session</div><div># 在Aria2退出时保存`错误/未完成`的下载任务到会话文件</div><div>save-session=/etc/aria2/aria2.session</div><div># 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0</div><div>#save-session-interval=60</div><div>## RPC相关设置 ##</div><div># 启用RPC, 默认:false</div><div>enable-rpc=true</div><div># 允许所有来源, 默认:false</div><div>rpc-allow-origin-all=true</div><div># 允许非外部访问, 默认:false</div><div>rpc-listen-all=true</div><div># 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同</div><div>#event-poll=select</div><div># RPC监听端口, 端口被占用时可以修改, 默认:6800</div><div>#rpc-listen-port=6800</div><div># 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项</div><div>#rpc-secret=&lt;TOKEN&gt;</div><div># 设置的RPC访问用户名, 此选项新版已废弃, 建议改用 --rpc-secret 选项</div><div>#rpc-user=&lt;USER&gt;</div><div># 设置的RPC访问密码, 此选项新版已废弃, 建议改用 --rpc-secret 选项</div><div>#rpc-passwd=&lt;PASSWD&gt;</div><div># 是否启用 RPC 服务的 SSL/TLS 加密,</div><div># 启用加密后 RPC 服务需要使用 https 或者 wss 协议连接</div><div>#rpc-secure=true</div><div># 在 RPC 服务中启用 SSL/TLS 加密时的证书文件,</div><div># 使用 PEM 格式时，您必须通过 --rpc-private-key 指定私钥</div><div>#rpc-certificate=/path/to/certificate.pem</div><div># 在 RPC 服务中启用 SSL/TLS 加密时的私钥文件</div><div>#rpc-private-key=/path/to/certificate.key</div><div>## BT/PT下载相关 ##</div><div># 当下载的是一个种子(以.torrent结尾)时, 自动开始BT任务, 默认:true</div><div>#follow-torrent=true</div><div># BT监听端口, 当端口被屏蔽时使用, 默认:6881-6999</div><div>listen-port=51413</div><div># 单个种子最大连接数, 默认:55</div><div>#bt-max-peers=55</div><div># 打开DHT功能, PT需要禁用, 默认:true</div><div>enable-dht=false</div><div># 打开IPv6 DHT功能, PT需要禁用</div><div>#enable-dht6=false</div><div># DHT网络监听端口, 默认:6881-6999</div><div>#dht-listen-port=6881-6999</div><div># 本地节点查找, PT需要禁用, 默认:false</div><div>#bt-enable-lpd=false</div><div># 种子交换, PT需要禁用, 默认:true</div><div>enable-peer-exchange=false</div><div># 每个种子限速, 对少种的PT很有用, 默认:50K</div><div>#bt-request-peer-speed-limit=50K</div><div># 客户端伪装, PT需要</div><div>peer-id-prefix=-TR2770-</div><div>user-agent=Transmission/2.77</div><div># 当种子的分享率达到这个数时, 自动停止做种, 0为一直做种, 默认:1.0</div><div>seed-ratio=0</div><div># 强制保存会话, 即使任务已经完成, 默认:false</div><div># 较新的版本开启后会在任务完成后依然保留.aria2文件</div><div>#force-save=false</div><div># BT校验相关, 默认:true</div><div>#bt-hash-check-seed=true</div><div># 继续之前的BT任务时, 无需再次校验, 默认:false</div><div>bt-seed-unverified=true</div><div># 保存磁力链接元数据为种子文件(.torrent文件), 默认:false</div><div>bt-save-metadata=true</div><div>路径可以使用绝对路径，我的Aria2软件是放在C盘，下载目录是D盘，所以在aria2.conf这个配置文件中，路径和进度保存要设置在同一个文件夹：</div><div>dir=D:/Aria2/</div><div>.......</div><div>## 进度保存相关 ##</div><div># 从会话文件中读取下载任务</div><div>input-file=D:\aria2\aria2.session</div><div># 在Aria2退出时保存`错误/未完成`的下载任务到会话文件</div><div>save-session=D:\aria2\aria2.session</div><div>另外我希望打开DHT功能，代码就改几个字母</div><div>enable-dht=true</div><div>理解为一个文字化的软件设置界面就可以了。顺着一行行看一下，根据自己的需求设定数值或者填写true或false就行，几分钟就可以设置完成。</div><div>需要注意的是，因软件限制，每台服务器最大连接数只能填16，超过这个数值就会报错。</div><div>max-connection-per-server=16</div><div>根据自身需求修改完参数后保存。确保aria2.conf、aria2c.exe(Aria2主程序)、aira2.exe（Aria2启动器），在同一目录下。aria2.session在下载目标目录下。现在Aria2已结配置好了，点击aira2.exe（Aria2启动器）图标，此时Aria2已开始运行。</div><div>Aira2相当轻量化，没有软件界面。怎样添加下载任务呢？十分简单，打开浏览器，输入网址aria2c.com就可以打开操作界面了。可以把这个网址放到书签中，方便使用。</div><div>可以添加http、https、磁链、BT种子（Aira2不支持ed2k链接）开始下载。成功安装后不会有报错提示，右上角可以看到Aira2的版本号。</div><div>上面步骤写的很多，其实总结下思路，就是获得Aria2启动器、最新版主程序-修改配置文件-启动-打开WebUI控制页-下载。</div><div><br/></div><div>解决Aria2 BT下载速度慢没速度的问题</div><div>获得最新的Tracker列表信息后，直接粘贴到aria2.conf文件的最后，记得看过一个帖子要求用英文逗号隔开：</div><div>bt-tracker=udp://tracker.skyts.net:6969/announce,udp://tracker.safe.moe:6969/announce,udp://tracker.piratepublic.com:1337/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.leechers-paradise.org:6969/announce,udp://allesanddro.de:1337/announce,udp://9.rarbg.com:2710/announce,http://p4p.arenabg.com:1337/announce,udp://p4p.arenabg.com:1337/announce,http://tracker.opentrackr.org:1337/announce,udp://tracker.opentrackr.org:1337/announce,udp://public.popcorn-tracker.org:6969/announce,udp://tracker2.christianbro.pw:6969/announce,udp://tracker1.xku.tv:6969/announce,udp://tracker1.wasabii.com.tw:6969/announce,udp://tracker.zer0day.to:1337/announce,udp://peerfect.org:6969/announce,udp://tracker.mg64.net:6969/announce,udp://open.facedatabg.net:6969/announce</div><div><br/></div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div></div>
+<div class="nav-buttons" id="article-nav"></div>
+</div>
+</div>
+<div class="side-column">
+<h3 class="side-title" id="side-title"></h3>
+<ul class="related-list" id="related-list"></ul>
+</div>
+</div>
+</div>
+
+<script>
+async function sha256(message) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+(function() {
+    const articleData = {"title": "安装配置Aria2", "date": "2020-08-07", "module": "技术网络", "sticky": false, "content": "官网下载Aria2程序: https://aria2.github.io/\r<div>解压↓\r</div><div><img alt=\"image\" src=\"/uploads/3b50f19d-fc19-445f-b62d-295ba92f3d0d.png\" style=\"max-width:100%;\"/><br/></div><div>其实我们只需要其中的aria2c这个可执行文件，这就是最新64位版本的Aria2\r</div><div>Aria2 相关下载-Windows 懒人包下载↓\r</div><div>http://211.143.146.215:82/1Q2W3E4R5T6Y7U8I9O0P1Z2X3C4V5B/aria2c.com/archiver/aria2.zip\r</div><div><img alt=\"image\" src=\"/uploads/986f5588-3862-454f-aca3-65b534e52b92.png\" style=\"max-width:100%;\"/><br/></div><div>这个可执行文件的作用是让你不用写命令行就可以运行Aria2，可以简单理解为 Aira2的启动器或快捷方式，添加到快捷启动栏后，需要下载时点击一下这个图标，Aria2就启动了。启动后会图标会现实中右下角的通知区域，不需要使用Aria2时，右键退出就行。</div><div><img alt=\"image\" src=\"/uploads/555caedf-aa3a-46fc-9894-5b48acba7a63.png\" style=\"max-width:100%;\"/><br/></div><div>所下载的Windows懒人包里的Aria2并不一定是最新版。所以要用官网下载的最新版aria2c.exe替换。或者也可以新建一个文件夹，把最新版的aria2c.exe、和黑色图标的aria2.exe放入，这个文件夹可视为绿色版的下载软件了，按照你的习惯放到软件存放目录。可以跟你的下载文件夹在不同盘符，没有影响的。\r</div><div>添加aria2.session文件。这个文件记录了任务记录，必须在下载目标文件夹中。用记事本新建一个空白文件，然后另存为-，保存类型为：所有文件即可\r</div><div><img alt=\"image\" src=\"/uploads/e51f9dd6-7d77-4bb1-bf64-5da111e479f1.png\" style=\"max-width:100%;\"/><br/></div><div>把这个文件放到你的下载目标文件夹\r</div><div>在Aria2软件存放文件夹，放置了两个可执行文件的那个。用记事本新建一个空白文件，然后另存为-aria2.conf，保存类型为：所有文件即可。\r</div><div>用记事本打开用aria2.conf，此时是空白的，粘贴如下代码，此代码引用自《Aria2 &amp; YAAW 使用说明》，按需修改保存即可。当中#号代表注释内容，删除了#号的注释项才会生效。\r</div><div>## '#'开头为注释内容, 选项都有相应的注释说明, 根据需要修改 ##\r</div><div>## 被注释的选项填写的是默认值, 建议在需要修改时再取消注释  ##\r</div><div>## 文件保存相关 ##\r</div><div># 文件的保存路径(可使用绝对路径或相对路径), 默认: 当前启动位置\r</div><div>dir=~/downloads\r</div><div># 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M\r</div><div>#disk-cache=32M\r</div><div># 文件预分配方式, 能有效降低磁盘碎片, 默认:prealloc\r</div><div># 预分配所需时间: none &lt; falloc ? trunc &lt; prealloc\r</div><div># falloc和trunc则需要文件系统和内核支持\r</div><div># NTFS建议使用falloc, EXT3/4建议trunc, MAC 下需要注释此项\r</div><div>#file-allocation=none\r</div><div># 断点续传\r</div><div>continue=true\r</div><div>## 下载连接相关 ##\r</div><div># 最大同时下载任务数, 运行时可修改, 默认:5\r</div><div>#max-concurrent-downloads=5\r</div><div># 同一服务器连接数, 添加时可指定, 默认:1\r</div><div>max-connection-per-server=5\r</div><div># 最小文件分片大小, 添加时可指定, 取值范围1M -1024M, 默认:20M\r</div><div># 假定size=10M, 文件为20MiB 则使用两个来源下载; 文件为15MiB 则使用一个来源下载\r</div><div>min-split-size=10M\r</div><div># 单个任务最大线程数, 添加时可指定, 默认:5\r</div><div>#split=5\r</div><div># 整体下载速度限制, 运行时可修改, 默认:0\r</div><div>#max-overall-download-limit=0\r</div><div># 单个任务下载速度限制, 默认:0\r</div><div>#max-download-limit=0\r</div><div># 整体上传速度限制, 运行时可修改, 默认:0\r</div><div>#max-overall-upload-limit=0\r</div><div># 单个任务上传速度限制, 默认:0\r</div><div>#max-upload-limit=0\r</div><div># 禁用IPv6, 默认:false\r</div><div>#disable-ipv6=true\r</div><div># 连接超时时间, 默认:60\r</div><div>#timeout=60\r</div><div># 最大重试次数, 设置为0表示不限制重试次数, 默认:5\r</div><div>#max-tries=5\r</div><div># 设置重试等待的秒数, 默认:0\r</div><div>#retry-wait=0\r</div><div>## 进度保存相关 ##\r</div><div># 从会话文件中读取下载任务\r</div><div>input-file=/etc/aria2/aria2.session\r</div><div># 在Aria2退出时保存`错误/未完成`的下载任务到会话文件\r</div><div>save-session=/etc/aria2/aria2.session\r</div><div># 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0\r</div><div>#save-session-interval=60\r</div><div>## RPC相关设置 ##\r</div><div># 启用RPC, 默认:false\r</div><div>enable-rpc=true\r</div><div># 允许所有来源, 默认:false\r</div><div>rpc-allow-origin-all=true\r</div><div># 允许非外部访问, 默认:false\r</div><div>rpc-listen-all=true\r</div><div># 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同\r</div><div>#event-poll=select\r</div><div># RPC监听端口, 端口被占用时可以修改, 默认:6800\r</div><div>#rpc-listen-port=6800\r</div><div># 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项\r</div><div>#rpc-secret=&lt;TOKEN&gt;\r</div><div># 设置的RPC访问用户名, 此选项新版已废弃, 建议改用 --rpc-secret 选项\r</div><div>#rpc-user=&lt;USER&gt;\r</div><div># 设置的RPC访问密码, 此选项新版已废弃, 建议改用 --rpc-secret 选项\r</div><div>#rpc-passwd=&lt;PASSWD&gt;\r</div><div># 是否启用 RPC 服务的 SSL/TLS 加密,\r</div><div># 启用加密后 RPC 服务需要使用 https 或者 wss 协议连接\r</div><div>#rpc-secure=true\r</div><div># 在 RPC 服务中启用 SSL/TLS 加密时的证书文件,\r</div><div># 使用 PEM 格式时，您必须通过 --rpc-private-key 指定私钥\r</div><div>#rpc-certificate=/path/to/certificate.pem\r</div><div># 在 RPC 服务中启用 SSL/TLS 加密时的私钥文件\r</div><div>#rpc-private-key=/path/to/certificate.key\r</div><div>## BT/PT下载相关 ##\r</div><div># 当下载的是一个种子(以.torrent结尾)时, 自动开始BT任务, 默认:true\r</div><div>#follow-torrent=true\r</div><div># BT监听端口, 当端口被屏蔽时使用, 默认:6881-6999\r</div><div>listen-port=51413\r</div><div># 单个种子最大连接数, 默认:55\r</div><div>#bt-max-peers=55\r</div><div># 打开DHT功能, PT需要禁用, 默认:true\r</div><div>enable-dht=false\r</div><div># 打开IPv6 DHT功能, PT需要禁用\r</div><div>#enable-dht6=false\r</div><div># DHT网络监听端口, 默认:6881-6999\r</div><div>#dht-listen-port=6881-6999\r</div><div># 本地节点查找, PT需要禁用, 默认:false\r</div><div>#bt-enable-lpd=false\r</div><div># 种子交换, PT需要禁用, 默认:true\r</div><div>enable-peer-exchange=false\r</div><div># 每个种子限速, 对少种的PT很有用, 默认:50K\r</div><div>#bt-request-peer-speed-limit=50K\r</div><div># 客户端伪装, PT需要\r</div><div>peer-id-prefix=-TR2770-\r</div><div>user-agent=Transmission/2.77\r</div><div># 当种子的分享率达到这个数时, 自动停止做种, 0为一直做种, 默认:1.0\r</div><div>seed-ratio=0\r</div><div># 强制保存会话, 即使任务已经完成, 默认:false\r</div><div># 较新的版本开启后会在任务完成后依然保留.aria2文件\r</div><div>#force-save=false\r</div><div># BT校验相关, 默认:true\r</div><div>#bt-hash-check-seed=true\r</div><div># 继续之前的BT任务时, 无需再次校验, 默认:false\r</div><div>bt-seed-unverified=true\r</div><div># 保存磁力链接元数据为种子文件(.torrent文件), 默认:false\r</div><div>bt-save-metadata=true\r</div><div>路径可以使用绝对路径，我的Aria2软件是放在C盘，下载目录是D盘，所以在aria2.conf这个配置文件中，路径和进度保存要设置在同一个文件夹：\r</div><div>dir=D:/Aria2/\r</div><div>.......\r</div><div>## 进度保存相关 ##\r</div><div># 从会话文件中读取下载任务\r</div><div>input-file=D:\\aria2\\aria2.session\r</div><div># 在Aria2退出时保存`错误/未完成`的下载任务到会话文件\r</div><div>save-session=D:\\aria2\\aria2.session\r</div><div>另外我希望打开DHT功能，代码就改几个字母\r</div><div>enable-dht=true\r</div><div>理解为一个文字化的软件设置界面就可以了。顺着一行行看一下，根据自己的需求设定数值或者填写true或false就行，几分钟就可以设置完成。\r</div><div>需要注意的是，因软件限制，每台服务器最大连接数只能填16，超过这个数值就会报错。\r</div><div>max-connection-per-server=16\r</div><div>根据自身需求修改完参数后保存。确保aria2.conf、aria2c.exe(Aria2主程序)、aira2.exe（Aria2启动器），在同一目录下。aria2.session在下载目标目录下。现在Aria2已结配置好了，点击aira2.exe（Aria2启动器）图标，此时Aria2已开始运行。\r</div><div>Aira2相当轻量化，没有软件界面。怎样添加下载任务呢？十分简单，打开浏览器，输入网址aria2c.com就可以打开操作界面了。可以把这个网址放到书签中，方便使用。\r</div><div>可以添加http、https、磁链、BT种子（Aira2不支持ed2k链接）开始下载。成功安装后不会有报错提示，右上角可以看到Aira2的版本号。\r</div><div>上面步骤写的很多，其实总结下思路，就是获得Aria2启动器、最新版主程序-修改配置文件-启动-打开WebUI控制页-下载。\r</div><div><br/></div><div>解决Aria2 BT下载速度慢没速度的问题\r</div><div>获得最新的Tracker列表信息后，直接粘贴到aria2.conf文件的最后，记得看过一个帖子要求用英文逗号隔开：\r</div><div>bt-tracker=udp://tracker.skyts.net:6969/announce,udp://tracker.safe.moe:6969/announce,udp://tracker.piratepublic.com:1337/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.leechers-paradise.org:6969/announce,udp://allesanddro.de:1337/announce,udp://9.rarbg.com:2710/announce,http://p4p.arenabg.com:1337/announce,udp://p4p.arenabg.com:1337/announce,http://tracker.opentrackr.org:1337/announce,udp://tracker.opentrackr.org:1337/announce,udp://public.popcorn-tracker.org:6969/announce,udp://tracker2.christianbro.pw:6969/announce,udp://tracker1.xku.tv:6969/announce,udp://tracker1.wasabii.com.tw:6969/announce,udp://tracker.zer0day.to:1337/announce,udp://peerfect.org:6969/announce,udp://tracker.mg64.net:6969/announce,udp://open.facedatabg.net:6969/announce\r</div><div><br/></div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div><div> </div>", "password": ""};
+    const currentDate = articleData.date;
+    const currentModule = articleData.module;
+
+    function setBingWallpaper() {
+        const bingImageUrl = `https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN`;
+        const img = new Image();
+        img.onload = function() {
+            document.body.style.backgroundImage = `url('${bingImageUrl}')`;
+        };
+        img.onerror = function() {
+            document.body.style.background = '#1a1a1e';
+        };
+        img.src = bingImageUrl;
+    }
+    setBingWallpaper();
+
+    function isInputElement(t) { return t.closest('input,textarea'); }
+    document.addEventListener('contextmenu', e => { if (!isInputElement(e.target)) e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (isInputElement(e.target)) return;
+        const k = e.key.toLowerCase();
+        if ((e.ctrlKey||e.metaKey) && ['c','x','a','v','s'].includes(k)) e.preventDefault();
+        if (e.key==='F12'||(e.ctrlKey&&e.shiftKey&&k==='i')||(e.ctrlKey&&k==='u')) e.preventDefault();
+    });
+    ['copy','cut','selectstart','dragstart'].forEach(ev => document.addEventListener(ev, e => { if (!isInputElement(e.target)) e.preventDefault(); }));
+    document.body.style.webkitUserSelect = 'none';
+    document.body.style.userSelect = 'none';
+
+    const contentDiv = document.getElementById('article-content');
+    const mainCard = document.querySelector('.article-card');
+
+    if (articleData.password) {
+        contentDiv.style.display = 'none';
+        const passwordOverlay = document.createElement('div');
+        passwordOverlay.className = 'password-overlay';
+        passwordOverlay.innerHTML = `
+            <h3 style="color:white; margin-bottom:20px;">🔒 此文章受密码保护</h3>
+            <input type="password" id="password-input" class="password-input" placeholder="输入密码">
+            <button id="password-submit" class="password-btn">验证</button>
+            <div id="password-error" class="error-message"></div>
+        `;
+        mainCard.appendChild(passwordOverlay);
+
+        document.getElementById('password-submit').addEventListener('click', async function() {
+            const inputPw = document.getElementById('password-input').value;
+            const hash = await sha256(inputPw);
+            if (hash === articleData.password) {
+                passwordOverlay.remove();
+                contentDiv.style.display = 'block';
+                contentDiv.innerHTML = articleData.content;
+            } else {
+                document.getElementById('password-error').textContent = '密码错误，请重试';
+            }
+        });
+    } else {
+        contentDiv.innerHTML = articleData.content;
+    }
+
+    async function loadRelated() {
+        try {
+            const res = await fetch('../data/articles.json');
+            const allArticles = await res.json();
+            const sameModule = allArticles.filter(a => a.module === currentModule && a.title !== articleData.title);
+            sameModule.sort((a,b) => b.date.localeCompare(a.date));
+            const relatedList = document.getElementById('related-list');
+            const sideTitle = document.getElementById('side-title');
+            if (sameModule.length === 0) {
+                sideTitle.textContent = `${currentModule} · 暂无其他文章`;
+                relatedList.innerHTML = '<li class="no-related">本版块暂无其他文章</li>';
+            } else {
+                sideTitle.textContent = `${currentModule} · 其他文章 (${sameModule.length})`;
+                relatedList.innerHTML = sameModule.map(a => `
+                    <li class="related-item">
+                        <a class="related-link" href="../article/${encodeURIComponent(a.title)}.html">
+                            <span class="related-title">${escapeHtml(a.title)}</span>
+                            <span class="related-date">${a.date}</span>
+                        </a>
+                    </li>
+                `).join('');
+            }
+        } catch (err) {
+            console.error('加载相关文章失败', err);
+        }
+    }
+    loadRelated();
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+}());
+</script>
+</body>
+</html>

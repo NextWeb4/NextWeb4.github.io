@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>自我刻度·文章详情</title>
+<link href="../uploads/icon.jpg" rel="icon" type="image/jpeg"/>
+<link href="../uploads/icon.jpg" rel="apple-touch-icon"/>
+<style>
+        /* 原有样式保持不变，请复制您原来的所有样式 */
+        * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+        input,textarea { user-select:auto !important; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            color: #e5e5e7;
+            background-color: #1a1a1e;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .apple-blog {
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+        .blog-header { margin-bottom:30px; padding:0 12px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+        .blog-header h1 { font-size:36px; font-weight:600; letter-spacing:-0.015em; line-height:1.2; color:#ffffff; margin-right:20px; flex:1 1 auto; text-shadow:0 2px 10px rgba(0,0,0,0.3); }
+        .blog-header h1 .thin { font-weight:400; color:rgba(255,255,255,0.8); display:block; font-size:24px; margin-top:4px; }
+        .search-wrapper { position:relative; max-width:320px; width:100%; flex-shrink:0; }
+        .search-container { display:flex; align-items:center; background-color:rgba(60,60,70,0.3); backdrop-filter:blur(10px); border-radius:50px; padding:8px 18px; border:0.5px solid rgba(255,255,255,0.1); width:100%; transition:box-shadow 0.2s ease, background-color 0.2s ease; }
+        .search-container:focus-within { box-shadow:0 0 0 4px rgba(10,132,255,0.3); background-color:rgba(80,80,90,0.4); }
+        .search-icon { font-size:20px; color:rgba(255,255,255,0.8); margin-right:12px; cursor:pointer; }
+        .search-input { flex:1; border:none; background:transparent; font-size:17px; font-weight:400; color:#ffffff; outline:none; font-family:inherit; min-width:150px; }
+        .search-input::placeholder { color:rgba(255,255,255,0.5); }
+        .clear-btn { font-size:18px; color:rgba(255,255,255,0.8); cursor:pointer; padding:0 6px; visibility:hidden; }
+        .search-container.has-text .clear-btn { visibility:visible; }
+        .clear-btn:hover { color:#ffffff; }
+        .suggestions { position:absolute; top:100%; left:0; right:0; background:rgba(40,40,45,0.95); backdrop-filter:blur(20px); border-radius:20px; margin-top:8px; padding:8px 0; border:0.5px solid rgba(255,255,255,0.1); max-height:300px; overflow-y:auto; z-index:1000; display:none; box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+        .suggestion-item { padding:10px 18px; color:#e5e5e7; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:15px; transition:background 0.1s; }
+        .suggestion-item:hover, .suggestion-item.selected { background:rgba(255,255,255,0.1); }
+        .suggestion-item .suggestion-date { font-size:13px; color:rgba(255,255,255,0.5); }
+        .back-link { display:inline-flex; align-items:center; gap:8px; margin-bottom:20px; color:rgba(255,255,255,0.8); text-decoration:none; font-size:17px; background:rgba(60,60,70,0.3); backdrop-filter:blur(10px); padding:8px 18px; border-radius:40px; border:0.5px solid rgba(255,255,255,0.1); transition:background-color 0.2s; }
+        .back-link:hover { background:rgba(80,80,90,0.4); }
+        .article-layout { display:flex; gap:30px; align-items:flex-start; }
+        .main-column { flex:2; min-width:0; }
+        .side-column { flex:1; min-width:240px; background:rgba(40,40,45,0.3); backdrop-filter:blur(16px); border-radius:28px; padding:24px 20px; border:0.5px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.2); }
+        .article-card { background:rgba(40,40,45,0.4); backdrop-filter:blur(16px); border-radius:36px; padding:40px; border:0.5px solid rgba(255,255,255,0.1); box-shadow:0 20px 40px rgba(0,0,0,0.3); }
+        .article-title { font-size:42px; font-weight:600; color:#ffffff; margin-bottom:16px; line-height:1.2; text-shadow:0 2px 10px rgba(0,0,0,0.3); }
+        .article-meta { display:flex; gap:16px; font-size:17px; color:rgba(255,255,255,0.6); margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .article-content { color:rgba(255,255,255,0.9); font-size:18px; line-height:1.6; margin-bottom:40px; }
+        .article-content p { margin-bottom:1.2em; }
+        .password-overlay { text-align:center; padding:40px; background:rgba(255,255,255,0.1); backdrop-filter:blur(16px); border-radius:36px; margin-bottom:30px; }
+        .password-input { background:#3a3a3c; border:1px solid #4a4a4e; color:#e5e5e7; border-radius:30px; padding:12px 20px; font-size:16px; width:300px; margin:20px auto; display:block; }
+        .password-btn { background:#0a84ff; color:white; border:none; border-radius:30px; padding:12px 30px; font-size:16px; cursor:pointer; }
+        .error-message { color:#ff6b6b; margin-top:10px; }
+        .side-title { font-size:20px; font-weight:600; color:#ffffff; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .related-list { list-style:none; }
+        .related-item { margin-bottom:16px; padding-bottom:12px; border-bottom:0.5px solid rgba(255,255,255,0.1); }
+        .related-item:last-child { border-bottom:none; }
+        .related-link { display:flex; justify-content:space-between; align-items:center; text-decoration:none; color:rgba(255,255,255,0.9); transition:background-color 0.2s; padding:8px 10px; border-radius:12px; margin:-8px -10px; }
+        .related-link:hover { background-color:rgba(255,255,255,0.1); }
+        .related-title { font-size:16px; font-weight:450; max-width:70%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .related-date { font-size:14px; color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.1); padding:2px 10px; border-radius:30px; border:0.5px solid rgba(255,255,255,0.2); }
+        .no-related { color:rgba(255,255,255,0.5); font-style:italic; text-align:center; padding:20px 0; }
+        .nav-buttons { display:flex; justify-content:space-between; margin-top:30px; gap:20px; }
+        .nav-button { background:rgba(60,60,70,0.3); backdrop-filter:blur(10px); border:0.5px solid rgba(255,255,255,0.1); color:white; padding:12px 24px; border-radius:40px; text-decoration:none; font-size:16px; transition:background 0.2s; flex:1; text-align:center; min-width:120px; }
+        .nav-button:hover:not(.disabled) { background:rgba(80,80,90,0.4); }
+        .nav-button.disabled { opacity:0.3; pointer-events:none; background:rgba(40,40,45,0.2); }
+        .bg-loading { position:fixed; top:20px; right:20px; background:rgba(0,0,0,0.5); color:white; padding:5px 12px; border-radius:30px; font-size:12px; z-index:100; backdrop-filter:blur(5px); display:none; }
+        @media (max-width:800px) { .article-layout { flex-direction:column; } .main-column, .side-column { width:100%; } .side-column { margin-top:30px; } }
+        @media (max-width:600px) { .article-card { padding:30px 20px; } .article-title { font-size:32px; } }
+    </style>
+</head>
+<body>
+<div class="bg-loading" id="bg-loading">壁纸加载中...</div>
+
+<div class="apple-blog">
+<header class="blog-header">
+<h1>
+                自我刻度·记录
+                <span class="thin">文章详情</span>
+</h1>
+<div class="search-wrapper">
+<div class="search-container" id="search-container">
+<span class="search-icon">🔍</span>
+<input class="search-input" id="global-search" placeholder="搜索文章..." type="text"/>
+<span class="clear-btn">✕</span>
+</div>
+<div class="suggestions" id="suggestions"></div>
+</div>
+</header>
+<a class="back-link" href="../index.html">← 返回主页</a>
+<div class="article-layout">
+<div class="main-column">
+<div class="article-card">
+<h1 class="article-title" id="article-title">2026年3月14日</h1>
+<div class="article-meta">
+<span id="article-date">📅 2026-03-14</span>
+<span id="article-module">📁 感悟反省</span>
+</div>
+<div class="article-content" id="article-content"><!--StartFragment--><p><span data-tt="{}" style="white-space: pre-wrap;">纵横千里独行客 何惧前路雨潇潇
+</span></p><p><span data-tt="{}" style="white-space: pre-wrap;">  又一年生日
+</span></p><p><span data-tt="{}" style="white-space: pre-wrap;">  常有朋友与前辈建议，将这几年的经历、思考与文字整理成书。那时正在读王教授的《政治的人生》，心里默默埋下一粒种子。人在深夜，难免有些“矫情”，思绪无处置放，便索性当随笔写下。
+</span></p><p><span data-tt="{}" style="white-space: pre-wrap;"><img alt="image" src="/uploads/6cac2496-e5e8-413a-91ab-5456bf1ca08a.jpg" style="max-width: 100%;"/><img alt="image" src="/uploads/23b39001-c3d4-4b1a-afd5-00fbdebb62cf.jpg" style="max-width: 100%;"/><img alt="image" src="/uploads/96973e83-3170-4ed2-80bf-c1beff59546c.jpg" style="max-width:100%;"/><br/></span></p><p><span data-tt="{}" style="white-space: pre-wrap;">我在二五年六月发过一条朋友圈：“封笔半年，专心干一件事。”其实就是在思考 应该如何去写这些事情 磕磕绊绊，如今总算有了大纲。
+</span></p><p><span data-tt="{}" style="white-space: pre-wrap;">  分享这些，只是想告诉大家：这件事，我有在做。
+</span></p><p><span data-tt="{}" style="white-space: pre-wrap;">  有些事，需要坚持去做。哪怕短期内没有回响，哪怕痛苦到看不到希望，但还是要坚持。优质感情的磨合、人的意志力、对痛苦的承受力，都需要细水长流的坚持。慢慢地，曾经觉得烦躁的事情，后来无感了；曾经难以承受的痛苦，后来习惯了。急于求成的人，往往迅速耗尽意志力，然后一蹶不振。
+</span></p><p><span data-tt="{}" style="white-space: pre-wrap;">  文字我会继续记录 但何时成书？或许五年，或许是十年，抑或是真正功成名就的那一天。
+</span></p><p><span data-tt='{"paragraphStyle":{"alignment":4}}' style="white-space: pre-wrap;">  “德不配位，必有灾殃”——这句话我一直谨记。自知阅历尚浅，唯一能做的，不过是站在巨人的肩膀上，慢慢看清世界的轮廓。更由衷感念各位前辈 在我前行路上给予提携和指点，帮我绕过了许多弯路
+</span></p><p><span data-tt='{"paragraphStyle":{"alignment":4}}' style="white-space: pre-wrap;">在这个川流不息的时代里，慢慢走，用心活，也很好。祝我们都能捕捉并珍惜生命中那些美好而明亮的瞬间。
+</span></p><p><span data-tt="{}" style="white-space: pre-wrap;">  新的一岁——
+</span></p><p><!--StartFragment--><!--EndFragment--></p><p><span data-tt="{}" style="white-space: pre-wrap;">  敬过往，爱当下，向未来。</span></p><!--EndFragment--></div>
+<div class="nav-buttons" id="article-nav"></div>
+</div>
+</div>
+<div class="side-column">
+<h3 class="side-title" id="side-title"></h3>
+<ul class="related-list" id="related-list"></ul>
+</div>
+</div>
+</div>
+
+<script>
+async function sha256(message) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+(function() {
+    const articleData = {"title": "2026年3月14日", "date": "2026-03-14", "module": "感悟反省", "sticky": false, "content": "<!--StartFragment--><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">纵横千里独行客 何惧前路雨潇潇\n</span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">  又一年生日\n</span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">  常有朋友与前辈建议，将这几年的经历、思考与文字整理成书。那时正在读王教授的《政治的人生》，心里默默埋下一粒种子。人在深夜，难免有些“矫情”，思绪无处置放，便索性当随笔写下。\n</span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\"><img alt=\"image\" src=\"/uploads/6cac2496-e5e8-413a-91ab-5456bf1ca08a.jpg\" style=\"max-width: 100%;\"/><img alt=\"image\" src=\"/uploads/23b39001-c3d4-4b1a-afd5-00fbdebb62cf.jpg\" style=\"max-width: 100%;\"/><img alt=\"image\" src=\"/uploads/96973e83-3170-4ed2-80bf-c1beff59546c.jpg\" style=\"max-width:100%;\"/><br/></span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">我在二五年六月发过一条朋友圈：“封笔半年，专心干一件事。”其实就是在思考 应该如何去写这些事情 磕磕绊绊，如今总算有了大纲。\n</span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">  分享这些，只是想告诉大家：这件事，我有在做。\n</span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">  有些事，需要坚持去做。哪怕短期内没有回响，哪怕痛苦到看不到希望，但还是要坚持。优质感情的磨合、人的意志力、对痛苦的承受力，都需要细水长流的坚持。慢慢地，曾经觉得烦躁的事情，后来无感了；曾经难以承受的痛苦，后来习惯了。急于求成的人，往往迅速耗尽意志力，然后一蹶不振。\n</span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">  文字我会继续记录 但何时成书？或许五年，或许是十年，抑或是真正功成名就的那一天。\n</span></p><p><span data-tt='{\"paragraphStyle\":{\"alignment\":4}}' style=\"white-space: pre-wrap;\">  “德不配位，必有灾殃”——这句话我一直谨记。自知阅历尚浅，唯一能做的，不过是站在巨人的肩膀上，慢慢看清世界的轮廓。更由衷感念各位前辈 在我前行路上给予提携和指点，帮我绕过了许多弯路\n</span></p><p><span data-tt='{\"paragraphStyle\":{\"alignment\":4}}' style=\"white-space: pre-wrap;\">在这个川流不息的时代里，慢慢走，用心活，也很好。祝我们都能捕捉并珍惜生命中那些美好而明亮的瞬间。\n</span></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">  新的一岁——\n</span></p><p><!--StartFragment--><!--EndFragment--></p><p><span data-tt=\"{}\" style=\"white-space: pre-wrap;\">  敬过往，爱当下，向未来。</span></p><!--EndFragment-->", "password": ""};
+    const currentDate = articleData.date;
+    const currentModule = articleData.module;
+
+    function setBingWallpaper() {
+        const bingImageUrl = `https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN`;
+        const img = new Image();
+        img.onload = function() {
+            document.body.style.backgroundImage = `url('${bingImageUrl}')`;
+        };
+        img.onerror = function() {
+            document.body.style.background = '#1a1a1e';
+        };
+        img.src = bingImageUrl;
+    }
+    setBingWallpaper();
+
+    function isInputElement(t) { return t.closest('input,textarea'); }
+    document.addEventListener('contextmenu', e => { if (!isInputElement(e.target)) e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (isInputElement(e.target)) return;
+        const k = e.key.toLowerCase();
+        if ((e.ctrlKey||e.metaKey) && ['c','x','a','v','s'].includes(k)) e.preventDefault();
+        if (e.key==='F12'||(e.ctrlKey&&e.shiftKey&&k==='i')||(e.ctrlKey&&k==='u')) e.preventDefault();
+    });
+    ['copy','cut','selectstart','dragstart'].forEach(ev => document.addEventListener(ev, e => { if (!isInputElement(e.target)) e.preventDefault(); }));
+    document.body.style.webkitUserSelect = 'none';
+    document.body.style.userSelect = 'none';
+
+    const contentDiv = document.getElementById('article-content');
+    const mainCard = document.querySelector('.article-card');
+
+    if (articleData.password) {
+        contentDiv.style.display = 'none';
+        const passwordOverlay = document.createElement('div');
+        passwordOverlay.className = 'password-overlay';
+        passwordOverlay.innerHTML = `
+            <h3 style="color:white; margin-bottom:20px;">🔒 此文章受密码保护</h3>
+            <input type="password" id="password-input" class="password-input" placeholder="输入密码">
+            <button id="password-submit" class="password-btn">验证</button>
+            <div id="password-error" class="error-message"></div>
+        `;
+        mainCard.appendChild(passwordOverlay);
+
+        document.getElementById('password-submit').addEventListener('click', async function() {
+            const inputPw = document.getElementById('password-input').value;
+            const hash = await sha256(inputPw);
+            if (hash === articleData.password) {
+                passwordOverlay.remove();
+                contentDiv.style.display = 'block';
+                contentDiv.innerHTML = articleData.content;
+            } else {
+                document.getElementById('password-error').textContent = '密码错误，请重试';
+            }
+        });
+    } else {
+        contentDiv.innerHTML = articleData.content;
+    }
+
+    async function loadRelated() {
+        try {
+            const res = await fetch('../data/articles.json');
+            const allArticles = await res.json();
+            const sameModule = allArticles.filter(a => a.module === currentModule && a.title !== articleData.title);
+            sameModule.sort((a,b) => b.date.localeCompare(a.date));
+            const relatedList = document.getElementById('related-list');
+            const sideTitle = document.getElementById('side-title');
+            if (sameModule.length === 0) {
+                sideTitle.textContent = `${currentModule} · 暂无其他文章`;
+                relatedList.innerHTML = '<li class="no-related">本版块暂无其他文章</li>';
+            } else {
+                sideTitle.textContent = `${currentModule} · 其他文章 (${sameModule.length})`;
+                relatedList.innerHTML = sameModule.map(a => `
+                    <li class="related-item">
+                        <a class="related-link" href="../article/${encodeURIComponent(a.title)}.html">
+                            <span class="related-title">${escapeHtml(a.title)}</span>
+                            <span class="related-date">${a.date}</span>
+                        </a>
+                    </li>
+                `).join('');
+            }
+        } catch (err) {
+            console.error('加载相关文章失败', err);
+        }
+    }
+    loadRelated();
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+}());
+</script>
+</body>
+</html>
