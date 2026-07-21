@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="来源： 2026-06-27 开发本地文档搜索客户端会话 这篇文章由本地 Codex 历史会话整理而来，保留可复用的工程经验，省略私有路径、账号、临时日志和不适合公开发布的细节。 目标：能搜，还要能证明它真的可用 这次本地文档搜索客户端的会…" name="description"/>
+<meta content="#111310" name="theme-color"/>
+<meta content="本地文档搜索客户端：一次离线工具的工程化复盘 · 自我刻度" property="og:title"/>
+<meta content="来源： 2026-06-27 开发本地文档搜索客户端会话 这篇文章由本地 Codex 历史会话整理而来，保留可复用的工程经验，省略私有路径、账号、临时日志和不适合公开发布的细节。 目标：能搜，还要能证明它真的可用 这次本地文档搜索客户端的会…" property="og:description"/>
+<meta content="article" property="og:type"/>
+<title>本地文档搜索客户端：一次离线工具的工程化复盘 · 自我刻度</title>
+<link href="../uploads/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="../uploads/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/article.css?v=29e7650ba32b" rel="stylesheet"/>
+<link href="/site.css?v=1eba148b71ae" rel="stylesheet"/>
+<script defer="" src="/site.js?v=757e623d2841"></script>
+</head>
+<body class="article-page">
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+
+<main class="apple-blog" id="main-content" tabindex="-1">
+<header class="blog-header">
+<p class="site-brand">
+                自我刻度·记录
+                <span class="thin">文章详情</span>
+</p>
+<div class="search-wrapper">
+<div class="search-container" id="search-container">
+<span aria-hidden="true" class="search-icon">⌕</span>
+<input aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false" aria-label="搜索文章" class="search-input" id="global-search" maxlength="200" placeholder="搜索文章..." role="combobox" type="text"/>
+<button aria-label="清空搜索" class="clear-btn" type="button">✕</button>
+</div>
+<div aria-label="搜索建议" class="suggestions" id="suggestions" role="listbox"></div>
+<p aria-live="polite" class="visually-hidden" id="search-status" role="status"></p>
+</div>
+</header>
+<a class="back-link" href="../index.html">← 返回主页</a>
+<div class="article-layout single-axis-article">
+<div class="main-column">
+<article class="article-card">
+<h1 class="article-title" id="article-title">本地文档搜索客户端：一次离线工具的工程化复盘</h1>
+<div class="article-meta">
+<span id="article-date">2026-06-27</span>
+<span id="article-module">技术与网络</span>
+</div>
+<div class="article-content" id="article-content"><p><strong>来源：</strong>2026-06-27 开发本地文档搜索客户端会话</p>
+<p>这篇文章由本地 Codex 历史会话整理而来，保留可复用的工程经验，省略私有路径、账号、临时日志和不适合公开发布的细节。</p>
+<h2>目标：能搜，还要能证明它真的可用</h2>
+<p>这次本地文档搜索客户端的会话不是简单做一个搜索框，而是围绕“离线资料如何被稳定检索”展开。项目里同时关注索引、筛选、预览、范围控制、文件类型过滤和 UI 卡顿感，最后还补了 UI 自动化证据。</p>
+<p>关键判断是：搜索工具不能只靠手动点几下说能用。它需要有可重复运行的构建、测试、UI smoke、扫描和清理流程，才能证明后续迭代没有破坏主路径。</p>
+<h2>做法</h2>
+<p>先给主窗口和关键控件加稳定的 AutomationId：搜索框、模式筛选、类型筛选、范围筛选、结果表、预览区和状态栏。这样 UI 自动化不依赖脆弱的坐标点击，也不会因为布局调整就失效。</p>
+<p>再增加 UIA smoke runner 和 PowerShell 启动脚本，把“输入关键词、等待结果、检查预览和状态”变成可运行检查。相比截图确认，这类测试更能覆盖真实交互。</p>
+<p>最后把测试结果写进报告，并做静态扫描：占位符不应残留，网络行为只应出现在明确的阻断模块和对应测试里，dist 目录只保留正式 EXE。</p>
+<h2>经验</h2>
+<p>离线工具的质量边界包括两部分：功能正确，以及没有偷偷越过离线边界。后者同样需要扫描和文档记录。</p>
+<p>UI 自动化不是大型项目才需要。只要工具有稳定主路径，给关键控件命名并写 smoke test，就能显著降低后续修改的回归成本。</p>
+<p>“不卡顿”不能只凭感觉。至少要在构建、单元测试、UI 冒烟和人工体验之间形成一组互相补充的证据。</p></div>
+<nav aria-label="上一篇与下一篇" class="nav-buttons article-continuation-nav" id="article-nav"><a class="nav-button article-step" href="../article/PowerShell%20UTF-8%20%E4%B9%B1%E7%A0%81%E7%9A%84%E6%A0%B9%E5%9B%A0%E4%B8%8E%E5%BD%BB%E5%BA%95%E4%BF%AE%E5%A4%8D.html" rel="prev"><span>上一篇 · 2026-06-28</span><strong>PowerShell UTF-8 乱码的根因与彻底修复</strong></a><a class="nav-button article-step" href="../article/%E4%BB%8E%E4%BC%9A%E8%AF%9D%E5%88%B0%E5%B7%A5%E5%85%B7%EF%BC%9A%E6%9C%AC%E5%9C%B0%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%AE%A1%E7%90%86%E5%99%A8%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%A4%8D%E7%9B%98.html" rel="next"><span>下一篇 · 2026-05-24</span><strong>从会话到工具：本地提示词管理器的迭代复盘</strong></a></nav>
+</article>
+<section aria-labelledby="side-title" class="side-column article-related-section">
+<h2 class="side-title" id="side-title">延伸阅读</h2>
+<ul class="related-list" id="related-list"><li class="related-item"><a class="related-link" href="../article/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E5%8F%91%E5%B8%83%E9%93%BE%E8%B7%AF%EF%BC%9A%E4%BB%8E%E6%9C%AC%E5%9C%B0%E7%AE%A1%E7%90%86%E5%88%B0%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9%E6%8E%A8%E9%80%81.html"><span class="related-title">个人网站发布链路：从本地管理到静态站点推送</span><span class="related-date">2026-07-07</span></a></li><li class="related-item"><a class="related-link" href="../article/AI%E5%A4%A7%E5%8F%99%E4%BA%8B%E4%B8%8B%EF%BC%8C%E6%80%8E%E6%A0%B7%E8%AF%86%E5%88%AB%E7%9C%9F%E6%AD%A3%E6%9C%89%E7%BA%A7%E5%88%AB%E7%9A%84%E4%BA%A7%E4%B8%9A%E5%8F%98%E5%8C%96.html"><span class="related-title">AI大叙事下，怎样识别真正有级别的产业变化</span><span class="related-date">2026-07-07</span></a></li><li class="related-item"><a class="related-link" href="../article/FinceptTerminal.html"><span class="related-title">FinceptTerminal</span><span class="related-date">2026-05-11</span></a></li><li class="related-item"><a class="related-link" href="../article/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9C%A8Windows%E5%AE%89%E8%A3%85%E4%B9%8C%E7%8F%AD%E5%9B%BE%E4%BB%A5%E4%BD%BF%E7%94%A8claude%20code.html"><span class="related-title">记一次在Windows安装乌班图以使用claude code</span><span class="related-date">2026-04-05</span></a></li><li class="related-item"><a class="related-link" href="../article/%E5%86%99%E4%BA%86%E4%B8%AA%E5%A4%96%E6%B1%87%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F.html"><span class="related-title">写了个外汇量化系统</span><span class="related-date">2026-03-31</span></a></li><li class="related-item"><a class="related-link" href="../article/QClaw.html"><span class="related-title">QClaw</span><span class="related-date">2026-03-22</span></a></li><li class="related-more"><a class="more-btn" href="../module/%E6%8A%80%E6%9C%AF%E7%BD%91%E7%BB%9C.html">更多文章</a></li></ul>
+</section>
+</div>
+</div>
+</main>
+<script data-module-labels='{"投资思想": "投资与思想", "感悟反省": "感悟与反省", "技术网络": "技术与网络"}' data-search-content="../data/search-content.json?v=2863f1b003da" data-search-index="../data/search-index.json?v=fa5ff19da23a" defer="" src="/article-search.js?v=04cc2baa90eb"></script></body>
+</html>

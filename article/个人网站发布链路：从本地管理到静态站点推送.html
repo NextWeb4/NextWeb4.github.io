@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="来源： 2026-07-07 个人网站项目会话 这篇文章由本地 Codex 历史会话整理而来，保留可复用的工程经验，省略私有路径、账号、临时日志和不适合公开发布的细节。 项目的真实边界 这个个人网站的结构有一个容易被忽略的特点：根目录不是 …" name="description"/>
+<meta content="#111310" name="theme-color"/>
+<meta content="个人网站发布链路：从本地管理到静态站点推送 · 自我刻度" property="og:title"/>
+<meta content="来源： 2026-07-07 个人网站项目会话 这篇文章由本地 Codex 历史会话整理而来，保留可复用的工程经验，省略私有路径、账号、临时日志和不适合公开发布的细节。 项目的真实边界 这个个人网站的结构有一个容易被忽略的特点：根目录不是 …" property="og:description"/>
+<meta content="article" property="og:type"/>
+<title>个人网站发布链路：从本地管理到静态站点推送 · 自我刻度</title>
+<link href="../uploads/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="../uploads/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/article.css?v=29e7650ba32b" rel="stylesheet"/>
+<link href="/site.css?v=1eba148b71ae" rel="stylesheet"/>
+<script defer="" src="/site.js?v=757e623d2841"></script>
+</head>
+<body class="article-page">
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+
+<main class="apple-blog" id="main-content" tabindex="-1">
+<header class="blog-header">
+<p class="site-brand">
+                自我刻度·记录
+                <span class="thin">文章详情</span>
+</p>
+<div class="search-wrapper">
+<div class="search-container" id="search-container">
+<span aria-hidden="true" class="search-icon">⌕</span>
+<input aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false" aria-label="搜索文章" class="search-input" id="global-search" maxlength="200" placeholder="搜索文章..." role="combobox" type="text"/>
+<button aria-label="清空搜索" class="clear-btn" type="button">✕</button>
+</div>
+<div aria-label="搜索建议" class="suggestions" id="suggestions" role="listbox"></div>
+<p aria-live="polite" class="visually-hidden" id="search-status" role="status"></p>
+</div>
+</header>
+<a class="back-link" href="../index.html">← 返回主页</a>
+<div class="article-layout single-axis-article">
+<div class="main-column">
+<article class="article-card">
+<h1 class="article-title" id="article-title">个人网站发布链路：从本地管理到静态站点推送</h1>
+<div class="article-meta">
+<span id="article-date">2026-07-07</span>
+<span id="article-module">技术与网络</span>
+</div>
+<div class="article-content" id="article-content"><p><strong>来源：</strong>2026-07-07 个人网站项目会话</p>
+<p>这篇文章由本地 Codex 历史会话整理而来，保留可复用的工程经验，省略私有路径、账号、临时日志和不适合公开发布的细节。</p>
+<h2>项目的真实边界</h2>
+<p>这个个人网站的结构有一个容易被忽略的特点：根目录不是 Git 仓库，docs/ 才是独立的发布仓库。运行态后端在 1.py，静态构建在 build.py，公开站点由 docs/ 输出。理解这个边界，是避免误改生成物、误提交源码或把本地后端当公网服务的前提。</p>
+<p>因此发布链路不是“随便改 HTML 然后 push”，而是：改根目录模板或数据，运行 python build.py 生成 docs/，本地 HTTP 预览，再只提交 docs/ 中的发布结果。</p>
+<h2>本次链路里沉淀的几个规则</h2>
+<p>第一，前后端一键启动要尊重端口边界。后端默认 8000，静态前端默认 8001；端口冲突时脚本自动顺延，避免两个服务抢同一个端口。</p>
+<p>第二，公开页面视觉优先收敛到 site.css，不要在多个模板里重复大段样式。模块卡片等高也是在公共样式层完成，并用浏览器实际测量卡片高度验证。</p>
+<p>第三，后端管理体验可以优化，但不必引入框架。当前项目是本地单文件后端，标准库足够支撑健康检查、JSON 响应和管理页筛选；引入 Flask/FastAPI/Django 会扩大迁移面。</p>
+<h2>发布前检查清单</h2>
+<p>运行 python -m py_compile 1.py build.py，确认脚本语法没有破坏。</p>
+<p>运行 python build.py，确认文章页、模块页、docs/data/*.json 和上传资源能重新生成。</p>
+<p>用本地 HTTP 服务预览 docs/，不要只用 file://，因为站点中存在 /site.css 和 /uploads/... 这类绝对路径。</p>
+<p>进入 docs/ 仓库查看 git status 和 git diff --stat，确认要推送的是发布结果，而不是临时文件。</p>
+<h2>沉淀</h2>
+<p>对个人网站来说，稳定的发布链路比一次性的页面美化更重要。只要构建、预览、验证、提交、推送能稳定重复，后续每次新增文章或调整样式都会轻很多。</p></div>
+<nav aria-label="上一篇与下一篇" class="nav-buttons article-continuation-nav" id="article-nav"><span aria-disabled="true" class="nav-button article-step disabled"><span>上一篇</span><strong>没有更近的文章</strong></span><a class="nav-button article-step" href="../article/AI%E5%A4%A7%E5%8F%99%E4%BA%8B%E4%B8%8B%EF%BC%8C%E6%80%8E%E6%A0%B7%E8%AF%86%E5%88%AB%E7%9C%9F%E6%AD%A3%E6%9C%89%E7%BA%A7%E5%88%AB%E7%9A%84%E4%BA%A7%E4%B8%9A%E5%8F%98%E5%8C%96.html" rel="next"><span>下一篇 · 2026-07-07</span><strong>AI大叙事下，怎样识别真正有级别的产业变化</strong></a></nav>
+</article>
+<section aria-labelledby="side-title" class="side-column article-related-section">
+<h2 class="side-title" id="side-title">延伸阅读</h2>
+<ul class="related-list" id="related-list"><li class="related-item"><a class="related-link" href="../article/PowerShell%20UTF-8%20%E4%B9%B1%E7%A0%81%E7%9A%84%E6%A0%B9%E5%9B%A0%E4%B8%8E%E5%BD%BB%E5%BA%95%E4%BF%AE%E5%A4%8D.html"><span class="related-title">PowerShell UTF-8 乱码的根因与彻底修复</span><span class="related-date">2026-06-28</span></a></li><li class="related-item"><a class="related-link" href="../article/%E6%9C%AC%E5%9C%B0%E6%96%87%E6%A1%A3%E6%90%9C%E7%B4%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%9A%E4%B8%80%E6%AC%A1%E7%A6%BB%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%A4%8D%E7%9B%98.html"><span class="related-title">本地文档搜索客户端：一次离线工具的工程化复盘</span><span class="related-date">2026-06-27</span></a></li><li class="related-item"><a class="related-link" href="../article/%E4%BB%8E%E4%BC%9A%E8%AF%9D%E5%88%B0%E5%B7%A5%E5%85%B7%EF%BC%9A%E6%9C%AC%E5%9C%B0%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%AE%A1%E7%90%86%E5%99%A8%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%A4%8D%E7%9B%98.html"><span class="related-title">从会话到工具：本地提示词管理器的迭代复盘</span><span class="related-date">2026-05-24</span></a></li><li class="related-item"><a class="related-link" href="../article/FinceptTerminal.html"><span class="related-title">FinceptTerminal</span><span class="related-date">2026-05-11</span></a></li><li class="related-item"><a class="related-link" href="../article/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9C%A8Windows%E5%AE%89%E8%A3%85%E4%B9%8C%E7%8F%AD%E5%9B%BE%E4%BB%A5%E4%BD%BF%E7%94%A8claude%20code.html"><span class="related-title">记一次在Windows安装乌班图以使用claude code</span><span class="related-date">2026-04-05</span></a></li><li class="related-item"><a class="related-link" href="../article/%E5%86%99%E4%BA%86%E4%B8%AA%E5%A4%96%E6%B1%87%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F.html"><span class="related-title">写了个外汇量化系统</span><span class="related-date">2026-03-31</span></a></li><li class="related-more"><a class="more-btn" href="../module/%E6%8A%80%E6%9C%AF%E7%BD%91%E7%BB%9C.html">更多文章</a></li></ul>
+</section>
+</div>
+</div>
+</main>
+<script data-module-labels='{"投资思想": "投资与思想", "感悟反省": "感悟与反省", "技术网络": "技术与网络"}' data-search-content="../data/search-content.json?v=2863f1b003da" data-search-index="../data/search-index.json?v=fa5ff19da23a" defer="" src="/article-search.js?v=04cc2baa90eb"></script></body>
+</html>
