@@ -10,15 +10,7 @@
     }
 
     function displayArticleTitle(title, date) {
-        const rawTitle = String(title || '');
-        const titleMatch = rawTitle.match(/^(.*?)(\d{2})\.(\d{1,2})\.(\d{1,2})$/);
-        const dateMatch = String(date || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
-        if (!titleMatch || !dateMatch) return rawTitle;
-        const label = titleMatch[1].trimEnd();
-        if (!label) return rawTitle;
-        const titleDate = titleMatch.slice(2).map(Number);
-        const metadataDate = [Number(dateMatch[1]) % 100, Number(dateMatch[2]), Number(dateMatch[3])];
-        return titleDate.every((value, index) => value === metadataDate[index]) ? label : rawTitle;
+        return String(title || '');
     }
 
     function parseModuleLabels(value) {
