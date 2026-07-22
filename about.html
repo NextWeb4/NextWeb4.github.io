@@ -12,15 +12,16 @@
 <title>黄浩翔 · 自我刻度</title>
 <link href="uploads/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="uploads/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link href="/site.css?v=1eba148b71ae" rel="stylesheet"/>
-<script defer="" src="/site.js?v=757e623d2841"></script>
+<link href="/site.css?v=8cc31286b3d1" rel="stylesheet"/>
+<script defer="" src="/site.js?v=699d45c6706a"></script>
 </head>
 <body class="about-page">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
 
 <main class="apple-blog" id="main-content" tabindex="-1">
 <nav aria-label="关于页导航" class="about-nav">
-<a class="back-link" href="index.html">← 返回主页</a>
+<a class="back-link" data-i18n="back" href="index.html">← 返回主页</a>
+<button aria-label="切换语言" class="language-toggle" data-language-toggle="" type="button">EN</button>
 </nav>
 <div class="profile-card">
 <div class="profile-header">
@@ -33,28 +34,95 @@
 <span class="title" id="profile-title" style="color: #d0cfd4;">Alpha证券投资顾问股份有限公司 创投</span>
 </div>
 </div>
+<hr class="divider"/>
 <div class="section">
-<h2>人物档案</h2>
+<h2 data-i18n="profile_title">个人简介</h2>
 <div class="bio" id="profile-bio">最黑的夜 往往离黎明最近<br/>最痛的此刻 常常是命运转弯的开始</div>
 </div>
 <div class="section">
-<h2 id="skills-heading">技能索引</h2>
+<h2 data-i18n="skills_title" id="skills-heading">技能</h2>
 <ol aria-labelledby="skills-heading" class="skills" id="profile-skills" role="list"><li class="skill">量化</li><li class="skill">私募</li><li class="skill">汇编</li><li class="skill">网络安全</li><li class="skill">VC</li><li class="skill">系统集成</li><li class="skill">项目管理</li><li class="skill">PA</li><li class="skill">SMC</li><li class="skill">ICT</li><li class="skill">均线</li><li class="skill">价格行为</li><li class="skill">缠论</li><li class="skill">Prompt Project</li><li class="skill">NLP</li><li class="skill">OpenWrt</li><li class="skill">OpenClaw</li><li class="skill">CodeX</li><li class="skill">Fintech</li><li class="skill">波浪理论</li><li class="skill">Macd</li><li class="skill">Web3</li><li class="skill">交易系统</li><li class="skill">CTF</li><li class="skill">MA</li><li class="skill">PE</li></ol>
 </div>
 <div class="section">
-<h2>档案说明</h2>
-<p class="bio">一处持续整理思考、技术实践与投资笔记的私人档案。内容按时间与主题编目，保留它们发生时的尺度。</p>
+<h2 data-i18n="project_title">项目简介</h2>
+<p class="bio" data-i18n="project_text">这个站点承载 NextWeb4 的 GitHub Pages 个人博客、自我刻度记录、文章页面和作者介绍页。</p>
 </div>
 <div class="section">
-<h2>作者信息</h2>
+<h2 data-i18n="author_title">作者信息</h2>
 <ul class="author-list">
-<li><span>作者</span><span>HaoXiang Huang</span></li>
-<li><span>邮箱</span><a href="mailto:Rays688888@gmail.com">Rays688888@gmail.com</a></li>
-<li><span>主页</span><a href="https://nextweb4.github.io/">nextweb4.github.io</a></li>
-<li><span>GitHub</span><a href="https://github.com/NextWeb4">@NextWeb4</a></li>
+<li><span data-i18n="author_name_label">作者</span>：HaoXiang Huang</li>
+<li><span data-i18n="author_email_label">邮箱</span>：<a href="mailto:Rays688888@gmail.com">Rays688888@gmail.com</a></li>
+<li><span data-i18n="author_home_label">主页</span>：<a href="https://nextweb4.github.io/">https://nextweb4.github.io/</a></li>
+<li>GitHub：<a href="https://github.com/NextWeb4">https://github.com/NextWeb4</a></li>
 </ul>
 </div>
 </div>
 </main>
+<script data-about-language="">
+        (function() {
+            const dictionary = {
+                zh: {
+                    back: '← 返回主页',
+                    toggle: 'EN',
+                    toggleLabel: '切换为英文',
+                    profile_title: '个人简介',
+                    skills_title: '技能',
+                    project_title: '项目简介',
+                    project_text: '这个站点承载 NextWeb4 的 GitHub Pages 个人博客、自我刻度记录、文章页面和作者介绍页。',
+                    author_title: '作者信息',
+                    author_name_label: '作者',
+                    author_email_label: '邮箱',
+                    author_home_label: '主页'
+                },
+                en: {
+                    back: '← Back Home',
+                    toggle: '中文',
+                    toggleLabel: 'Switch to Chinese',
+                    profile_title: 'Profile',
+                    skills_title: 'Skills',
+                    project_title: 'Project Introduction',
+                    project_text: 'This site hosts the NextWeb4 GitHub Pages blog, self-measure journal, article pages, and author profile.',
+                    author_title: 'Author',
+                    author_name_label: 'Author',
+                    author_email_label: 'Email',
+                    author_home_label: 'Homepage'
+                }
+            };
+            const storageKey = 'nextweb4.about.language';
+            const toggle = document.querySelector('[data-language-toggle]');
+
+            function readLanguage() {
+                try {
+                    const value = localStorage.getItem(storageKey);
+                    return dictionary[value] ? value : 'zh';
+                } catch (error) {
+                    return 'zh';
+                }
+            }
+
+            function applyLanguage(language) {
+                const current = dictionary[language] ? language : 'zh';
+                document.documentElement.lang = current === 'zh' ? 'zh-CN' : 'en';
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const text = dictionary[current][element.dataset.i18n];
+                    if (text) element.textContent = text;
+                });
+                if (toggle) {
+                    toggle.textContent = dictionary[current].toggle;
+                    toggle.setAttribute('aria-label', dictionary[current].toggleLabel);
+                }
+                try {
+                    localStorage.setItem(storageKey, current);
+                } catch (error) {}
+            }
+
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    applyLanguage(readLanguage() === 'zh' ? 'en' : 'zh');
+                });
+            }
+            applyLanguage(readLanguage());
+        })();
+    </script>
 </body>
 </html>

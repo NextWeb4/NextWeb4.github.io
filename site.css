@@ -50,6 +50,8 @@ body {
     position: relative;
     text-rendering: optimizeLegibility;
     transition: background-image 500ms ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
     -webkit-font-smoothing: antialiased;
     isolation: isolate;
 }
@@ -88,13 +90,6 @@ button,
 input,
 textarea,
 [contenteditable="true"] {
-    user-select: text !important;
-    -webkit-user-select: text !important;
-}
-
-.article-content,
-.bio,
-.author-list {
     user-select: text !important;
     -webkit-user-select: text !important;
 }
@@ -211,8 +206,9 @@ textarea:focus-visible {
 .home-page .blog-header {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: 20px;
-    min-height: 430px;
-    padding-bottom: 32px !important;
+    min-height: 0;
+    padding-bottom: 28px !important;
+    row-gap: 16px;
 }
 
 .home-page .blog-header::before {
@@ -222,25 +218,32 @@ textarea:focus-visible {
 
 .home-page .blog-header h1 {
     align-self: center;
-    grid-column: 1 / 9;
-    grid-row: 2;
+    font-size: 72px !important;
+    grid-column: 1 / 8;
+    grid-row: 2 / 4;
     max-width: 8em;
-    padding: 34px 0 48px;
+    padding: 24px 0;
     position: relative;
     z-index: 1;
 }
 
 .home-page .search-wrapper {
     align-self: end;
-    grid-column: 9 / -1;
+    grid-column: 8 / -1;
     grid-row: 2;
-    margin-bottom: 48px;
+    margin-bottom: 0;
     z-index: 2;
 }
 
 .home-page .header-meta {
-    grid-column: 1 / -1;
+    align-self: start;
+    grid-column: 8 / -1;
     grid-row: 3;
+    justify-content: flex-start;
+}
+
+.home-page .header-meta .site-update {
+    margin-left: 0;
 }
 
 .blog-header h1,
@@ -301,6 +304,7 @@ textarea:focus-visible {
 .site-update,
 .nav-chip,
 .back-link,
+.language-toggle,
 .more-btn,
 .nav-button,
 .password-btn,
@@ -316,6 +320,7 @@ textarea:focus-visible {
 .site-update,
 .nav-chip,
 .back-link,
+.language-toggle,
 .more-btn,
 .nav-button,
 .password-btn {
@@ -396,6 +401,7 @@ textarea:focus-visible {
 }
 
 .back-link:hover,
+.language-toggle:hover,
 .more-btn:hover,
 .nav-button:hover:not(.disabled),
 .password-btn:hover {
@@ -1385,6 +1391,16 @@ textarea:focus-visible {
     text-decoration: none;
 }
 
+.about-page .language-toggle {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 14px;
+}
+
 .about-page .profile-card::before {
     border: 1px solid rgba(212, 180, 118, 0.42);
     border-radius: 50%;
@@ -1412,6 +1428,7 @@ textarea:focus-visible {
 }
 
 .about-page .profile-header,
+.about-page .profile-card > .divider,
 .about-page .profile-card > .section {
     position: relative;
     z-index: 1;
@@ -1457,6 +1474,13 @@ textarea:focus-visible {
     margin: 0;
 }
 
+.about-page .divider {
+    border: 0;
+    border-top: 1px solid var(--line);
+    height: 1px;
+    margin: 20px 0 30px;
+}
+
 .about-page .section {
     border-top: 1px solid var(--line);
     counter-increment: about-section;
@@ -1483,32 +1507,25 @@ textarea:focus-visible {
 }
 
 .about-page .skill {
-    align-items: baseline;
+    align-items: center;
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    border: 0 !important;
-    border-top: 1px solid var(--line) !important;
-    border-radius: 0 !important;
-    color: var(--ink-soft) !important;
-    counter-increment: skill-index;
-    display: grid;
+    border: 1px solid var(--line) !important;
+    border-radius: var(--radius) !important;
+    color: var(--ink) !important;
+    display: inline-flex;
     font-size: 16px;
-    gap: 12px;
-    grid-template-columns: 2.25rem minmax(0, 1fr);
     min-width: 0;
     overflow-wrap: anywhere;
-    padding: 12px 0;
-    transition: none;
+    padding: 8px 14px;
+    transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-.about-page .skill::before {
-    color: var(--accent);
-    content: counter(skill-index, decimal-leading-zero);
-    font-size: 11px;
-    font-variant-numeric: tabular-nums;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+.about-page .skill:hover {
+    border-color: var(--line-strong) !important;
+    color: var(--accent) !important;
+    transform: translateY(-2px);
 }
 
 .about-page .bio {
@@ -1527,21 +1544,6 @@ textarea:focus-visible {
     padding: 0;
 }
 
-.about-page .author-list li {
-    align-items: baseline;
-    display: grid;
-    gap: 12px;
-    grid-template-columns: minmax(4.5rem, max-content) minmax(0, 1fr);
-}
-
-.about-page .author-list li > :first-child {
-    color: var(--ink-muted);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
 .about-page .author-list a {
     color: var(--ink);
     overflow-wrap: anywhere;
@@ -1551,10 +1553,9 @@ textarea:focus-visible {
 }
 
 .about-page .skills {
-    column-gap: clamp(24px, 5vw, 48px);
-    counter-reset: skill-index;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1618,6 +1619,87 @@ textarea:focus-visible {
     color: var(--ink) !important;
     font-family: var(--font-display) !important;
     font-weight: 600 !important;
+}
+
+.site-protection-shield {
+    bottom: 16px;
+    color: #f3efe5;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 16px;
+    transform: translateY(12px);
+    transition: opacity 160ms ease, transform 160ms ease;
+    width: min(360px, calc(100vw - 32px));
+    z-index: 10000;
+}
+
+.site-protection-shield > div {
+    background: rgba(8, 11, 12, 0.96);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.34);
+    padding: 16px 18px;
+}
+
+.site-protection-shield strong,
+.site-protection-shield span {
+    display: block;
+}
+
+.site-protection-shield strong {
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.25;
+}
+
+.site-protection-shield span {
+    color: var(--ink-muted);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-top: 8px;
+}
+
+body.is-protection-notice .site-protection-shield {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+body.is-devtools-detected {
+    height: 100vh;
+    overflow: hidden;
+}
+
+body.is-devtools-detected > :not(.site-protection-shield) {
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+body.is-devtools-detected .site-protection-shield {
+    background: #090b0c;
+    bottom: 0;
+    display: grid;
+    left: 0;
+    opacity: 1;
+    padding: 24px;
+    place-items: center;
+    pointer-events: auto;
+    right: 0;
+    top: 0;
+    transform: none;
+    width: auto;
+}
+
+body.is-devtools-detected .site-protection-shield > div {
+    max-width: 520px;
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+body.is-devtools-detected .site-protection-shield strong {
+    font-size: 30px;
 }
 
 .article-page .blog-header {
@@ -1872,6 +1954,7 @@ textarea:focus-visible {
 @media (pointer: coarse) {
     .nav-chip,
     .back-link,
+    .language-toggle,
     .more-btn,
     .clear-btn,
     .social-icons a,
@@ -1889,6 +1972,33 @@ textarea:focus-visible {
 
     .article-layout {
         grid-template-columns: minmax(0, 820px);
+    }
+}
+
+@media (min-width: 821px) and (max-width: 960px) {
+    .home-page .blog-header {
+        align-items: start !important;
+        grid-template-columns: 1fr;
+        row-gap: 18px;
+    }
+
+    .home-page .blog-header h1 {
+        font-size: 64px !important;
+        grid-column: 1;
+        grid-row: 2;
+        max-width: none;
+        padding: 20px 0 6px;
+    }
+
+    .home-page .search-wrapper {
+        grid-column: 1;
+        grid-row: 3;
+        margin-bottom: 0;
+    }
+
+    .home-page .header-meta {
+        grid-column: 1;
+        grid-row: 4;
     }
 }
 
@@ -1928,6 +2038,7 @@ textarea:focus-visible {
     }
 
     .home-page .blog-header h1 {
+        font-size: 64px !important;
         grid-column: 1;
         grid-row: 2;
         max-width: none;
@@ -2095,6 +2206,7 @@ textarea:focus-visible {
     }
 
     .home-page .blog-header h1 {
+        font-size: 46px !important;
         white-space: nowrap;
     }
 
@@ -2328,7 +2440,7 @@ textarea:focus-visible {
     }
 
     .about-page .skills {
-        grid-template-columns: minmax(0, 1fr);
+        justify-content: center;
     }
 
     .nav-buttons {

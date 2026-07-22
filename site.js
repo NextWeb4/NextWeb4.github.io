@@ -139,6 +139,145 @@
         document.documentElement.dataset.wallpaper = 'fallback';
     }
 
+    const DEVTOOLS_THRESHOLD = 240;
+    const DEVTOOLS_MIN_VIEWPORT = 720;
+
+    function hasDockedDevtoolsViewportDelta(widthDelta, heightDelta, innerWidth) {
+        const dimensions = [widthDelta, heightDelta, innerWidth];
+        return dimensions.every(Number.isFinite)
+            && innerWidth >= DEVTOOLS_MIN_VIEWPORT
+            && (widthDelta > DEVTOOLS_THRESHOLD || heightDelta > DEVTOOLS_THRESHOLD);
+    }
+
+    function createProtectionShield() {
+        const shield = document.createElement('div');
+        const panel = document.createElement('div');
+        const title = document.createElement('strong');
+        const message = document.createElement('span');
+        shield.className = 'site-protection-shield';
+        shield.setAttribute('role', 'status');
+        shield.setAttribute('aria-live', 'polite');
+        shield.setAttribute('aria-hidden', 'true');
+        title.textContent = '页面保护已启用';
+        message.textContent = '此操作不可用，请使用页面提供的点击与输入功能。';
+        panel.append(title, message);
+        shield.appendChild(panel);
+        document.body.appendChild(shield);
+        return { shield, title, message };
+    }
+
+    function protectPublicPage() {
+        const body = document.body;
+        if (!body) return;
+        const protection = createProtectionShield();
+        const coarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)');
+        const isEmbeddedPreview = window.self !== window.top;
+        let noticeTimer = 0;
+        let viewportFrame = 0;
+        let noticeVisible = false;
+        let dockedDevtoolsDetected = false;
+        let baselinePixelRatio = window.devicePixelRatio;
+        let baselineWidthDelta = Math.max(0, window.outerWidth - window.innerWidth);
+        let baselineHeightDelta = Math.max(0, window.outerHeight - window.innerHeight);
+
+        const updateProtectionState = function () {
+            body.classList.toggle('is-protection-notice', noticeVisible && !dockedDevtoolsDetected);
+            body.classList.toggle('is-devtools-detected', dockedDevtoolsDetected);
+            protection.title.textContent = dockedDevtoolsDetected ? '页面已进入保护模式' : '页面保护已启用';
+            protection.message.textContent = dockedDevtoolsDetected
+                ? '请关闭开发者工具后继续浏览。'
+                : '此操作不可用，请使用页面提供的点击与输入功能。';
+            protection.shield.setAttribute(
+                'aria-hidden',
+                noticeVisible || dockedDevtoolsDetected ? 'false' : 'true'
+            );
+        };
+
+        const showProtectionNotice = function () {
+            window.clearTimeout(noticeTimer);
+            noticeVisible = true;
+            updateProtectionState();
+            noticeTimer = window.setTimeout(function () {
+                noticeVisible = false;
+                updateProtectionState();
+            }, 1600);
+        };
+
+        ['contextmenu', 'copy', 'cut', 'paste', 'dragstart'].forEach(function (eventName) {
+            document.addEventListener(eventName, function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                showProtectionNotice();
+            }, true);
+        });
+
+        document.addEventListener('selectstart', function (event) {
+            const target = event.target;
+            const editable = target && target.closest
+                ? target.closest('input, textarea, select, [contenteditable="true"]')
+                : null;
+            if (!editable) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, true);
+
+        document.querySelectorAll('img').forEach(function (image) {
+            image.draggable = false;
+        });
+
+        document.addEventListener('keydown', function (event) {
+            const key = String(event.key || '').toLowerCase();
+            const devtoolsKey = new Set(['i', 'j', 'c', 'k']).has(key);
+            const blockedCommand = new Set(['c', 'p', 's', 'u', 'v', 'x']).has(key);
+            const blocked = event.key === 'F12'
+                || event.code === 'F12'
+                || key === 'contextmenu'
+                || (event.shiftKey && key === 'f10')
+                || (event.ctrlKey && event.shiftKey && devtoolsKey)
+                || (event.metaKey && event.altKey && devtoolsKey)
+                || ((event.ctrlKey || event.metaKey) && blockedCommand);
+            if (blocked) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                showProtectionNotice();
+            }
+        }, true);
+
+        const checkDockedDevtools = function () {
+            viewportFrame = 0;
+            const pixelRatioChanged = Number.isFinite(window.devicePixelRatio)
+                && Number.isFinite(baselinePixelRatio)
+                && Math.abs(window.devicePixelRatio - baselinePixelRatio) > 0.01;
+            if (pixelRatioChanged) {
+                baselinePixelRatio = window.devicePixelRatio;
+                baselineWidthDelta = Math.max(0, window.outerWidth - window.innerWidth);
+                baselineHeightDelta = Math.max(0, window.outerHeight - window.innerHeight);
+            }
+            const widthDelta = Math.max(0, window.outerWidth - window.innerWidth - baselineWidthDelta);
+            const heightDelta = Math.max(0, window.outerHeight - window.innerHeight - baselineHeightDelta);
+            const detected = !isEmbeddedPreview
+                && !pixelRatioChanged
+                && !coarsePointer.matches
+                && hasDockedDevtoolsViewportDelta(widthDelta, heightDelta, window.innerWidth);
+            if (detected !== dockedDevtoolsDetected) {
+                dockedDevtoolsDetected = detected;
+                updateProtectionState();
+            }
+        };
+
+        const scheduleDockedDevtoolsCheck = function () {
+            if (viewportFrame) window.cancelAnimationFrame(viewportFrame);
+            viewportFrame = window.requestAnimationFrame(checkDockedDevtools);
+        };
+
+        window.addEventListener('resize', scheduleDockedDevtoolsCheck, { passive: true });
+        window.addEventListener('pageshow', scheduleDockedDevtoolsCheck);
+        coarsePointer.addEventListener?.('change', scheduleDockedDevtoolsCheck);
+        scheduleDockedDevtoolsCheck();
+    }
+
     refreshCurrentYear();
+    protectPublicPage();
     resolveWallpaperUrl().then(applyWallpaper).catch(showFallback);
 }());
