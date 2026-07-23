@@ -133,6 +133,10 @@ body {
   transition: color 420ms var(--ease-soft), background-color 520ms var(--ease-soft);
 }
 
+[data-i18n].managed-multiline {
+  white-space: pre-line;
+}
+
 body::after {
   position: fixed;
   inset: 0;

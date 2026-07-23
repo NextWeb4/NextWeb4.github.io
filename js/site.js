@@ -50,12 +50,11 @@ const EXCLUDED_PROJECT_REPOS = new Set(["Private", "NextWeb4.github.io"]);
 const CONTENT_URL = "content/site-content.json";
 const CONTENT_FETCH_TIMEOUT = 20000;
 const CONTENT_SCHEMA_VERSION = 1;
+const PREVIEW_DRAFT_MESSAGE = "oldweb:preview-draft";
 const REFLECTION_INTERVAL = 8000;
 const REFLECTION_MAX_ITEMS = 128;
-const REFLECTION_MAX_LENGTH = 4000;
-const CONTENT_MAX_TEXT_LENGTH = 70000;
 const REFLECTION_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-const REFLECTION_ICLOUD_HEADER_PATTERN = /^@(\d{4}-\d{2}-\d{2})\|(.{1,240})$/;
+const REFLECTION_ICLOUD_HEADER_PATTERN = /^@(\d{4}-\d{2}-\d{2})\|(.+)$/;
 const REFLECTION_HAN_PATTERN = /[\u3007\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\u{20000}-\u{323af}]/u;
 const REFLECTION_SHORT_MAX_LINES = 3;
 const REFLECTION_PREVIEW_MAX_LINES = 6;
@@ -74,75 +73,6 @@ const EDITABLE_CONTENT_KEYS = new Set([
   "skill_automation_title", "skill_automation_text", "skill_network_title", "skill_network_text", "skill_search_title", "skill_search_text",
   "skill_delivery_title", "skill_delivery_text", "journal_label", "journal_title", "journal_text", "journal_button", "contact_label",
   "contact_title", "contact_email", "contact_x", "contact_facebook", "contact_github",
-]);
-const EDITABLE_CONTENT_LIMITS = Object.freeze({
-  "document_title": 120,
-  "meta_description": 320,
-  "og_description": 320,
-  "nav_about": 30,
-  "nav_work": 30,
-  "nav_skills": 30,
-  "nav_blog": 30,
-  "nav_contact": 30,
-  "footer_suffix": 180,
-  "footer_blog": 30,
-  "hero_eyebrow": 80,
-  "hero_title": 100,
-  "hero_lead": 70000,
-  "hero_blog": 40,
-  "hero_work": 40,
-  "photo_meta": 100,
-  "photo_line": 240,
-  "photo_link": 60,
-  "about_label": 30,
-  "about_title": 120,
-  "about_p1": 700,
-  "about_p2": 700,
-  "about_p3": 700,
-  "about_ledger_1_label": 40,
-  "about_ledger_1_text": 260,
-  "about_ledger_2_label": 40,
-  "about_ledger_2_text": 260,
-  "about_ledger_3_label": 40,
-  "about_ledger_3_text": 260,
-  "about_focus_1_title": 40,
-  "about_focus_1_text": 260,
-  "about_focus_2_title": 40,
-  "about_focus_2_text": 260,
-  "about_focus_3_title": 40,
-  "about_focus_3_text": 260,
-  "about_focus_4_title": 40,
-  "about_focus_4_text": 260,
-  "work_label": 40,
-  "work_title": 120,
-  "work_intro": 420,
-  "skills_label": 40,
-  "skills_title": 140,
-  "skills_intro": 420,
-  "skill_automation_title": 100,
-  "skill_automation_text": 600,
-  "skill_network_title": 100,
-  "skill_network_text": 600,
-  "skill_search_title": 100,
-  "skill_search_text": 600,
-  "skill_delivery_title": 100,
-  "skill_delivery_text": 600,
-  "journal_label": 30,
-  "journal_title": 120,
-  "journal_text": 420,
-  "journal_button": 60,
-  "contact_label": 30,
-  "contact_title": 100,
-  "contact_email": 40,
-  "contact_x": 40,
-  "contact_facebook": 40,
-  "contact_github": 40
-});
-const MULTILINE_CONTENT_KEYS = new Set([
-  "meta_description", "og_description", "hero_lead", "photo_line", "about_p1", "about_p2", "about_p3",
-  "about_ledger_1_text", "about_ledger_2_text", "about_ledger_3_text", "about_focus_1_text", "about_focus_2_text",
-  "about_focus_3_text", "about_focus_4_text", "work_intro", "skills_intro", "skill_automation_text", "skill_network_text",
-  "skill_search_text", "skill_delivery_text", "journal_text",
 ]);
 const BANNED_CONTENT_CONTROL_PATTERN = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f]/u;
 
@@ -752,6 +682,7 @@ function applyLanguage(language) {
     const key = element.dataset.i18n;
     if (dict[key]) {
       element.textContent = dict[key];
+      element.classList.toggle("managed-multiline", dict[key].includes("\n"));
     }
   });
 
@@ -823,7 +754,7 @@ function isValidReflectionDate(value) {
 }
 
 function parseReflectionArchive(value) {
-  if (typeof value !== "string" || reflectionTextLength(value) > CONTENT_MAX_TEXT_LENGTH) {
+  if (typeof value !== "string") {
     return [];
   }
 
@@ -837,7 +768,7 @@ function parseReflectionArchive(value) {
       return true;
     }
     const text = current.lines.join("\n").trim().replace(/\n{3,}/g, "\n\n");
-    if (!text || reflectionTextLength(text) > REFLECTION_MAX_LENGTH || entries.length >= REFLECTION_MAX_ITEMS) {
+    if (!text || entries.length >= REFLECTION_MAX_ITEMS) {
       return false;
     }
     entries.push({
@@ -1498,16 +1429,11 @@ function normalizeSiteContent(value) {
     }
     const zh = bilingual.zh.replace(/\r\n?/g, "\n").trim();
     const en = bilingual.en.replace(/\r\n?/g, "\n").trim();
-    const maxLength = EDITABLE_CONTENT_LIMITS[key];
     if (
       !zh
       || !en
-      || !Number.isInteger(maxLength)
-      || reflectionTextLength(zh) > maxLength
-      || reflectionTextLength(en) > maxLength
       || BANNED_CONTENT_CONTROL_PATTERN.test(zh)
       || BANNED_CONTENT_CONTROL_PATTERN.test(en)
-      || (!MULTILINE_CONTENT_KEYS.has(key) && (/[\n\t]/u.test(zh) || /[\n\t]/u.test(en)))
     ) {
       return null;
     }
@@ -1551,6 +1477,33 @@ function applySiteContent(content) {
     });
   }
 }
+
+function isManagedPreviewFrame() {
+  return window.parent !== window
+    && (window.location.pathname === "/preview/" || window.location.pathname === "/preview/index.html");
+}
+
+function applyPreviewDraft(event) {
+  if (
+    !isManagedPreviewFrame()
+    || event.source !== window.parent
+    || event.origin !== window.location.origin
+    || !event.data
+    || event.data.type !== PREVIEW_DRAFT_MESSAGE
+  ) {
+    return;
+  }
+  const normalized = normalizeSiteContent(event.data.content);
+  if (!normalized) {
+    return;
+  }
+  siteContentRequestId += 1;
+  siteContentController?.abort();
+  applySiteContent(normalized);
+  applyLanguage(currentLanguage);
+}
+
+window.addEventListener("message", applyPreviewDraft);
 
 async function loadSiteContent() {
   const requestId = ++siteContentRequestId;
