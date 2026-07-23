@@ -19,7 +19,7 @@
 - Preserve UTF-8, semantic HTML, safe text assignment, fixed responsive dimensions, and nonempty image alt text.
 
 ## 6. Module boundaries
-- Public markup belongs in `index.html` and `404.html`; presentation belongs in `css/site.css`; browser behavior belongs in `js/site.js`; managed overlay data belongs in `content/site-content.json`.
+- Public markup belongs in `index.html` and `404.html`; presentation belongs in `css/site.css`; browser behavior belongs in `js/site.js`; managed overlay data belongs in `content/site-content.json`. Managed presentation is limited to an 85-115% font scale in 5% steps, one complete six-module order, and `compact`/`standard`/`wide` sizes for every module.
 - The `images/` files are the only runtime media. Admin, backend, tests, deployment scripts, credentials, and private history remain in `NextWeb4/website-source`.
 - Documentation describes the generated artifact; authoring changes happen in the private source repository.
 - The public tree must preserve the visibility-aware thought rotator, dated four-project fallback snapshot, safe text assignment, equal project-card layout, and wrapping evidence links; these are runtime behavior owned by `js/site.js` and `css/site.css`.

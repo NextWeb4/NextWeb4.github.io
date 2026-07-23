@@ -7,6 +7,7 @@
   --motion-ui: 240ms;
   --motion-reveal: 560ms;
   --motion-media: 480ms;
+  --managed-font-scale: 1;
   --ink: #111318;
   --ink-soft: #3f434a;
   --muted: #6e737c;
@@ -125,7 +126,7 @@ body {
   color: var(--ink);
   background: var(--paper);
   font-family: var(--body);
-  font-size: 16px;
+  font-size: calc(16px * var(--managed-font-scale));
   line-height: 1.65;
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
@@ -559,9 +560,9 @@ select:focus-visible {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--grid-gap);
   row-gap: 3.75rem;
-  width: var(--content-width);
+  width: var(--managed-module-width, var(--content-width));
   margin: 0 auto;
-  padding: 7.5rem 0 5rem;
+  padding: calc(7.5rem * var(--managed-module-space, 1)) 0 calc(5rem * var(--managed-module-space, 1));
   align-items: start;
 }
 
@@ -636,8 +637,9 @@ select:focus-visible {
 }
 
 .hero h1 {
+  --managed-heading-size: 5.75rem;
   max-width: 12ch;
-  font-size: 5.75rem;
+  font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   text-wrap: balance;
 }
 
@@ -804,7 +806,7 @@ select:focus-visible {
 .reflection-stage[data-reflection-density="short"] > p,
 .reflection-preview-measure[data-reflection-density="short"] {
   max-width: 32ch;
-  font-size: 1.28rem;
+  font-size: calc(1.28rem * var(--managed-font-scale));
   line-height: 1.58;
 }
 
@@ -815,14 +817,14 @@ select:focus-visible {
 
 .reflection-stage[data-reflection-density="medium"] > p,
 .reflection-preview-measure[data-reflection-density="medium"] {
-  font-size: 1.1rem;
+  font-size: calc(1.1rem * var(--managed-font-scale));
   line-height: 1.68;
 }
 
 .reflection-stage[data-reflection-density="long"] > p,
 .reflection-preview-measure[data-reflection-density="long"] {
   color: var(--ink-soft);
-  font-size: 1rem;
+  font-size: calc(1rem * var(--managed-font-scale));
   line-height: 1.74;
 }
 
@@ -941,7 +943,7 @@ select:focus-visible {
   position: relative;
   margin: 0;
   font-family: var(--display);
-  font-size: 1.42rem;
+  font-size: calc(1.42rem * var(--managed-font-scale));
   font-weight: 480;
   line-height: 1.42;
   letter-spacing: 0;
@@ -1274,12 +1276,12 @@ select:focus-visible {
 }
 
 .section {
-  padding: var(--section-space) 0;
+  padding: calc(var(--section-space) * var(--managed-module-space, 1)) 0;
 }
 
 .section-shell {
   position: relative;
-  width: var(--content-width);
+  width: var(--managed-module-width, var(--content-width));
   margin: 0 auto;
 }
 
@@ -1293,9 +1295,10 @@ select:focus-visible {
 
 .section h2,
 .journal h2 {
+  --managed-heading-size: 3.85rem;
   max-width: 16ch;
   color: var(--ink);
-  font-size: 3.85rem;
+  font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   text-wrap: balance;
 }
 
@@ -1630,7 +1633,7 @@ select:focus-visible {
 .work-card h3 {
   margin: 0 0 0.8rem;
   font-family: var(--display);
-  font-size: 1.55rem;
+  font-size: calc(1.55rem * var(--managed-font-scale));
   font-weight: 600;
   line-height: 1.12;
   overflow-wrap: anywhere;
@@ -2072,7 +2075,7 @@ select:focus-visible {
   margin: 0;
   font-family: var(--display);
   max-width: 16ch;
-  font-size: 1.7rem;
+  font-size: calc(1.7rem * var(--managed-font-scale));
   font-weight: 620;
   line-height: 1.16;
   text-wrap: balance;
@@ -2091,7 +2094,7 @@ select:focus-visible {
   margin: 0;
   max-width: 50rem;
   color: var(--ink-soft);
-  font-size: 0.95rem;
+  font-size: calc(0.95rem * var(--managed-font-scale));
   line-height: 1.72;
 }
 
@@ -2155,7 +2158,7 @@ select:focus-visible {
 
 .journal {
   position: relative;
-  padding: var(--section-space-compact) 0;
+  padding: calc(var(--section-space-compact) * var(--managed-module-space, 1)) 0;
   overflow: hidden;
   color: var(--ink);
   background: var(--paper);
@@ -2182,7 +2185,7 @@ select:focus-visible {
   column-gap: 1.25rem;
   row-gap: 1.5rem;
   align-items: end;
-  width: var(--content-width);
+  width: var(--managed-module-width, var(--content-width));
   margin: 0 auto;
   overflow: visible;
   padding: 0;
@@ -2201,10 +2204,11 @@ select:focus-visible {
 }
 
 .journal h2 {
+  --managed-heading-size: 3.65rem;
   grid-column: 1 / span 7;
   color: var(--ink);
   max-width: 12ch;
-  font-size: 3.65rem;
+  font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
 }
 
 .journal p:not(.section-label) {
@@ -2270,8 +2274,9 @@ select:focus-visible {
 }
 
 .section-contact h2 {
+  --managed-heading-size: 4.1rem;
   max-width: none;
-  font-size: 4.1rem;
+  font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   line-height: 0.98;
 }
 
@@ -2304,13 +2309,13 @@ select:focus-visible {
 }
 
 .contact-links a:first-child span {
-  font-size: 2rem;
+  font-size: calc(2rem * var(--managed-font-scale));
   font-weight: 560;
 }
 
 .contact-links a:first-child small {
   color: var(--ink);
-  font-size: 0.96rem;
+  font-size: calc(0.96rem * var(--managed-font-scale));
 }
 
 .contact-arrow {
@@ -2352,7 +2357,7 @@ select:focus-visible {
 
 .contact-links span {
   font-family: var(--display);
-  font-size: 1.24rem;
+  font-size: calc(1.24rem * var(--managed-font-scale));
   font-weight: 560;
 }
 
@@ -2499,6 +2504,22 @@ body.is-devtools-detected .devtools-shield strong {
   font-size: 2rem;
 }
 
+[data-module] {
+  --managed-module-width: var(--content-width);
+  --managed-module-space: 1;
+  font-size: calc(1rem * var(--managed-font-scale));
+}
+
+[data-module][data-layout-size="compact"] {
+  --managed-module-width: min(64rem, calc(100% - (var(--page-gutter) * 2)));
+  --managed-module-space: 0.8;
+}
+
+[data-module][data-layout-size="wide"] {
+  --managed-module-width: min(90rem, calc(100% - (var(--page-gutter) * 2)));
+  --managed-module-space: 1.12;
+}
+
 .motion-ready [data-reveal] {
   opacity: 0.9;
   translate: 0 10px;
@@ -2561,7 +2582,7 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .hero h1 {
-    font-size: 4.5rem;
+    --managed-heading-size: 4.5rem;
   }
 
   .hero-copy {
@@ -2580,7 +2601,7 @@ body.is-devtools-detected .devtools-shield strong {
 
   .section h2,
   .journal h2 {
-    font-size: 3.5rem;
+    --managed-heading-size: 3.5rem;
   }
 
   .hero-visual {
@@ -2622,13 +2643,13 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .project-card-featured h3 {
-    font-size: 1.75rem;
+    font-size: calc(1.75rem * var(--managed-font-scale));
   }
 }
 
 @media (min-width: 1101px) and (max-width: 1280px) {
   .hero h1 {
-    font-size: 5.25rem;
+    --managed-heading-size: 5.25rem;
   }
 }
 
@@ -2669,7 +2690,7 @@ body.is-devtools-detected .devtools-shield strong {
 
 @media (max-width: 760px) {
   body {
-    font-size: 15px;
+    font-size: calc(15px * var(--managed-font-scale));
   }
 
   #main,
@@ -2750,7 +2771,7 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .hero h1 {
-    font-size: 3.2rem;
+    --managed-heading-size: 3.2rem;
   }
 
   .hero-reflections {
@@ -2768,7 +2789,7 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .hero-thought blockquote {
-    font-size: 1.12rem;
+    font-size: calc(1.12rem * var(--managed-font-scale));
   }
 
   .hero-thought figcaption {
@@ -2782,19 +2803,19 @@ body.is-devtools-detected .devtools-shield strong {
 
   .reflection-stage[data-reflection-density="short"] > p,
   .reflection-preview-measure[data-reflection-density="short"] {
-    font-size: 1.16rem;
+    font-size: calc(1.16rem * var(--managed-font-scale));
     line-height: 1.62;
   }
 
   .reflection-stage[data-reflection-density="medium"] > p,
   .reflection-preview-measure[data-reflection-density="medium"] {
-    font-size: 1.04rem;
+    font-size: calc(1.04rem * var(--managed-font-scale));
     line-height: 1.72;
   }
 
   .reflection-stage[data-reflection-density="long"] > p,
   .reflection-preview-measure[data-reflection-density="long"] {
-    font-size: 1rem;
+    font-size: calc(1rem * var(--managed-font-scale));
     line-height: 1.76;
   }
 
@@ -2805,7 +2826,7 @@ body.is-devtools-detected .devtools-shield strong {
   .reflection-dialog-copy p,
   .reflection-dialog[data-reflection-density="short"] .reflection-dialog-copy p,
   .reflection-dialog[data-reflection-density="long"] .reflection-dialog-copy p {
-    font-size: 1rem;
+    font-size: calc(1rem * var(--managed-font-scale));
     line-height: 1.82;
   }
 
@@ -2863,7 +2884,7 @@ body.is-devtools-detected .devtools-shield strong {
     grid-row: 2;
     padding-bottom: 0.7rem;
     color: var(--ink-soft);
-    font-size: 0.92rem;
+    font-size: calc(0.92rem * var(--managed-font-scale));
     line-height: 1.55;
   }
 
@@ -2913,11 +2934,11 @@ body.is-devtools-detected .devtools-shield strong {
 
   .section h2,
   .journal h2 {
-    font-size: 2.7rem;
+    --managed-heading-size: 2.7rem;
   }
 
   .skill-list li > span {
-    font-size: 1.35rem;
+    font-size: calc(1.35rem * var(--managed-font-scale));
   }
 
   .journal {
@@ -2952,7 +2973,7 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .project-card-featured h3 {
-    font-size: 1.85rem;
+    font-size: calc(1.85rem * var(--managed-font-scale));
   }
 
   .about-ledger {
@@ -3012,7 +3033,7 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .hero h1 {
-    font-size: 2.8rem;
+    --managed-heading-size: 2.8rem;
   }
 
   .not-found h1 {

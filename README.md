@@ -44,7 +44,7 @@ The deployment workflow replaces the public tree from a private-source allowlist
 | `.nojekyll` | Prevents GitHub Pages Jekyll processing |
 | `index.html` | Homepage structure, fallback copy, project list, and thought archive UI |
 | `404.html` | Public error page |
-| `content/site-content.json` | Validated bilingual content overlay and module visibility |
+| `content/site-content.json` | Validated bilingual content, module visibility, and bounded presentation overlay |
 | `css/site.css` | Themes, responsive layout, typography, and interaction states |
 | `js/site.js` | Content overlay, themes, projects, archive rotation, dialog, and safe text rendering |
 | `images/favicon.png` | Site icon |
@@ -56,7 +56,7 @@ Source-only paths such as `admin/`, `backend/`, `tests/`, `.github/`, `scripts/`
 
 ## Content and fallback
 
-The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages.
+The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The overlay may set an 85-115% font scale, a complete six-module order, and compact/standard/wide module sizes; responsive limits remain authoritative on narrow screens. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages.
 
 Public JavaScript treats managed text as untrusted and assigns visible dates, provenance, titles, and bodies safely. The runtime does not expose iCloud storage labels as visible titles and does not run translation services in the browser.
 
