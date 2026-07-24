@@ -99,6 +99,10 @@
   display: none !important;
 }
 
+[data-font-module] {
+  font-size: calc(1em * var(--managed-font-scale));
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -328,7 +332,7 @@ select:focus-visible {
   gap: 0.55rem;
   color: var(--ink);
   font-family: var(--display);
-  font-size: 1rem;
+  font-size: calc(1rem * var(--managed-font-scale));
   font-weight: 650;
   text-decoration: none;
   white-space: nowrap;
@@ -367,7 +371,7 @@ select:focus-visible {
   flex-wrap: wrap;
   gap: 0.2rem 1rem;
   min-width: 0;
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--managed-font-scale));
 }
 
 .site-nav a {
@@ -424,7 +428,7 @@ select:focus-visible {
   border-radius: 999px;
   cursor: pointer;
   font: inherit;
-  font-size: 0.75rem;
+  font-size: calc(0.75rem * var(--managed-font-scale));
   font-weight: 700;
   -webkit-backdrop-filter: blur(12px) saturate(1.12);
   backdrop-filter: blur(12px) saturate(1.12);
@@ -470,7 +474,7 @@ select:focus-visible {
 
 .page-scale-current {
   font-family: var(--utility);
-  font-size: 0.62rem;
+  font-size: calc(0.62rem * var(--managed-font-scale));
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: 0;
@@ -580,7 +584,7 @@ select:focus-visible {
 .card-meta {
   margin: 0 0 1.25rem;
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: calc(0.72rem * var(--managed-font-scale));
   font-weight: 650;
   line-height: 1.3;
   letter-spacing: 0;
@@ -598,7 +602,7 @@ select:focus-visible {
   min-width: 1.6rem;
   color: var(--ink);
   font-family: var(--utility);
-  font-size: 0.68rem;
+  font-size: calc(0.68rem * var(--managed-font-scale));
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
@@ -685,7 +689,7 @@ select:focus-visible {
   margin: 0;
   color: var(--muted);
   font-family: var(--utility);
-  font-size: 0.68rem;
+  font-size: calc(0.68rem * var(--managed-font-scale));
   font-variant-numeric: tabular-nums;
   font-weight: 650;
   letter-spacing: 0;
@@ -711,7 +715,7 @@ select:focus-visible {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0;
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--managed-font-scale));
   font-weight: 680;
   transition: color var(--motion-fast) var(--ease-soft), border-color var(--motion-fast) var(--ease-soft), background-color var(--motion-fast) var(--ease-soft);
 }
@@ -758,7 +762,7 @@ select:focus-visible {
 .reflection-dialog time {
   color: var(--accent);
   font-family: var(--utility);
-  font-size: 0.72rem;
+  font-size: calc(0.72rem * var(--managed-font-scale));
   font-variant-numeric: tabular-nums;
   font-weight: 650;
   letter-spacing: 0;
@@ -778,7 +782,7 @@ select:focus-visible {
   gap: 0.45rem;
   color: var(--muted);
   font-family: var(--utility);
-  font-size: 0.68rem;
+  font-size: calc(0.68rem * var(--managed-font-scale));
   font-weight: 650;
   letter-spacing: 0;
 }
@@ -844,7 +848,7 @@ select:focus-visible {
   padding: 0 0.1rem;
   color: var(--accent);
   border-color: transparent;
-  font-size: 0.74rem;
+  font-size: calc(0.74rem * var(--managed-font-scale));
   font-weight: 650;
   white-space: nowrap;
 }
@@ -970,7 +974,7 @@ select:focus-visible {
   margin-top: 0.85rem;
   color: var(--muted);
   font-family: var(--utility);
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--managed-font-scale));
 }
 
 .hero-thought figcaption span {
@@ -988,7 +992,7 @@ select:focus-visible {
   color: var(--accent);
   border: 1px solid var(--line);
   border-radius: 50%;
-  font-size: 1rem;
+  font-size: calc(1rem * var(--managed-font-scale));
   line-height: 1;
   transition: color var(--motion-fast) var(--ease-soft), background-color var(--motion-fast) var(--ease-soft), border-color var(--motion-fast) var(--ease-soft), translate var(--motion-ui) var(--ease-out);
 }
@@ -1111,7 +1115,7 @@ select:focus-visible {
 .reflection-dialog-copy p {
   margin: 0;
   color: var(--ink);
-  font-size: 1.05rem;
+  font-size: calc(1.05rem * var(--managed-font-scale));
   font-weight: 400;
   line-height: 1.82;
   letter-spacing: 0;
@@ -1121,12 +1125,12 @@ select:focus-visible {
 }
 
 .reflection-dialog[data-reflection-density="short"] .reflection-dialog-copy p {
-  font-size: 1.16rem;
+  font-size: calc(1.16rem * var(--managed-font-scale));
   line-height: 1.72;
 }
 
 .reflection-dialog[data-reflection-density="long"] .reflection-dialog-copy p {
-  font-size: 1rem;
+  font-size: calc(1rem * var(--managed-font-scale));
   line-height: 1.86;
 }
 
@@ -1248,7 +1252,7 @@ select:focus-visible {
   margin: 0;
   color: rgba(247, 248, 244, 0.56);
   font-family: var(--utility);
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--managed-font-scale));
   font-weight: 650;
   text-transform: uppercase;
 }
@@ -1258,7 +1262,7 @@ select:focus-visible {
   color: rgba(247, 248, 244, 0.88);
   font-family: var(--display);
   max-width: 36rem;
-  font-size: 0.96rem;
+  font-size: calc(0.96rem * var(--managed-font-scale));
   font-weight: 480;
   line-height: 1.45;
 }
@@ -1267,7 +1271,7 @@ select:focus-visible {
   justify-self: end;
   margin-top: 0;
   color: rgba(247, 248, 244, 0.86);
-  font-size: 0.82rem;
+  font-size: calc(0.82rem * var(--managed-font-scale));
   font-weight: 680;
 }
 
@@ -1344,7 +1348,7 @@ select:focus-visible {
   padding-top: 1rem;
   color: var(--muted);
   border-top: 1px solid var(--line);
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--managed-font-scale));
   font-weight: 650;
 }
 
@@ -1379,7 +1383,7 @@ select:focus-visible {
 .prose p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 1.02rem;
+  font-size: calc(1.02rem * var(--managed-font-scale));
 }
 
 .prose > p {
@@ -1422,7 +1426,7 @@ select:focus-visible {
 .about-ledger dt {
   color: var(--muted);
   font-family: var(--utility);
-  font-size: 0.76rem;
+  font-size: calc(0.76rem * var(--managed-font-scale));
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -1431,7 +1435,7 @@ select:focus-visible {
 .about-ledger dd {
   margin: 0.45rem 0 0;
   color: var(--ink-soft);
-  font-size: 0.9rem;
+  font-size: calc(0.9rem * var(--managed-font-scale));
   line-height: 1.55;
 }
 
@@ -1470,7 +1474,7 @@ select:focus-visible {
 
 .section-about .prose > p:first-child {
   color: var(--ink);
-  font-size: 1.08rem;
+  font-size: calc(1.08rem * var(--managed-font-scale));
   font-weight: 480;
   line-height: 1.75;
 }
@@ -1515,7 +1519,7 @@ select:focus-visible {
   content: "0" counter(about-item);
   color: var(--muted);
   font-family: var(--display);
-  font-size: 0.92rem;
+  font-size: calc(0.92rem * var(--managed-font-scale));
   font-weight: 700;
   line-height: 1;
 }
@@ -1547,14 +1551,14 @@ select:focus-visible {
   margin-bottom: 0.55rem;
   color: var(--ink);
   font-family: var(--display);
-  font-size: 1.24rem;
+  font-size: calc(1.24rem * var(--managed-font-scale));
   font-weight: 600;
 }
 
 .about-list p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: calc(0.9rem * var(--managed-font-scale));
   line-height: 1.56;
   text-wrap: pretty;
 }
@@ -1713,7 +1717,7 @@ select:focus-visible {
   color: #ffffff;
   background: var(--accent);
   border-radius: 999px;
-  font-size: 0.7rem;
+  font-size: calc(0.7rem * var(--managed-font-scale));
   font-weight: 750;
   letter-spacing: 0;
 }
@@ -1721,7 +1725,7 @@ select:focus-visible {
 .project-stat {
   color: var(--muted);
   font-family: var(--utility);
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--managed-font-scale));
   font-weight: 680;
   overflow-wrap: anywhere;
 }
@@ -1737,7 +1741,7 @@ select:focus-visible {
 
 .project-copy-secondary {
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: calc(0.88rem * var(--managed-font-scale));
   line-height: 1.55;
   padding-left: 0.8rem;
   border-left: 1px solid var(--line);
@@ -1763,7 +1767,7 @@ select:focus-visible {
 .project-card-featured h3 {
   max-width: 32rem;
   margin-bottom: 0.8rem;
-  font-size: 1.85rem;
+  font-size: calc(1.85rem * var(--managed-font-scale));
   line-height: 1.1;
 }
 
@@ -1785,7 +1789,7 @@ select:focus-visible {
 
 .project-card-featured .project-copy-primary {
   color: var(--feature-ink);
-  font-size: 0.98rem;
+  font-size: calc(0.98rem * var(--managed-font-scale));
 }
 
 .project-card-featured .project-copy-secondary {
@@ -1829,7 +1833,7 @@ select:focus-visible {
   background: transparent;
   border: 0;
   border-radius: 0;
-  font-size: 0.72rem;
+  font-size: calc(0.72rem * var(--managed-font-scale));
   font-weight: 650;
   overflow-wrap: anywhere;
 }
@@ -1938,7 +1942,7 @@ select:focus-visible {
   background: var(--ink);
   border-left: 1px solid var(--line-strong);
   font-family: var(--display);
-  font-size: 1.2rem;
+  font-size: calc(1.2rem * var(--managed-font-scale));
   line-height: 1;
 }
 
@@ -2023,7 +2027,7 @@ select:focus-visible {
   border: 1px solid color-mix(in srgb, var(--skill-tone) 28%, var(--line));
   border-radius: 50%;
   font-family: var(--utility);
-  font-size: 0.72rem;
+  font-size: calc(0.72rem * var(--managed-font-scale));
   font-weight: 650;
   line-height: 1;
   letter-spacing: 0;
@@ -2118,7 +2122,7 @@ select:focus-visible {
   padding: 0.72rem 0;
   color: var(--ink);
   border-bottom: 1px solid var(--line);
-  font-size: 0.9rem;
+  font-size: calc(0.9rem * var(--managed-font-scale));
   font-weight: 640;
   line-height: 1.35;
   letter-spacing: 0;
@@ -2136,7 +2140,7 @@ select:focus-visible {
   content: "0" counter(skill-evidence);
   color: var(--skill-tone);
   font-family: var(--utility);
-  font-size: 0.66rem;
+  font-size: calc(0.66rem * var(--managed-font-scale));
   font-weight: 600;
 }
 
@@ -2406,7 +2410,7 @@ select:focus-visible {
 
 .not-found h1 {
   color: var(--ink);
-  font-size: 4rem;
+  font-size: calc(4rem * var(--managed-font-scale));
 }
 
 .not-found p {
@@ -2443,7 +2447,7 @@ select:focus-visible {
 
 .devtools-shield strong {
   font-family: var(--display);
-  font-size: 1.22rem;
+  font-size: calc(1.22rem * var(--managed-font-scale));
   font-weight: 600;
   line-height: 1.15;
 }
@@ -2501,7 +2505,7 @@ body.is-devtools-detected .devtools-shield > div {
 }
 
 body.is-devtools-detected .devtools-shield strong {
-  font-size: 2rem;
+  font-size: calc(2rem * var(--managed-font-scale));
 }
 
 [data-module] {
@@ -3017,7 +3021,7 @@ body.is-devtools-detected .devtools-shield strong {
 
 @media (max-width: 460px) {
   .brand {
-    font-size: 1rem;
+    font-size: calc(1rem * var(--managed-font-scale));
   }
 
   [data-theme-label] {
@@ -3037,7 +3041,7 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .not-found h1 {
-    font-size: 2.65rem;
+    font-size: calc(2.65rem * var(--managed-font-scale));
   }
 
   .hero-actions .button {
@@ -3057,7 +3061,7 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .reflection-more {
-    font-size: 0.68rem;
+    font-size: calc(0.68rem * var(--managed-font-scale));
   }
 
   .reflection-controls {

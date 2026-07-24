@@ -66,7 +66,7 @@ const CONTENT_MODULE_IDS = ["site", "hero", "about", "work", "skills", "journal"
 const PRESENTATION_MODULE_IDS = CONTENT_MODULE_IDS.filter((moduleId) => moduleId !== "site");
 const PRESENTATION_SIZE_VALUES = new Set(["compact", "standard", "wide"]);
 const DEFAULT_PRESENTATION = {
-  font_scale: 100,
+  module_font_scales: Object.fromEntries(CONTENT_MODULE_IDS.map((moduleId) => [moduleId, 100])),
   module_order: [...PRESENTATION_MODULE_IDS],
   module_sizes: Object.fromEntries(PRESENTATION_MODULE_IDS.map((moduleId) => [moduleId, "standard"])),
 };
@@ -1408,7 +1408,7 @@ function setupReflectionRotator() {
 
 function defaultPresentation() {
   return {
-    font_scale: DEFAULT_PRESENTATION.font_scale,
+    module_font_scales: { ...DEFAULT_PRESENTATION.module_font_scales },
     module_order: [...DEFAULT_PRESENTATION.module_order],
     module_sizes: { ...DEFAULT_PRESENTATION.module_sizes },
   };
@@ -1421,16 +1421,41 @@ function normalizePresentation(value) {
   if (!value || typeof value !== "object") {
     return null;
   }
+  const hasNewFontScales = Object.hasOwn(value, "module_font_scales");
+  const hasLegacyFontScale = Object.hasOwn(value, "font_scale");
+  if (hasNewFontScales === hasLegacyFontScale) {
+    return null;
+  }
   const presentationKeys = Object.keys(value);
+  const allowedKeys = hasNewFontScales
+    ? ["module_font_scales", "module_order", "module_sizes"]
+    : ["font_scale", "module_order", "module_sizes"];
   if (
     presentationKeys.length !== 3
-    || presentationKeys.some((key) => !["font_scale", "module_order", "module_sizes"].includes(key))
+    || presentationKeys.some((key) => !allowedKeys.includes(key))
   ) {
     return null;
   }
-  const fontScale = value.font_scale;
-  if (!Number.isInteger(fontScale) || fontScale < 85 || fontScale > 115 || fontScale % 5 !== 0) {
+  const fontScaleValues = hasNewFontScales
+    ? value.module_font_scales
+    : Object.fromEntries(CONTENT_MODULE_IDS.map((moduleId) => [moduleId, value.font_scale]));
+  if (!fontScaleValues || typeof fontScaleValues !== "object") {
     return null;
+  }
+  const fontScaleKeys = Object.keys(fontScaleValues);
+  if (
+    fontScaleKeys.length !== CONTENT_MODULE_IDS.length
+    || fontScaleKeys.some((moduleId) => !CONTENT_MODULE_IDS.includes(moduleId))
+  ) {
+    return null;
+  }
+  const moduleFontScales = {};
+  for (const moduleId of CONTENT_MODULE_IDS) {
+    const scale = fontScaleValues[moduleId];
+    if (!Number.isInteger(scale) || scale < 85 || scale > 115 || scale % 5 !== 0) {
+      return null;
+    }
+    moduleFontScales[moduleId] = scale;
   }
   if (!Array.isArray(value.module_order) || value.module_order.length !== PRESENTATION_MODULE_IDS.length) {
     return null;
@@ -1460,7 +1485,7 @@ function normalizePresentation(value) {
     }
     moduleSizes[moduleId] = size;
   }
-  return { font_scale: fontScale, module_order: order, module_sizes: moduleSizes };
+  return { module_font_scales: moduleFontScales, module_order: order, module_sizes: moduleSizes };
 }
 
 function normalizeSiteContent(value) {
@@ -1521,7 +1546,12 @@ function normalizeSiteContent(value) {
 }
 
 function applyPresentation(presentation) {
-  root.style.setProperty("--managed-font-scale", (presentation.font_scale / 100).toFixed(2));
+  for (const moduleId of CONTENT_MODULE_IDS) {
+    const scale = (presentation.module_font_scales[moduleId] / 100).toFixed(2);
+    document.querySelectorAll(`[data-module="${moduleId}"], [data-font-module="${moduleId}"]`).forEach((element) => {
+      element.style.setProperty("--managed-font-scale", scale);
+    });
+  }
   const main = document.getElementById("main");
   if (!main) {
     return;
