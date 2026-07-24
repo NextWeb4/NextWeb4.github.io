@@ -56,7 +56,7 @@ Source-only paths such as `admin/`, `backend/`, `tests/`, `.github/`, `scripts/`
 
 ## Content and fallback
 
-The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The overlay may set independent 85-115% font scales for all seven managed modules, a complete six-section order, and compact/standard/wide section sizes; responsive limits remain authoritative on narrow screens. Legacy global font scale values apply to all seven modules. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages.
+The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The overlay may set independent 85-115% font scales for all seven managed modules, CJK-safe compact/standard/wide primary-heading widths for all six sections, a complete six-section order, and three bounded section sizes; responsive limits remain authoritative on narrow screens. Missing heading settings use standard widths, while legacy global font scale values apply to all seven modules. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages.
 
 Public JavaScript treats managed text as untrusted and assigns visible dates, provenance, titles, and bodies safely. The runtime does not expose iCloud storage labels as visible titles and does not run translation services in the browser.
 

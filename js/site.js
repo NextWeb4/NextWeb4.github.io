@@ -65,9 +65,11 @@ const DEFAULT_REFLECTION_ARCHIVES = {
 const CONTENT_MODULE_IDS = ["site", "hero", "about", "work", "skills", "journal", "contact"];
 const PRESENTATION_MODULE_IDS = CONTENT_MODULE_IDS.filter((moduleId) => moduleId !== "site");
 const PRESENTATION_SIZE_VALUES = new Set(["compact", "standard", "wide"]);
+const PRESENTATION_HEADING_WIDTH_VALUES = new Set(["compact", "standard", "wide"]);
 const DEFAULT_PRESENTATION = {
   module_font_scales: Object.fromEntries(CONTENT_MODULE_IDS.map((moduleId) => [moduleId, 100])),
   module_order: [...PRESENTATION_MODULE_IDS],
+  module_heading_widths: Object.fromEntries(PRESENTATION_MODULE_IDS.map((moduleId) => [moduleId, "standard"])),
   module_sizes: Object.fromEntries(PRESENTATION_MODULE_IDS.map((moduleId) => [moduleId, "standard"])),
 };
 const EDITABLE_CONTENT_KEYS = new Set([
@@ -1410,6 +1412,7 @@ function defaultPresentation() {
   return {
     module_font_scales: { ...DEFAULT_PRESENTATION.module_font_scales },
     module_order: [...DEFAULT_PRESENTATION.module_order],
+    module_heading_widths: { ...DEFAULT_PRESENTATION.module_heading_widths },
     module_sizes: { ...DEFAULT_PRESENTATION.module_sizes },
   };
 }
@@ -1428,10 +1431,10 @@ function normalizePresentation(value) {
   }
   const presentationKeys = Object.keys(value);
   const allowedKeys = hasNewFontScales
-    ? ["module_font_scales", "module_order", "module_sizes"]
-    : ["font_scale", "module_order", "module_sizes"];
+    ? ["module_font_scales", "module_order", "module_heading_widths", "module_sizes"]
+    : ["font_scale", "module_order", "module_heading_widths", "module_sizes"];
   if (
-    presentationKeys.length !== 3
+    ![3, 4].includes(presentationKeys.length)
     || presentationKeys.some((key) => !allowedKeys.includes(key))
   ) {
     return null;
@@ -1485,7 +1488,31 @@ function normalizePresentation(value) {
     }
     moduleSizes[moduleId] = size;
   }
-  return { module_font_scales: moduleFontScales, module_order: order, module_sizes: moduleSizes };
+  const headingWidthValues = value.module_heading_widths ?? DEFAULT_PRESENTATION.module_heading_widths;
+  if (!headingWidthValues || typeof headingWidthValues !== "object") {
+    return null;
+  }
+  const headingWidthKeys = Object.keys(headingWidthValues);
+  if (
+    headingWidthKeys.length !== PRESENTATION_MODULE_IDS.length
+    || headingWidthKeys.some((moduleId) => !PRESENTATION_MODULE_IDS.includes(moduleId))
+  ) {
+    return null;
+  }
+  const moduleHeadingWidths = {};
+  for (const moduleId of PRESENTATION_MODULE_IDS) {
+    const width = headingWidthValues[moduleId];
+    if (!PRESENTATION_HEADING_WIDTH_VALUES.has(width)) {
+      return null;
+    }
+    moduleHeadingWidths[moduleId] = width;
+  }
+  return {
+    module_font_scales: moduleFontScales,
+    module_order: order,
+    module_heading_widths: moduleHeadingWidths,
+    module_sizes: moduleSizes,
+  };
 }
 
 function normalizeSiteContent(value) {
@@ -1564,6 +1591,7 @@ function applyPresentation(presentation) {
       continue;
     }
     section.dataset.layoutSize = presentation.module_sizes[moduleId];
+    section.dataset.headingWidth = presentation.module_heading_widths[moduleId];
     orderedSections.push(section);
     main.append(section);
   }

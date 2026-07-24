@@ -642,7 +642,7 @@ select:focus-visible {
 
 .hero h1 {
   --managed-heading-size: 5.75rem;
-  max-width: 12ch;
+  max-width: var(--managed-heading-width);
   font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   text-wrap: balance;
 }
@@ -1300,7 +1300,7 @@ select:focus-visible {
 .section h2,
 .journal h2 {
   --managed-heading-size: 3.85rem;
-  max-width: 16ch;
+  max-width: var(--managed-heading-width);
   color: var(--ink);
   font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   text-wrap: balance;
@@ -1312,10 +1312,6 @@ select:focus-visible {
   gap: 5rem;
   align-items: end;
   margin-bottom: var(--section-heading-gap);
-}
-
-.section-about h2 {
-  max-width: 10ch;
 }
 
 .section-heading-main {
@@ -2211,7 +2207,6 @@ select:focus-visible {
   --managed-heading-size: 3.65rem;
   grid-column: 1 / span 7;
   color: var(--ink);
-  max-width: 12ch;
   font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
 }
 
@@ -2279,7 +2274,6 @@ select:focus-visible {
 
 .section-contact h2 {
   --managed-heading-size: 4.1rem;
-  max-width: none;
   font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   line-height: 0.98;
 }
@@ -2509,9 +2503,49 @@ body.is-devtools-detected .devtools-shield strong {
 }
 
 [data-module] {
+  --module-heading-width-compact: 6.5em;
+  --module-heading-width-standard: 9em;
+  --module-heading-width-wide: 13em;
+  --managed-heading-width: var(--module-heading-width-standard);
   --managed-module-width: var(--content-width);
   --managed-module-space: 1;
   font-size: calc(1rem * var(--managed-font-scale));
+}
+
+.hero {
+  --module-heading-width-compact: 5em;
+  --module-heading-width-standard: 6.5em;
+  --module-heading-width-wide: 9em;
+}
+
+.section-about {
+  --module-heading-width-compact: 4.5em;
+  --module-heading-width-standard: 6em;
+  --module-heading-width-wide: 9em;
+}
+
+.journal {
+  --module-heading-width-compact: 8em;
+  --module-heading-width-standard: 12em;
+  --module-heading-width-wide: 16em;
+}
+
+.section-contact {
+  --module-heading-width-compact: 8em;
+  --module-heading-width-standard: 14em;
+  --module-heading-width-wide: none;
+}
+
+[data-module][data-heading-width="compact"] {
+  --managed-heading-width: var(--module-heading-width-compact);
+}
+
+[data-module][data-heading-width="standard"] {
+  --managed-heading-width: var(--module-heading-width-standard);
+}
+
+[data-module][data-heading-width="wide"] {
+  --managed-heading-width: var(--module-heading-width-wide);
 }
 
 [data-module][data-layout-size="compact"] {
