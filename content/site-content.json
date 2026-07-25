@@ -217,8 +217,8 @@
       "en": "Usage and updates"
     },
     "work_intro": {
-      "zh": "Star 显示外部使用，更新时间显示最近交付；先看四个主要项目，需要时再展开全部仓库。",
-      "en": "Stars show outside use and update time shows recent delivery. Start with four primary projects, then expand the complete repository list when needed."
+      "zh": "描述、Topics、Stars 和更新时间直接同步 GitHub；先看四个主要项目，需要时再展开全部仓库。",
+      "en": "Descriptions, topics, stars, and update times sync directly from GitHub. Start with four primary projects, then expand the complete repository list when needed."
     },
     "skills_label": {
       "zh": "技术与方法",

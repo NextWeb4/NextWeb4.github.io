@@ -29,11 +29,11 @@ The private source repository `NextWeb4/website-source` owns the editor, backend
 ## Reader experience
 
 - A dark-first fresh visit with persisted light/dark and Chinese/English switching; an explicitly stored light preference remains authoritative.
-- A grapheme-safe bilingual hero-title typewriter with a complete accessible name, reserved geometry, language-aware heading measures, and an instant reduced-motion fallback.
+- A grapheme-safe bilingual hero-title typewriter with a complete accessible name, reserved geometry, a visible completed-text caret hold, hidden-document pause, language-aware heading measures, an instant automatic reduced-motion fallback, and an explicit replay control.
 - A dated 100-entry thought archive: 31 Moments entries and 69 iCloud Notes entries per language.
 - Visibility-aware rotation that pauses during interaction, in hidden documents, or when less than one quarter of the panel remains visible; previous/next controls, reading progress, provenance, reading time, keyboard access, and a native full-text dialog remain available.
-- Public GitHub project enrichment with a dated, sortable four-repository snapshot when the API is unavailable; “latest delivery” uses code-push time rather than metadata-only updates.
-- Responsive article-style layout, balanced project cards, wrapping evidence links, a repository-owned hero photograph, and a non-blocking wallpaper enhancement.
+- Live-first public GitHub project enrichment that revalidates descriptions, Topics, Stars, update times, and code-push times on every page entry; fresh cache may appear while refreshing, and a dated sortable four-repository snapshot remains the final fallback.
+- Responsive article-style layout, balanced project cards, wrapping evidence links, a repository-owned hero photograph with a one-line Chinese desktop caption and normal-flow mobile wrapping, and a non-blocking wallpaper enhancement.
 - Browser copy or DevTools deterrence is presentational only; delivered browser code and content are inspectable.
 
 ## Public artifact inventory
@@ -63,7 +63,7 @@ Public JavaScript treats managed text as untrusted and assigns visible dates, pr
 
 ## Network and privacy
 
-- The public project list may request public GitHub repository data; bundled project data remains the fallback.
+- The public project list requests public GitHub repository data on every page entry, uses GitHub descriptions and up to 20 Topics without local secondary copy, and labels loading, refreshing, live, cached, and snapshot states truthfully. Unauthenticated rate limits remain external; fresh cache and bundled project data are fallbacks.
 - The optional wallpaper path requests metadata from `bing.biturl.top`, accepts only validated HTTPS `bing.com` image hosts, uses a bounded timeout, and falls back to a solid color.
 - Language, theme, and wallpaper cache state stays in browser storage; no admin token or GitHub credential belongs in this repository.
 - README badges request images from `img.shields.io` when GitHub renders the page.
@@ -89,8 +89,8 @@ The public repository must never receive the private source tree, backend, admin
 
 - Confirm the artifact contains only the allowlisted runtime and documentation paths.
 - Open `/`, `/404.html`, both public language states, and representative archive entries through HTTP.
-- Check keyboard navigation, focus visibility, reduced motion, mobile overflow, pause behavior, dialog close access, and fallback content.
-- Confirm project links, image paths, JSON loading, and canonical site URLs resolve.
+- Check keyboard navigation, focus visibility, reduced-motion automatic rendering and explicit typewriter replay, the one-line Chinese desktop caption, mobile overflow, pause behavior, dialog close access, and fallback content.
+- Confirm live GitHub status/refresh, API descriptions and Topics, cache/snapshot fallback, project links, image paths, JSON loading, and canonical site URLs resolve.
 - Compare the public tree with the private build artifact before accepting a deployment.
 
 ## Contact

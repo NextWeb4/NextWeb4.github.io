@@ -442,6 +442,12 @@ select:focus-visible {
   background: var(--surface-strong);
 }
 
+.control-button-icon {
+  min-width: 2rem;
+  padding: 0;
+  font-size: calc(1rem * var(--managed-font-scale));
+}
+
 .js-enabled .page-scale {
   display: none;
 }
@@ -668,14 +674,15 @@ select:focus-visible {
   visibility: hidden;
 }
 
-[data-typewriter-state="typing"] .hero-title-visual::after {
+[data-typewriter-state="typing"] .hero-title-visual::after,
+[data-typewriter-state="holding"] .hero-title-visual::after {
   display: inline-block;
   width: 0;
   height: 0.82em;
   margin-left: 0.08em;
   content: "";
   border-right: 0.055em solid currentColor;
-  animation: typewriter-caret 720ms steps(1, end) 6;
+  animation: typewriter-caret 720ms steps(1, end) infinite;
   vertical-align: -0.04em;
 }
 
@@ -1370,6 +1377,16 @@ select:focus-visible {
     grid-template-columns: minmax(24rem, 1.05fr) minmax(28rem, 0.95fr);
     gap: 4rem;
   }
+
+  :lang(zh-CN) .hero-card {
+    grid-template-columns: minmax(9rem, 2fr) minmax(0, 8fr) minmax(8rem, 2fr);
+  }
+
+  :lang(zh-CN) .photo-line {
+    max-width: none;
+    white-space: nowrap;
+    font-size: calc(0.88rem * var(--managed-font-scale));
+  }
 }
 
 .section-heading {
@@ -1402,14 +1419,56 @@ select:focus-visible {
   color: var(--ink-soft);
 }
 
-.project-sort-control {
+.project-controls {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   width: 100%;
   padding-top: 1rem;
-  color: var(--muted);
   border-top: 1px solid var(--line);
+}
+
+.project-sync-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  color: var(--muted);
+  font-family: var(--utility);
+  font-size: calc(0.72rem * var(--managed-font-scale));
+  font-weight: 700;
+}
+
+.project-sync-status::before {
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  content: "";
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.project-sync-status[data-project-sync-state="loaded"] {
+  color: var(--accent);
+}
+
+.project-control-actions,
+.project-sort-control {
+  display: inline-flex;
+  align-items: center;
+}
+
+.project-control-actions {
+  justify-content: flex-end;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.project-sort-control {
+  justify-content: flex-end;
+  gap: 1rem;
+  width: auto;
+  color: var(--muted);
   font-size: calc(0.78rem * var(--managed-font-scale));
   font-weight: 650;
 }
@@ -1436,6 +1495,44 @@ select:focus-visible {
   border-color: var(--line);
   cursor: not-allowed;
   opacity: 0.72;
+}
+
+.project-refresh-button {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  font: inherit;
+  font-size: calc(1rem * var(--managed-font-scale));
+}
+
+.project-refresh-button:hover,
+.project-refresh-button:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.project-refresh-button:disabled {
+  color: var(--muted);
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.project-refresh-button[aria-busy="true"] > span {
+  animation: project-refresh-spin 720ms linear infinite;
+}
+
+@keyframes project-refresh-spin {
+  to {
+    rotate: 1turn;
+  }
 }
 
 .section-heading.compact {
@@ -1801,14 +1898,6 @@ select:focus-visible {
   color: var(--ink-soft);
 }
 
-.project-copy-secondary {
-  color: var(--muted);
-  font-size: calc(0.88rem * var(--managed-font-scale));
-  line-height: 1.55;
-  padding-left: 0.8rem;
-  border-left: 1px solid var(--line);
-}
-
 .project-card-featured {
   grid-column: auto;
   min-height: 18.5rem;
@@ -1852,14 +1941,6 @@ select:focus-visible {
 .project-card-featured .project-copy-primary {
   color: var(--feature-ink);
   font-size: calc(0.98rem * var(--managed-font-scale));
-}
-
-.project-card-featured .project-copy-secondary {
-  max-width: 38rem;
-  padding: 0.75rem 0 0.75rem 1rem;
-  color: var(--feature-soft);
-  background: transparent;
-  border-left-color: var(--feature-line);
 }
 
 .project-card-featured .project-footer {
@@ -3020,6 +3101,20 @@ body.is-devtools-detected .devtools-shield strong {
     color: var(--ink-soft);
     font-size: calc(0.92rem * var(--managed-font-scale));
     line-height: 1.55;
+  }
+
+  .project-controls {
+    flex-wrap: wrap;
+  }
+
+  .project-control-actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .project-sort-control {
+    flex: 1;
+    justify-content: space-between;
   }
 
   .scroll-cue {

@@ -43,7 +43,7 @@
       }, 2000);
     }());
   </script>
-  <link rel="stylesheet" href="css/site.css?v=20260724-4">
+  <link rel="stylesheet" href="css/site.css?v=20260725-1">
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">跳到主要内容</a>
@@ -59,6 +59,9 @@
         <button class="control-button" id="theme-toggle" type="button" aria-label="切换暗色模式">
           <span data-theme-icon aria-hidden="true">☾</span>
           <span data-theme-label>暗色</span>
+        </button>
+        <button class="control-button control-button-icon" id="typewriter-replay" type="button" aria-label="重播标题打字动画" title="重播标题打字动画" data-i18n-attr="aria-label:typewriter_replay,title:typewriter_replay">
+          <span aria-hidden="true">↻</span>
         </button>
         <button class="control-button language-toggle" id="language-toggle" type="button" aria-label="切换到英文">
           <span data-lang-label>EN</span>
@@ -225,14 +228,22 @@
             <h2 id="work-title" data-i18n="work_title">项目的使用与更新</h2>
           </div>
           <div class="project-heading-aside">
-            <p data-i18n="work_intro">Star 显示外部使用，更新时间显示最近交付；先看四个主要项目，需要时再展开全部仓库。</p>
-            <label class="project-sort-control js-only-inline" for="project-sort">
-              <span data-i18n="projects_sort_label">项目排序</span>
-              <select id="project-sort" data-project-sort>
-                <option value="popular" selected data-i18n="projects_sort_popular">最受欢迎</option>
-                <option value="recent" data-i18n="projects_sort_recent">最新交付</option>
-              </select>
-            </label>
+            <p data-i18n="work_intro">描述、Topics、Stars 和更新时间直接同步 GitHub；先看四个主要项目，需要时再展开全部仓库。</p>
+            <div class="project-controls js-only-inline">
+              <span class="project-sync-status" role="status" aria-live="polite" data-project-sync-status data-project-sync-state="loading">正在同步 GitHub</span>
+              <div class="project-control-actions">
+                <label class="project-sort-control" for="project-sort">
+                  <span data-i18n="projects_sort_label">项目排序</span>
+                  <select id="project-sort" data-project-sort>
+                    <option value="popular" selected data-i18n="projects_sort_popular">最受欢迎</option>
+                    <option value="recent" data-i18n="projects_sort_recent">最新交付</option>
+                  </select>
+                </label>
+                <button class="project-refresh-button" type="button" aria-label="刷新 GitHub 项目" title="刷新 GitHub 项目" data-project-refresh data-i18n-attr="aria-label:projects_refresh,title:projects_refresh">
+                  <span aria-hidden="true">↻</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -241,7 +252,7 @@
             <div>
               <p class="card-meta" data-i18n="projects_loading_meta">GitHub</p>
               <h3 data-i18n="projects_loading_title">正在读取项目</h3>
-              <p data-i18n="projects_loading_text">正在从 NextWeb4 的公开仓库读取项目简介。</p>
+              <p data-i18n="projects_loading_text">正在从 NextWeb4 的公开仓库读取描述、Topics、Stars 与更新时间。</p>
             </div>
           </article>
           <noscript>
@@ -367,6 +378,6 @@
     <a href="https://nextweb4.github.io/Private/" target="_blank" rel="noopener noreferrer" data-i18n="footer_blog">博客</a>
   </footer>
 
-  <script src="js/site.js?v=20260724-4" defer></script>
+  <script src="js/site.js?v=20260725-1" defer></script>
 </body>
 </html>

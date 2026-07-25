@@ -20,15 +20,15 @@
 
 ## 6. Module boundaries
 - Public markup belongs in `index.html` and `404.html`; presentation belongs in `css/site.css`; browser behavior belongs in `js/site.js`; managed overlay data belongs in `content/site-content.json`. Managed presentation is limited to exact 85-115% font scales in 5% steps for `site`, `hero`, `about`, `work`, `skills`, `journal`, and `contact`, `compact`/`standard`/`wide` language-aware primary-heading widths for all six sections, one complete six-section order, and three section-size presets. Each font value affects only its complete module typography; heading widths use module-owned `em` caps and must avoid unintended extra wraps in both Han and English display text.
-- A fresh page and 404 render dark before CSS; an explicit stored light/dark preference remains authoritative. Only the hero H1 uses grapheme-safe typewriter motion; keep its complete accessible name and reserved geometry, and render it instantly under reduced motion or without JavaScript.
+- A fresh page and 404 render dark before CSS; an explicit stored light/dark preference remains authoritative. Only the hero H1 uses grapheme-safe typewriter motion; keep its complete accessible name and reserved geometry, pause hidden runs, render automatic text instantly under reduced motion or without JavaScript, and allow the bounded replay only from the explicit user control.
 - The `images/` files are the only runtime media. Admin, backend, tests, deployment scripts, credentials, and private history remain in `NextWeb4/website-source`.
 - Documentation describes the generated artifact; authoring changes happen in the private source repository.
-- The public tree must preserve the dark-first theme, bilingual hero typewriter, language-aware heading measures, visibility-aware thought rotator, dated four-project fallback snapshot, safe text assignment, equal project-card layout, and wrapping evidence links; these are runtime behavior owned by `js/site.js` and `css/site.css`.
+- The public tree must preserve the dark-first theme, bilingual hero typewriter/replay, language-aware heading measures, visibility-aware thought rotator, live-first GitHub revalidation with truthful cache/snapshot fallback, API-owned project descriptions and Topics, the one-line wide Chinese photo caption, safe text assignment, equal project-card layout, and wrapping evidence links; these are runtime behavior owned by `js/site.js` and `css/site.css`.
 
 ## 7. Prohibited changes
 - Do not edit the runtime as a durable content workflow; the next private-source deployment replaces it.
 - Do not add `admin/`, `backend/`, `tests/`, `.github/`, `scripts/`, credentials, deploy keys, backups, or private Git history.
-- Do not weaken safe text rendering, content fallback, GitHub API fallback, wallpaper host validation, visibility-aware pause behavior, keyboard/accessibility behavior, or mobile overflow protections.
+- Do not weaken safe text rendering, content fallback, GitHub API revalidation/fallback, truthful sync status, wallpaper host validation, visibility-aware pause behavior, keyboard/accessibility behavior, or mobile overflow protections.
 - Do not replace the SVG language row with browser-translatable plain text or add unlicensed decorative assets.
 
 ## 8. Completion criteria
@@ -38,11 +38,11 @@
 
 ## 9. Review criteria
 - Compare the public tree with `NextWeb4/website-source` build output before accepting deployment.
-- Check desktop/mobile overflow, dark-first and stored-light behavior, complete typewriter accessibility/geometry, English heading line lengths, focus visibility, reduced motion, language switching, archive pause/dialog behavior, image paths, and JSON fallback.
+- Check desktop/mobile overflow, dark-first and stored-light behavior, complete typewriter accessibility/geometry/replay, English heading line lengths, the one-line Chinese desktop photo caption, GitHub loading/refresh/live/cache/snapshot states, focus visibility, reduced motion, language switching, archive pause/dialog behavior, image paths, and JSON fallback.
 - Run the private source tests and `git diff --check`; never claim runtime-only review is equivalent to source regression coverage.
 
 ## 10. Common risks
 - Manual runtime edits are temporary and may be overwritten by deployment.
 - The public tree is inspectable by design; it must not contain source-only files or secrets.
-- GitHub API, wallpaper, Shields, and Pages availability are external dependencies; bundled content and the solid-color fallback must remain usable.
+- GitHub API availability and unauthenticated rate limits, wallpaper, Shields, and Pages are external dependencies; fresh cache, the dated bundled project snapshot, and the solid-color fallback must remain usable.
 - No license file was detected; reuse rights for code, writing, JSON, and images are not granted by public visibility.
