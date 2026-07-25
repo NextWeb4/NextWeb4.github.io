@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "owner": "NextWeb4",
+  "generated_at": "2026-07-25T17:06:21Z",
+  "source": "https://api.github.com/users/NextWeb4/repos",
+  "repositories": [
+    {
+      "name": "2021-Skill-Synthesis-Test",
+      "description": "Archive of computer skills-test materials, routing labs, VB practice, and exam documents.",
+      "language": "Visual Basic 6.0",
+      "updated_at": "2026-07-22T14:17:02Z",
+      "pushed_at": "2026-07-22T14:14:09Z",
+      "html_url": "https://github.com/NextWeb4/2021-Skill-Synthesis-Test",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "archive",
+        "computer-skills",
+        "exam-materials",
+        "networking",
+        "packet-tracer",
+        "skills-test",
+        "visual-basic"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "alias-cockpit",
+      "description": "Windows local email-alias cockpit built with .NET and WinUI for alias generation, markers, local storage, and release packaging.",
+      "language": "C#",
+      "updated_at": "2026-07-25T02:20:15Z",
+      "pushed_at": "2026-07-22T14:14:15Z",
+      "html_url": "https://github.com/NextWeb4/alias-cockpit",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "desktop-app",
+        "dotnet",
+        "email-alias",
+        "local-first",
+        "release-packaging",
+        "windows",
+        "winui"
+      ],
+      "stargazers_count": 161
+    },
+    {
+      "name": "C-practice",
+      "description": "Numbered C language practice collection covering basics, algorithms, data structures, files, graphics, and small projects.",
+      "language": "C",
+      "updated_at": "2026-07-22T14:21:28Z",
+      "pushed_at": "2026-07-22T14:14:31Z",
+      "html_url": "https://github.com/NextWeb4/C-practice",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "algorithms",
+        "archive",
+        "c",
+        "c-language",
+        "data-structures",
+        "learning-notes",
+        "programming-practice"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "code-relay",
+      "description": "A local mailbox verification-code console with owned GitHub account workflows.",
+      "language": "JavaScript",
+      "updated_at": "2026-07-22T14:19:35Z",
+      "pushed_at": "2026-07-22T14:14:21Z",
+      "html_url": "https://github.com/NextWeb4/code-relay",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "desktop-app",
+        "email",
+        "github-api",
+        "javascript",
+        "local-first",
+        "nodejs",
+        "oauth-device-flow",
+        "verification-code",
+        "windows"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "Cplus.test",
+      "description": "C++ test-question and practice-material archive organized by year and topic.",
+      "language": "C++",
+      "updated_at": "2026-07-22T14:16:52Z",
+      "pushed_at": "2026-07-22T14:14:26Z",
+      "html_url": "https://github.com/NextWeb4/Cplus.test",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "archive",
+        "cpp",
+        "cpp-practice",
+        "exam-materials",
+        "programming-practice"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "deepseek-translation-studio",
+      "description": "Windows Python/PySide6 translation studio for DeepSeek Web/API workflows, SRT continuation, capture, and packaging.",
+      "language": "Python",
+      "updated_at": "2026-07-25T02:20:09Z",
+      "pushed_at": "2026-07-22T14:14:37Z",
+      "html_url": "https://github.com/NextWeb4/deepseek-translation-studio",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "ai-tools",
+        "deepseek",
+        "desktop-app",
+        "playwright",
+        "pyside6",
+        "python",
+        "srt",
+        "subtitle-translation",
+        "translation",
+        "windows"
+      ],
+      "stargazers_count": 165
+    },
+    {
+      "name": "folder-locker",
+      "description": "Offline folder locker with AES-256-GCM encrypted containers and optional Windows ACL quick lock",
+      "language": "Python",
+      "updated_at": "2026-07-25T02:20:22Z",
+      "pushed_at": "2026-07-22T14:14:48Z",
+      "html_url": "https://github.com/NextWeb4/folder-locker",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "aes-gcm",
+        "desktop-app",
+        "encryption",
+        "folder-locker",
+        "local-first",
+        "ntfs",
+        "python",
+        "tkinter",
+        "windows"
+      ],
+      "stargazers_count": 168
+    },
+    {
+      "name": "gw",
+      "description": "HxHwang Gw 公文事务与写作管理系统",
+      "language": "HTML",
+      "updated_at": "2026-07-25T16:32:43Z",
+      "pushed_at": "2026-07-25T17:06:21Z",
+      "html_url": "https://github.com/NextWeb4/gw",
+      "homepage": "https://nextweb4.github.io/gw/",
+      "topics": [],
+      "stargazers_count": 147
+    },
+    {
+      "name": "hacking.script",
+      "description": "Authorized security-lab script archive for defensive learning, detection review, and isolated experiments.",
+      "language": "Python",
+      "updated_at": "2026-07-22T14:20:11Z",
+      "pushed_at": "2026-07-22T14:14:58Z",
+      "html_url": "https://github.com/NextWeb4/hacking.script",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "archive",
+        "authorized-testing",
+        "cybersecurity",
+        "defensive-security",
+        "powershell",
+        "python",
+        "security-lab"
+      ],
+      "stargazers_count": 1
+    },
+    {
+      "name": "lan-file-transfer",
+      "description": "Local LAN file transfer desktop app with user/group permissions and audit logs.",
+      "language": "Python",
+      "updated_at": "2026-07-25T11:13:36Z",
+      "pushed_at": "2026-07-22T14:15:04Z",
+      "html_url": "https://github.com/NextWeb4/lan-file-transfer",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "access-control",
+        "audit-log",
+        "desktop-app",
+        "fastapi",
+        "file-transfer",
+        "lan",
+        "python",
+        "tkinter",
+        "windows"
+      ],
+      "stargazers_count": 269
+    },
+    {
+      "name": "NextWeb4",
+      "description": "GitHub profile README for HaoXiang Huang / NextWeb4.",
+      "language": "",
+      "updated_at": "2026-07-22T14:21:25Z",
+      "pushed_at": "2026-07-22T14:15:12Z",
+      "html_url": "https://github.com/NextWeb4/NextWeb4",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "github-profile",
+        "haoxiang-huang",
+        "nextweb4",
+        "profile-readme"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "official-document-ai-assistant",
+      "description": "Local official-document review, formatting repair, and compliant export desktop assistant.",
+      "language": "Python",
+      "updated_at": "2026-07-25T11:28:23Z",
+      "pushed_at": "2026-07-25T11:28:13Z",
+      "html_url": "https://github.com/NextWeb4/official-document-ai-assistant",
+      "homepage": "",
+      "topics": [],
+      "stargazers_count": 162
+    },
+    {
+      "name": "offline-utility-suite",
+      "description": "Offline folder protection and SRT subtitle utilities",
+      "language": "Python",
+      "updated_at": "2026-07-25T02:20:18Z",
+      "pushed_at": "2026-07-22T14:15:25Z",
+      "html_url": "https://github.com/NextWeb4/offline-utility-suite",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "aes-gcm",
+        "desktop-app",
+        "encryption",
+        "local-first",
+        "offline",
+        "python",
+        "srt",
+        "subtitle-editor",
+        "tkinter",
+        "windows"
+      ],
+      "stargazers_count": 159
+    },
+    {
+      "name": "phone-record-manager",
+      "description": "Local Windows phone-number binding record manager built with Python, PySide6, SQLite, backups, and release packaging.",
+      "language": "Python",
+      "updated_at": "2026-07-25T02:20:23Z",
+      "pushed_at": "2026-07-22T14:15:31Z",
+      "html_url": "https://github.com/NextWeb4/phone-record-manager",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "backup",
+        "desktop-app",
+        "local-first",
+        "phone-records",
+        "pyside6",
+        "python",
+        "sqlite",
+        "windows"
+      ],
+      "stargazers_count": 163
+    },
+    {
+      "name": "photo-metadata-editor",
+      "description": "Windows desktop EXIF/XMP/IPTC photo metadata editor powered by ExifTool.",
+      "language": "Python",
+      "updated_at": "2026-07-25T05:18:26Z",
+      "pushed_at": "2026-07-22T14:15:38Z",
+      "html_url": "https://github.com/NextWeb4/photo-metadata-editor",
+      "homepage": "",
+      "topics": [
+        "desktop-app",
+        "exif",
+        "exiftool",
+        "iptc",
+        "metadata-editor",
+        "offline",
+        "photo-metadata",
+        "python",
+        "tkinter",
+        "windows",
+        "xmp"
+      ],
+      "stargazers_count": 162
+    },
+    {
+      "name": "Python-Basic",
+      "description": "Python basics archive with introductory notes, documents, and 100 practice cases.",
+      "language": "Python",
+      "updated_at": "2026-07-22T14:21:04Z",
+      "pushed_at": "2026-07-22T14:15:50Z",
+      "html_url": "https://github.com/NextWeb4/Python-Basic",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "archive",
+        "beginner-friendly",
+        "learning-notes",
+        "practice-exercises",
+        "python",
+        "python-basics"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "tips-prompt-manager",
+      "description": "Offline prompt engineering manager for Windows",
+      "language": "Python",
+      "updated_at": "2026-07-25T02:20:21Z",
+      "pushed_at": "2026-07-22T14:15:55Z",
+      "html_url": "https://github.com/NextWeb4/tips-prompt-manager",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "desktop-app",
+        "local-first",
+        "offline",
+        "prompt-engineering",
+        "prompt-manager",
+        "python",
+        "sqlite",
+        "tkinter",
+        "windows"
+      ],
+      "stargazers_count": 158
+    },
+    {
+      "name": "VB-practice",
+      "description": "Visual Basic practice collection with examples for forms, controls, files, multimedia, system information, and utilities.",
+      "language": "Visual Basic 6.0",
+      "updated_at": "2026-07-22T14:20:47Z",
+      "pushed_at": "2026-07-22T14:16:06Z",
+      "html_url": "https://github.com/NextWeb4/VB-practice",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "archive",
+        "desktop-examples",
+        "learning-notes",
+        "programming-practice",
+        "vb",
+        "visual-basic"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "VB-Skills.test",
+      "description": "Visual Basic skills-test archive with control notes, assignments, syllabi, mock papers, and past exams.",
+      "language": "Visual Basic 6.0",
+      "updated_at": "2026-07-22T14:20:52Z",
+      "pushed_at": "2026-07-22T14:16:12Z",
+      "html_url": "https://github.com/NextWeb4/VB-Skills.test",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "archive",
+        "exam-materials",
+        "learning-notes",
+        "practice-exercises",
+        "skills-test",
+        "visual-basic"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "yaml-proxy-editor",
+      "description": "Tauri, React, and TypeScript desktop workbench for local Clash/OpenClash/Mihomo YAML editing, audit, and export.",
+      "language": "TypeScript",
+      "updated_at": "2026-07-25T02:20:08Z",
+      "pushed_at": "2026-07-22T14:16:31Z",
+      "html_url": "https://github.com/NextWeb4/yaml-proxy-editor",
+      "homepage": "https://nextweb4.github.io/",
+      "topics": [
+        "clash",
+        "desktop-app",
+        "local-first",
+        "mihomo",
+        "openclash",
+        "proxy-config",
+        "react",
+        "tauri",
+        "typescript",
+        "yaml"
+      ],
+      "stargazers_count": 166
+    }
+  ]
+}

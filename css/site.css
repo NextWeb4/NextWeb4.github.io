@@ -1435,6 +1435,67 @@ select:focus-visible {
   align-self: end;
 }
 
+.skills-heading-aside {
+  display: grid;
+  grid-column: 2;
+  gap: 1.25rem;
+  align-self: end;
+}
+
+.skills-heading-aside > p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.capability-controls {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.capability-controls button,
+.capability-position {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-small);
+  font-family: var(--utility);
+  font-size: calc(0.72rem * var(--managed-font-scale));
+  font-weight: 700;
+}
+
+.capability-controls button {
+  gap: 0.38rem;
+  padding: 0.56rem 0.72rem;
+  cursor: pointer;
+  transition: color var(--motion-fast) var(--ease-soft), border-color var(--motion-fast) var(--ease-soft), background-color var(--motion-fast) var(--ease-soft);
+}
+
+.capability-controls button:hover:not(:disabled),
+.capability-controls button:focus-visible {
+  color: var(--accent);
+  background: var(--surface-strong);
+  border-color: var(--accent);
+}
+
+.capability-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.capability-position {
+  min-width: 3.7rem;
+  padding: 0.56rem 0.65rem;
+  color: var(--muted);
+  background: transparent;
+}
+
 .project-heading-aside > p {
   margin: 0;
   color: var(--ink-soft);
@@ -1469,7 +1530,8 @@ select:focus-visible {
   border-radius: 50%;
 }
 
-.project-sync-status[data-project-sync-state="loaded"] {
+.project-sync-status[data-project-sync-state="loaded"],
+.project-sync-status[data-project-sync-state="synced"] {
   color: var(--accent);
 }
 
@@ -1854,11 +1916,6 @@ select:focus-visible {
   background: var(--surface-strong);
 }
 
-.project-card-archive {
-  min-height: 16rem;
-  background: var(--paper-deep);
-}
-
 .project-card > p,
 .project-copy p {
   margin: 0;
@@ -2057,59 +2114,6 @@ select:focus-visible {
   max-width: 42rem;
 }
 
-.project-disclosure {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  padding-top: 1.35rem;
-  border-top: 1px solid var(--line);
-}
-
-.project-disclosure[hidden] {
-  display: none;
-}
-
-.project-toggle {
-  display: inline-flex;
-  align-items: stretch;
-  min-height: 3.1rem;
-  overflow: hidden;
-  padding: 0;
-  color: var(--ink);
-  background: color-mix(in srgb, var(--surface-strong) 78%, transparent);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-small);
-  cursor: pointer;
-  font: inherit;
-  font-weight: 680;
-  box-shadow: none;
-  transition: transform var(--motion-ui) var(--ease-out), border-color var(--motion-fast) var(--ease-soft), background-color var(--motion-fast) var(--ease-soft);
-}
-
-.project-toggle:hover {
-  transform: translateY(-1px);
-  border-color: var(--ink);
-  background: var(--surface-strong);
-}
-
-.project-toggle [data-project-toggle-label] {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.72rem 1rem;
-}
-
-.project-toggle-icon {
-  display: grid;
-  width: 3.1rem;
-  place-items: center;
-  color: var(--paper);
-  background: var(--ink);
-  border-left: 1px solid var(--line-strong);
-  font-family: var(--display);
-  font-size: calc(1.2rem * var(--managed-font-scale));
-  line-height: 1;
-}
-
 .section-skills {
   color: var(--ink);
   background: var(--paper-deep);
@@ -2124,7 +2128,7 @@ select:focus-visible {
   color: var(--ink);
 }
 
-.section-skills .section-heading > p:last-child {
+.section-skills .skills-heading-aside > p {
   color: var(--ink-soft);
 }
 
@@ -2292,6 +2296,61 @@ select:focus-visible {
   letter-spacing: 0;
   text-decoration: none;
   transition: color var(--motion-fast) var(--ease-soft);
+}
+
+.evidence-project-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.16rem;
+}
+
+.evidence-project-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.evidence-project-meta {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--utility);
+  font-size: calc(0.66rem * var(--managed-font-scale));
+  font-weight: 560;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.capability-empty {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  color: var(--muted);
+  font-family: var(--utility);
+  font-size: calc(0.76rem * var(--managed-font-scale));
+}
+
+.js-enabled .skill-evidence a {
+  animation: capability-evidence-enter 260ms var(--ease-out) both;
+}
+
+.js-enabled .skill-evidence a:nth-child(2) {
+  animation-delay: 45ms;
+}
+
+.js-enabled .skill-evidence a:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+@keyframes capability-evidence-enter {
+  from {
+    opacity: 0;
+    translate: 0 0.3rem;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0;
+  }
 }
 
 .skill-evidence a:last-child {
@@ -2809,11 +2868,13 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .section-heading-main,
-  .project-heading-aside {
+  .project-heading-aside,
+  .skills-heading-aside {
     grid-column: 1;
   }
 
-  .project-heading-aside {
+  .project-heading-aside,
+  .skills-heading-aside {
     gap: 1rem;
   }
 
@@ -2910,7 +2971,6 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .project-card,
-  .project-card-archive,
   .project-card-featured {
     grid-column: auto;
   }
@@ -3223,7 +3283,6 @@ body.is-devtools-detected .devtools-shield strong {
   }
 
   .project-card,
-  .project-card-archive,
   .project-card-featured {
     grid-column: auto;
   }
@@ -3322,15 +3381,6 @@ body.is-devtools-detected .devtools-shield strong {
     margin-left: 0;
   }
 
-  .project-toggle {
-    width: 100%;
-  }
-
-  .project-toggle [data-project-toggle-label] {
-    flex: 1;
-    justify-content: center;
-  }
-
   .hero-visual img {
     aspect-ratio: 4 / 3;
   }
@@ -3404,10 +3454,6 @@ body.is-devtools-detected .devtools-shield strong {
   .hero-thought-arrow,
   .skill-list li::before {
     translate: 0 !important;
-  }
-
-  .project-toggle:hover {
-    transform: none;
   }
 
   .hero::after,

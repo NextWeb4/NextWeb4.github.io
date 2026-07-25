@@ -32,8 +32,8 @@ The private source repository `NextWeb4/website-source` owns the editor, backend
 - A grapheme-safe bilingual hero-title typewriter with a complete accessible name, reserved geometry, a visible completed-text caret hold, hidden-document pause, and language-aware heading measures. It plays once on page entry even under reduced motion, then the title text itself is the click/keyboard replay target; no separate header replay icon is shown, and the no-JavaScript title remains complete.
 - A dated 100-entry thought archive: 31 Moments entries and 69 iCloud Notes entries per language.
 - Visibility-aware rotation that pauses during interaction, in hidden documents, or when less than one quarter of the panel remains visible; previous/next controls, reading progress, provenance, reading time, keyboard access, and a native full-text dialog remain available.
-- Live-first public GitHub project enrichment that revalidates descriptions, Topics, Stars, update times, and code-push times on every page entry; fresh cache may appear while refreshing, and a dated sortable four-repository snapshot remains the final fallback.
-- Responsive article-style layout, balanced project cards, wrapping evidence links, a repository-owned hero photograph with a one-line Chinese desktop caption and normal-flow mobile wrapping, and a non-blocking wallpaper enhancement.
+- A complete live-first GitHub catalogue that revalidates every eligible public repository, description, Topic, Star count, update time, and code-push time on each entry. Fresh cache or the latest scheduled same-origin sync may render during revalidation; a complete dated emergency snapshot is the final fallback. All cards remain visible and sortable by popularity, delivery time, or name, while Chinese mode generates metadata-based summaries and localizes common Topics without hiding their GitHub values.
+- Responsive article-style layout, balanced project cards, a repository-owned hero photograph with a one-line Chinese desktop caption and normal-flow mobile wrapping, and four metadata-driven capability lines. Their evidence projects rotate every eight seconds with previous/next/pause and interaction/visibility-aware stops; newly synchronized tools join automatically.
 - Browser copy or DevTools deterrence is presentational only; delivered browser code and content are inspectable.
 
 ## Public artifact inventory
@@ -46,6 +46,7 @@ The deployment workflow replaces the public tree from a private-source allowlist
 | `index.html` | Homepage structure, fallback copy, project list, and thought archive UI |
 | `404.html` | Public error page |
 | `content/site-content.json` | Validated bilingual content, module visibility, and bounded presentation overlay |
+| `content/github-projects.json` | Dated complete public-repository metadata for rate-limit-resistant same-origin fallback |
 | `css/site.css` | Themes, responsive layout, typography, and interaction states |
 | `js/site.js` | Content overlay, themes, projects, archive rotation, dialog, and safe text rendering |
 | `images/favicon.png` | Site icon |
@@ -57,13 +58,13 @@ Source-only paths such as `admin/`, `backend/`, `tests/`, `.github/`, `scripts/`
 
 ## Content and fallback
 
-The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The overlay may set independent 85-115% font scales for all seven managed modules, language-aware compact/standard/wide primary-heading widths for all six sections, a complete six-section order, and three bounded section sizes; responsive limits remain authoritative on narrow screens. Missing heading settings use standard widths, while legacy global font scale values apply to all seven modules. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages.
+The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The overlay may set independent 85-115% font scales for all seven managed modules, language-aware compact/standard/wide primary-heading widths for all six sections, a complete six-section order, and three bounded section sizes; responsive limits remain authoritative on narrow screens. Missing heading settings use standard widths, while legacy global font scale values apply to all seven modules. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages. The separate read-only project JSON is produced from GitHub's public REST metadata by the private deployment workflow every 15 minutes.
 
 Public JavaScript treats managed text as untrusted and assigns visible dates, provenance, titles, and bodies safely. The runtime does not expose iCloud storage labels as visible titles and does not run translation services in the browser.
 
 ## Network and privacy
 
-- The public project list requests public GitHub repository data on every page entry, uses GitHub descriptions and up to 20 Topics without local secondary copy, and labels loading, refreshing, live, cached, and snapshot states truthfully. Unauthenticated rate limits remain external; fresh cache and bundled project data are fallbacks.
+- The public project list requests GitHub repository data on every page entry and retains GitHub descriptions plus all normalized Topics up to the 20-topic bound. Fresh cache, the same-origin synchronized feed, and the complete embedded emergency snapshot form the fallback chain; loading, refreshing, live, cached, synchronized, and emergency status is explicit. Chinese summaries and common Topic labels are generated locally from public metadata, with original values preserved and no translation request.
 - The optional wallpaper path requests metadata from `bing.biturl.top`, accepts only validated HTTPS `bing.com` image hosts, uses a bounded timeout, and falls back to a solid color.
 - Language, theme, and wallpaper cache state stays in browser storage; no admin token or GitHub credential belongs in this repository.
 - README badges request images from `img.shields.io` when GitHub renders the page.
@@ -90,7 +91,7 @@ The public repository must never receive the private source tree, backend, admin
 - Confirm the artifact contains only the allowlisted runtime and documentation paths.
 - Open `/`, `/404.html`, both public language states, and representative archive entries through HTTP.
 - Check keyboard navigation, focus visibility, one-time entry typing and title-text replay under reduced motion, absence of a separate header replay icon, the one-line Chinese desktop caption, mobile overflow, pause behavior, dialog close access, and fallback content.
-- Confirm live GitHub status/refresh, API descriptions and Topics, cache/snapshot fallback, project links, image paths, JSON loading, and canonical site URLs resolve.
+- Confirm complete live GitHub status/refresh, all three sort modes, Chinese descriptions and source-preserving Topics, cache/synchronized/emergency fallback, capability rotation/pause/manual controls, project links, image paths, both JSON files, and canonical site URLs.
 - Compare the public tree with the private build artifact before accepting a deployment.
 
 ## Contact

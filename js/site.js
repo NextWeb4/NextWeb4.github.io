@@ -6,13 +6,18 @@ const themeToggle = document.getElementById("theme-toggle");
 const languageToggle = document.getElementById("language-toggle");
 const heroTitleTrigger = document.querySelector("[data-typewriter-trigger]");
 const githubProjects = document.querySelector("[data-github-projects]");
-const projectDisclosure = document.querySelector("[data-project-disclosure]");
-const projectToggle = document.querySelector("[data-project-toggle]");
-const projectToggleLabel = document.querySelector("[data-project-toggle-label]");
-const projectToggleIcon = document.querySelector(".project-toggle-icon");
 const projectSortSelect = document.querySelector("[data-project-sort]");
 const projectRefresh = document.querySelector("[data-project-refresh]");
 const projectSyncStatus = document.querySelector("[data-project-sync-status]");
+const capabilitySection = document.querySelector(".section-skills");
+const capabilityList = document.querySelector(".skill-list");
+const capabilityPrevious = document.querySelector("[data-capability-prev]");
+const capabilityNext = document.querySelector("[data-capability-next]");
+const capabilityToggle = document.querySelector("[data-capability-toggle]");
+const capabilityToggleIcon = document.querySelector("[data-capability-toggle-icon]");
+const capabilityToggleLabel = document.querySelector("[data-capability-toggle-label]");
+const capabilityCurrent = document.querySelector("[data-capability-current]");
+const capabilityCount = document.querySelector("[data-capability-count]");
 const sectionNavLinks = Array.from(document.querySelectorAll(".site-nav a[href^='#']"));
 const pageScale = document.querySelector("[data-page-scale]");
 const siteHeader = document.querySelector(".site-header");
@@ -47,17 +52,20 @@ const BLOG_HOME_URL = "https://nextweb4.github.io/Private/";
 const BLOG_INDEX_URL = "https://nextweb4.github.io/Private/index.html";
 const GITHUB_USER = "NextWeb4";
 const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&direction=desc&per_page=100`;
+const GITHUB_PROJECTS_FEED_URL = "content/github-projects.json";
 const BLOG_THOUGHT_CACHE_KEY = "homepage.blogThoughtCandidates.v2";
-const GITHUB_REPOS_CACHE_KEY = "homepage.githubRepos.v5";
+const GITHUB_REPOS_CACHE_KEY = "homepage.githubRepos.v6";
 const BLOG_THOUGHT_CACHE_TTL = 1000 * 60 * 60;
 const GITHUB_REPOS_CACHE_MAX_AGE = 1000 * 60 * 20;
-const PROJECT_INITIAL_COUNT = 4;
 const EXCLUDED_PROJECT_REPOS = new Set(["Private", "NextWeb4.github.io"]);
 const CONTENT_URL = "content/site-content.json";
 const CONTENT_FETCH_TIMEOUT = 20000;
 const CONTENT_SCHEMA_VERSION = 1;
 const PREVIEW_DRAFT_MESSAGE = "oldweb:preview-draft";
 const REFLECTION_INTERVAL = 8000;
+const CAPABILITY_INTERVAL = 8000;
+const CAPABILITY_PAGE_SIZE = 3;
+const CAPABILITY_LINE_IDS = Object.freeze(["automation", "network", "search", "delivery"]);
 const REFLECTION_MAX_ITEMS = 128;
 const REFLECTION_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const REFLECTION_ICLOUD_HEADER_PATTERN = /^@(\d{4}-\d{2}-\d{2})\|(.+)$/;
@@ -96,59 +104,35 @@ const BANNED_CONTENT_CONTROL_PATTERN = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\
 
 const PROJECT_SNAPSHOT_DATE = "2026-07-25";
 const BUNDLED_PROJECTS = Object.freeze([
-  Object.freeze({
-    name: "lan-file-transfer",
-    description: "Local LAN file transfer desktop app with user/group permissions and audit logs.",
-    language: "Python",
-    html_url: "https://github.com/NextWeb4/lan-file-transfer",
-    homepage: "https://nextweb4.github.io/",
-    topics: ["access-control", "audit-log", "desktop-app", "fastapi", "file-transfer", "lan", "python", "tkinter", "windows"],
-    stargazers_count: 266,
-    updated_at: "2026-07-25T02:20:29Z",
-    pushed_at: "2026-07-22T14:15:04Z",
-    snapshot_at: PROJECT_SNAPSHOT_DATE,
-    bundled: true,
-  }),
-  Object.freeze({
-    name: "yaml-proxy-editor",
-    description: "Tauri, React, and TypeScript desktop workbench for local Clash/OpenClash/Mihomo YAML editing, audit, and export.",
-    language: "TypeScript",
-    html_url: "https://github.com/NextWeb4/yaml-proxy-editor",
-    homepage: "https://nextweb4.github.io/",
-    topics: ["clash", "desktop-app", "local-first", "mihomo", "openclash", "proxy-config", "react", "tauri", "typescript", "yaml"],
-    stargazers_count: 166,
-    updated_at: "2026-07-25T02:20:08Z",
-    pushed_at: "2026-07-22T14:16:31Z",
-    snapshot_at: PROJECT_SNAPSHOT_DATE,
-    bundled: true,
-  }),
-  Object.freeze({
-    name: "deepseek-translation-studio",
-    description: "Windows Python/PySide6 translation studio for DeepSeek Web/API workflows, SRT continuation, capture, and packaging.",
-    language: "Python",
-    html_url: "https://github.com/NextWeb4/deepseek-translation-studio",
-    homepage: "https://nextweb4.github.io/",
-    topics: ["ai-tools", "deepseek", "desktop-app", "playwright", "pyside6", "python", "srt", "subtitle-translation", "translation", "windows"],
-    stargazers_count: 165,
-    updated_at: "2026-07-25T02:20:09Z",
-    pushed_at: "2026-07-22T14:14:37Z",
-    snapshot_at: PROJECT_SNAPSHOT_DATE,
-    bundled: true,
-  }),
-  Object.freeze({
-    name: "folder-locker",
-    description: "Offline folder locker with AES-256-GCM encrypted containers and optional Windows ACL quick lock",
-    language: "Python",
-    html_url: "https://github.com/NextWeb4/folder-locker",
-    homepage: "https://nextweb4.github.io/",
-    topics: ["aes-gcm", "desktop-app", "encryption", "folder-locker", "local-first", "ntfs", "python", "tkinter", "windows"],
-    stargazers_count: 168,
-    updated_at: "2026-07-25T02:20:22Z",
-    pushed_at: "2026-07-22T14:14:48Z",
-    snapshot_at: PROJECT_SNAPSHOT_DATE,
-    bundled: true,
-  }),
-]);
+  { name: "2021-Skill-Synthesis-Test", description: "Archive of computer skills-test materials, routing labs, VB practice, and exam documents.", language: "Visual Basic 6.0", topics: ["networking", "visual-basic", "archive", "skills-test", "packet-tracer", "computer-skills", "exam-materials"], stargazers_count: 0, pushed_at: "2026-07-22T14:14:09Z" },
+  { name: "alias-cockpit", description: "Windows local email-alias cockpit built with .NET and WinUI for alias generation, markers, local storage, and release packaging.", language: "C#", topics: ["desktop-app", "windows", "dotnet", "winui", "email-alias", "local-first", "release-packaging"], stargazers_count: 161, pushed_at: "2026-07-22T14:14:15Z" },
+  { name: "C-practice", description: "Numbered C language practice collection covering basics, algorithms, data structures, files, graphics, and small projects.", language: "C", topics: ["c", "algorithms", "archive", "data-structures", "c-language", "learning-notes", "programming-practice"], stargazers_count: 0, pushed_at: "2026-07-22T14:14:31Z" },
+  { name: "code-relay", description: "A local mailbox verification-code console with owned GitHub account workflows.", language: "JavaScript", topics: ["nodejs", "javascript", "desktop-app", "windows", "github-api", "email", "verification-code"], stargazers_count: 0, pushed_at: "2026-07-22T14:14:21Z" },
+  { name: "Cplus.test", description: "C++ test-question and practice-material archive organized by year and topic.", language: "C++", topics: ["cpp", "archive", "programming-practice", "cpp-practice", "exam-materials"], stargazers_count: 0, pushed_at: "2026-07-22T14:14:26Z" },
+  { name: "deepseek-translation-studio", description: "Windows Python/PySide6 translation studio for DeepSeek Web/API workflows, SRT continuation, capture, and packaging.", language: "Python", topics: ["desktop-app", "python", "windows", "translation", "srt", "subtitle-translation", "playwright"], stargazers_count: 165, pushed_at: "2026-07-22T14:14:37Z" },
+  { name: "folder-locker", description: "Offline folder locker with AES-256-GCM encrypted containers and optional Windows ACL quick lock", language: "Python", topics: ["desktop-app", "python", "windows", "encryption", "tkinter", "aes-gcm", "ntfs"], stargazers_count: 168, pushed_at: "2026-07-22T14:14:48Z" },
+  { name: "github-achievement-collab-notes", description: "A small public README collaboration notes project for real cross-account documentation practice.", language: "", topics: ["documentation", "collaboration", "pull-requests", "github-workflow", "github-achievements"], stargazers_count: 0, pushed_at: "2026-07-22T14:14:53Z" },
+  { name: "gw", description: "HxHwang Gw 公文事务与写作管理系统", language: "HTML", topics: [], stargazers_count: 147, pushed_at: "2026-07-25T15:10:13Z" },
+  { name: "hacking.script", description: "Authorized security-lab script archive for defensive learning, detection review, and isolated experiments.", language: "Python", topics: ["python", "powershell", "archive", "cybersecurity", "defensive-security", "security-lab", "authorized-testing"], stargazers_count: 1, pushed_at: "2026-07-22T14:14:58Z" },
+  { name: "lan-file-transfer", description: "Local LAN file transfer desktop app with user/group permissions and audit logs.", language: "Python", topics: ["desktop-app", "python", "windows", "lan", "tkinter", "file-transfer", "audit-log"], stargazers_count: 269, pushed_at: "2026-07-22T14:15:04Z" },
+  { name: "NextWeb4", description: "GitHub profile README for HaoXiang Huang / NextWeb4.", language: "", topics: ["github-profile", "profile-readme", "nextweb4", "haoxiang-huang"], stargazers_count: 0, pushed_at: "2026-07-22T14:15:12Z" },
+  { name: "official-document-ai-assistant", description: "Local official-document review, formatting repair, and compliant export desktop assistant.", language: "Python", topics: [], stargazers_count: 162, pushed_at: "2026-07-25T11:28:13Z" },
+  { name: "offline-utility-suite", description: "Offline folder protection and SRT subtitle utilities", language: "Python", topics: ["desktop-app", "python", "windows", "encryption", "offline", "tkinter", "aes-gcm"], stargazers_count: 159, pushed_at: "2026-07-22T14:15:25Z" },
+  { name: "phone-record-manager", description: "Local Windows phone-number binding record manager built with Python, PySide6, SQLite, backups, and release packaging.", language: "Python", topics: ["desktop-app", "python", "windows", "backup", "sqlite", "local-first", "pyside6"], stargazers_count: 163, pushed_at: "2026-07-22T14:15:31Z" },
+  { name: "photo-metadata-editor", description: "Windows desktop EXIF/XMP/IPTC photo metadata editor powered by ExifTool.", language: "Python", topics: ["desktop-app", "python", "windows", "offline", "exif", "iptc", "xmp"], stargazers_count: 162, pushed_at: "2026-07-22T14:15:38Z" },
+  { name: "Python-Basic", description: "Python basics archive with introductory notes, documents, and 100 practice cases.", language: "Python", topics: ["python", "archive", "beginner-friendly", "learning-notes", "python-basics", "practice-exercises"], stargazers_count: 0, pushed_at: "2026-07-22T14:15:50Z" },
+  { name: "tips-prompt-manager", description: "Offline prompt engineering manager for Windows", language: "Python", topics: ["desktop-app", "python", "windows", "offline", "sqlite", "tkinter", "local-first"], stargazers_count: 158, pushed_at: "2026-07-22T14:15:55Z" },
+  { name: "VB-practice", description: "Visual Basic practice collection with examples for forms, controls, files, multimedia, system information, and utilities.", language: "Visual Basic 6.0", topics: ["visual-basic", "archive", "vb", "learning-notes", "programming-practice", "desktop-examples"], stargazers_count: 0, pushed_at: "2026-07-22T14:16:06Z" },
+  { name: "VB-Skills.test", description: "Visual Basic skills-test archive with control notes, assignments, syllabi, mock papers, and past exams.", language: "Visual Basic 6.0", topics: ["visual-basic", "archive", "learning-notes", "skills-test", "practice-exercises", "exam-materials"], stargazers_count: 0, pushed_at: "2026-07-22T14:16:12Z" },
+  { name: "yaml-proxy-editor", description: "Tauri, React, and TypeScript desktop workbench for local Clash/OpenClash/Mihomo YAML editing, audit, and export.", language: "TypeScript", topics: ["react", "desktop-app", "yaml", "typescript", "clash", "tauri", "openclash"], stargazers_count: 166, pushed_at: "2026-07-22T14:16:31Z" },
+].map((repository) => Object.freeze({
+  ...repository,
+  updated_at: repository.pushed_at,
+  html_url: `https://github.com/${GITHUB_USER}/${repository.name}`,
+  homepage: "",
+  snapshot_at: PROJECT_SNAPSHOT_DATE,
+  bundled: true,
+})));
 
 const storage = {
   get(key) {
@@ -274,7 +258,7 @@ const i18n = {
     about_focus_4_text: "保留可追踪的更新，把每次修正都变成下一次交付的基础。",
     work_label: "GitHub 项目",
     work_title: "项目的使用与更新",
-    work_intro: "描述、Topics、Stars 和更新时间直接同步 GitHub；先看四个主要项目，需要时再展开全部仓库。",
+    work_intro: "完整读取 NextWeb4 的公开项目：优先连接 GitHub 实时数据，并在限流时使用最近同步结果；描述、Topics、Stars 与交付时间都可核对和排序。",
     projects_loading_meta: "GitHub",
     projects_loading_title: "正在读取项目",
     projects_loading_text: "正在从 NextWeb4 的公开仓库读取描述、Topics、Stars 与更新时间。",
@@ -288,24 +272,36 @@ const i18n = {
     projects_sync_live: "GitHub 实时",
     projects_sync_refreshing: "正在同步 GitHub",
     projects_sync_cached: "GitHub 缓存",
-    projects_sync_snapshot: "站点快照",
+    projects_sync_synced: "最近同步",
+    projects_sync_snapshot: "应急快照",
     projects_refresh: "刷新 GitHub 项目",
     projects_sort_label: "项目排序",
     projects_sort_popular: "最受欢迎",
     projects_sort_recent: "最新交付",
+    projects_sort_name: "项目名称",
     projects_featured_bundled: "代表项目",
     projects_featured_popular: "最受欢迎",
     projects_featured_recent: "最新交付",
+    projects_featured_name: "名称首项",
     projects_updated_prefix: "更新",
+    projects_synced_prefix: "同步于",
     projects_open_repo: "打开仓库",
     projects_open_repo_aria: "打开仓库：",
     projects_open_homepage: "项目主页",
     projects_open_homepage_aria: "打开项目主页：",
-    projects_show_archive: "展开全部项目（{count}）",
-    projects_hide_archive: "收起项目",
     skills_label: "技术与方法",
     skills_title: "四条能力线",
-    skills_intro: "从产品、基础设施、内容系统到安全交付，每条能力线都由可运行项目和公开实现共同验证。",
+    skills_intro: "从产品、基础设施、内容系统到安全交付，每条能力线都由最新公开项目动态验证；新工具会自动进入对应能力线并轮换展示。",
+    capability_previous: "上一组工具",
+    capability_previous_short: "上一组",
+    capability_next: "下一组工具",
+    capability_next_short: "下一组",
+    capability_pause: "暂停工具轮换",
+    capability_pause_short: "暂停",
+    capability_resume: "继续工具轮换",
+    capability_resume_short: "继续",
+    capability_position_suffix: " 组工具",
+    capability_empty: "等待公开项目",
     skill_automation_title: "桌面产品与本地优先工具",
     skill_automation_text: "用 Python / PySide6、.NET / WinUI 和 Tauri，把局域网传输、翻译、号码与邮箱管理做成可安装、可备份、可审计的桌面产品。",
     skill_automation_link_1: "局域网文件传输",
@@ -421,7 +417,7 @@ const i18n = {
     about_focus_4_text: "Keep updates traceable so each correction becomes the base for the next delivery.",
     work_label: "GitHub Projects",
     work_title: "Usage and updates",
-    work_intro: "Descriptions, topics, stars, and update times sync directly from GitHub. Start with four primary projects, then expand the complete repository list when needed.",
+    work_intro: "The complete public repository set is read live from GitHub, with the latest synchronized result available during rate limits. Descriptions, topics, stars, and delivery times remain verifiable and sortable.",
     projects_loading_meta: "GitHub",
     projects_loading_title: "Loading projects",
     projects_loading_text: "Reading descriptions, topics, stars, and update times from NextWeb4's public repositories.",
@@ -435,24 +431,36 @@ const i18n = {
     projects_sync_live: "GitHub live",
     projects_sync_refreshing: "Syncing GitHub",
     projects_sync_cached: "GitHub cache",
-    projects_sync_snapshot: "Site snapshot",
+    projects_sync_synced: "Recently synced",
+    projects_sync_snapshot: "Emergency snapshot",
     projects_refresh: "Refresh GitHub projects",
     projects_sort_label: "Project order",
     projects_sort_popular: "Most popular",
     projects_sort_recent: "Latest delivery",
+    projects_sort_name: "Repository name",
     projects_featured_bundled: "Featured project",
     projects_featured_popular: "Most popular",
     projects_featured_recent: "Latest delivery",
+    projects_featured_name: "First by name",
     projects_updated_prefix: "Updated",
+    projects_synced_prefix: "Synced",
     projects_open_repo: "Open Repo",
     projects_open_repo_aria: "Open repository: ",
     projects_open_homepage: "Homepage",
     projects_open_homepage_aria: "Open project homepage: ",
-    projects_show_archive: "View all projects ({count})",
-    projects_hide_archive: "Show fewer projects",
     skills_label: "Technology & Method",
     skills_title: "Four capability lines",
-    skills_intro: "From products and infrastructure to content systems and secure delivery, every capability is verified by working projects and public implementation.",
+    skills_intro: "From products and infrastructure to content systems and secure delivery, each line is verified by the latest public repositories; new tools join the relevant rotation automatically.",
+    capability_previous: "Previous tool group",
+    capability_previous_short: "Previous",
+    capability_next: "Next tool group",
+    capability_next_short: "Next",
+    capability_pause: "Pause tool rotation",
+    capability_pause_short: "Pause",
+    capability_resume: "Resume tool rotation",
+    capability_resume_short: "Resume",
+    capability_position_suffix: " tool groups",
+    capability_empty: "Waiting for public projects",
     skill_automation_title: "Desktop Products & Local-First Tools",
     skill_automation_text: "I use Python / PySide6, .NET / WinUI, and Tauri to make LAN transfer, translation, phone records, and email management installable, backup-friendly, and auditable.",
     skill_automation_link_1: "LAN File Transfer",
@@ -513,8 +521,16 @@ let reflectionStageWidth = 0;
 const reflectionPauseReasons = new Set();
 let activeProjects = [];
 let projectsLoadState = "idle";
-let projectsExpanded = false;
-let currentProjectSort = projectSortSelect?.value === "recent" ? "recent" : "popular";
+let currentProjectSort = ["popular", "recent", "name"].includes(projectSortSelect?.value)
+  ? projectSortSelect.value
+  : "popular";
+let capabilityProjectsByLine = Object.fromEntries(CAPABILITY_LINE_IDS.map((lineId) => [lineId, []]));
+let capabilityPageIndex = 0;
+let capabilityPageTotal = 1;
+let capabilityTimer = 0;
+let capabilityManualPause = false;
+let capabilityVisibilityObserver = null;
+const capabilityPauseReasons = new Set();
 let blogThoughtRequestId = 0;
 let githubProjectsRequestId = 0;
 let blogThoughtController = null;
@@ -542,7 +558,6 @@ let currentTheme = getStoredTheme();
 async function refreshPageState() {
   currentLanguage = getStoredLanguage();
   currentTheme = getStoredTheme();
-  projectsExpanded = false;
   applyTheme(currentTheme);
   applyLanguage(currentLanguage);
   await loadSiteContent();
@@ -2009,6 +2024,139 @@ async function loadBlogThought() {
   }
 }
 
+const PROJECT_TOPIC_ZH = Object.freeze({
+  "access-control": "权限控制",
+  "aes-gcm": "AES-GCM 加密",
+  algorithms: "算法",
+  archive: "资料归档",
+  "audit-log": "审计日志",
+  "authorized-testing": "授权测试",
+  backup: "数据备份",
+  "beginner-friendly": "入门友好",
+  "c-language": "C 语言",
+  clash: "Clash 配置",
+  collaboration: "协作",
+  "computer-skills": "计算机技能",
+  cpp: "C++",
+  "cpp-practice": "C++ 练习",
+  cybersecurity: "网络安全",
+  "data-structures": "数据结构",
+  "defensive-security": "防御安全",
+  "desktop-app": "桌面应用",
+  "desktop-examples": "桌面示例",
+  documentation: "文档工程",
+  dotnet: ".NET",
+  email: "邮件工作流",
+  "email-alias": "邮箱别名",
+  encryption: "数据加密",
+  "exam-materials": "考试资料",
+  exif: "EXIF 元数据",
+  "file-transfer": "文件传输",
+  "github-achievements": "GitHub 成就",
+  "github-api": "GitHub API",
+  "github-profile": "GitHub 主页",
+  "github-workflow": "GitHub 工作流",
+  iptc: "IPTC 元数据",
+  javascript: "JavaScript",
+  lan: "局域网",
+  "learning-notes": "学习笔记",
+  "local-first": "本地优先",
+  networking: "网络技术",
+  nodejs: "Node.js",
+  ntfs: "NTFS 权限",
+  offline: "离线运行",
+  openclash: "OpenClash",
+  "packet-tracer": "Packet Tracer",
+  playwright: "Playwright",
+  powershell: "PowerShell",
+  "practice-exercises": "实践练习",
+  "profile-readme": "主页文档",
+  "programming-practice": "编程练习",
+  "pull-requests": "Pull Request",
+  pyside6: "PySide6",
+  python: "Python",
+  "python-basics": "Python 基础",
+  react: "React",
+  "release-packaging": "发布打包",
+  security: "安全",
+  "security-lab": "安全实验",
+  "skills-test": "技能测试",
+  sqlite: "SQLite",
+  srt: "SRT 字幕",
+  "subtitle-translation": "字幕翻译",
+  tauri: "Tauri",
+  tkinter: "Tkinter",
+  translation: "翻译工作流",
+  typescript: "TypeScript",
+  vb: "Visual Basic",
+  "verification-code": "验证码",
+  "visual-basic": "Visual Basic",
+  windows: "Windows",
+  winui: "WinUI",
+  xmp: "XMP 元数据",
+  yaml: "YAML 配置",
+});
+
+const PROJECT_SUBJECT_RULES = Object.freeze([
+  { terms: ["official-document", "公文", "document"], label: "公文审校与文档写作" },
+  { terms: ["email-alias", "verification-code", "mailbox", "email"], label: "邮件与账号工作流" },
+  { terms: ["yaml", "clash", "openclash", "mihomo", "proxy"], label: "代理配置与 YAML 审计" },
+  { terms: ["translation", "subtitle", "srt"], label: "翻译与字幕处理" },
+  { terms: ["photo", "exif", "xmp", "iptc", "metadata"], label: "照片元数据管理" },
+  { terms: ["phone", "record", "binding"], label: "本地记录管理" },
+  { terms: ["file-transfer", "lan", "networking"], label: "局域网与文件传输" },
+  { terms: ["encryption", "aes-gcm", "locker", "ntfs"], label: "本地数据保护" },
+  { terms: ["prompt"], label: "提示词资产管理" },
+  { terms: ["security", "cybersecurity", "hacking", "authorized-testing"], label: "安全学习与防御实验" },
+  { terms: ["archive", "practice", "learning", "exam", "skills-test"], label: "编程学习与资料整理" },
+  { terms: ["github-profile", "readme", "collaboration", "pull-requests"], label: "开源协作与项目文档" },
+]);
+
+function hasHanText(value) {
+  return REFLECTION_HAN_PATTERN.test(value || "");
+}
+
+function localizeProjectTopic(topic) {
+  return currentLanguage === "zh" ? (PROJECT_TOPIC_ZH[topic.toLowerCase()] || topic) : topic;
+}
+
+function getProjectSearchText(repo) {
+  return [repo.name, repo.description, repo.language, ...(repo.topics || [])].join(" ").toLowerCase();
+}
+
+function getChineseProjectSummary(repo) {
+  if (hasHanText(repo.description)) {
+    return repo.description;
+  }
+
+  const searchText = getProjectSearchText(repo);
+  const subject = PROJECT_SUBJECT_RULES.find(({ terms }) => terms.some((term) => searchText.includes(term)))?.label
+    || (repo.language ? `${repo.language} 开发与工程实践` : "公开开发与工程实践");
+  const topics = (repo.topics || [])
+    .map(localizeProjectTopic)
+    .filter((topic, index, values) => values.indexOf(topic) === index)
+    .slice(0, 3);
+  const kind = searchText.includes("archive") || searchText.includes("learning") || searchText.includes("practice")
+    ? "学习资料项目"
+    : searchText.includes("desktop-app") || searchText.includes("local-first")
+      ? "本地优先工具"
+      : searchText.includes("documentation") || searchText.includes("readme")
+        ? "公开文档项目"
+        : searchText.includes("security") || searchText.includes("hacking")
+          ? "安全实践项目"
+          : "开源项目";
+  const language = repo.language ? `，主要使用 ${repo.language}` : "";
+  const topicText = topics.length > 0 ? `，覆盖${topics.join("、")}` : "";
+  return `围绕${subject}构建的${kind}${language}${topicText}。`;
+}
+
+function getProjectDescription(repo) {
+  if (currentLanguage === "zh") {
+    return getChineseProjectSummary(repo);
+  }
+  return repo.description || i18n[currentLanguage].projects_no_description;
+}
+
 function formatProjectDate(dateString) {
   if (!dateString) {
     return "";
@@ -2028,8 +2176,17 @@ function getProjectTimestamp(repo) {
 
 function sortProjectsForDisplay(projects) {
   return [...projects].sort((first, second) => {
+    const nameDifference = first.name.localeCompare(
+      second.name,
+      currentLanguage === "zh" ? "zh-CN" : "en",
+      { sensitivity: "base", numeric: true },
+    );
     const starDifference = second.stargazers_count - first.stargazers_count;
     const timeDifference = getProjectTimestamp(second) - getProjectTimestamp(first);
+
+    if (currentProjectSort === "name" && nameDifference !== 0) {
+      return nameDifference;
+    }
 
     if (currentProjectSort === "popular" && starDifference !== 0) {
       return starDifference;
@@ -2043,7 +2200,7 @@ function sortProjectsForDisplay(projects) {
       return starDifference;
     }
 
-    return first.name.localeCompare(second.name, "en");
+    return nameDifference;
   });
 }
 
@@ -2078,18 +2235,260 @@ function getSafeGithubRepoUrl(value, repoName) {
     : "";
 }
 
+const CAPABILITY_KEYWORDS = Object.freeze({
+  automation: Object.freeze([
+    "desktop-app", "local-first", "pyside6", "tkinter", "tauri", "winui", "dotnet",
+    "visual-basic", "utility", "translation", "photo", "phone", "email", "document", "公文",
+  ]),
+  network: Object.freeze([
+    "network", "lan", "yaml", "clash", "openclash", "mihomo", "proxy", "packet-tracer",
+    "powershell", "cybersecurity", "security-lab", "defensive-security", "authorized-testing",
+  ]),
+  search: Object.freeze([
+    "archive", "learning", "practice", "prompt", "metadata", "readme", "documentation",
+    "collaboration", "profile", "exam", "algorithm", "data-structures", "skills-test",
+  ]),
+  delivery: Object.freeze([
+    "security", "encryption", "audit", "backup", "release", "github-api", "github-workflow",
+    "pull-requests", "verification-code", "aes", "acl", "ntfs", "locker",
+  ]),
+});
+
+function getCapabilityLine(repo) {
+  const searchText = getProjectSearchText(repo);
+  const scores = CAPABILITY_LINE_IDS.map((lineId) => ({
+    lineId,
+    score: CAPABILITY_KEYWORDS[lineId].reduce(
+      (total, keyword) => total + (searchText.includes(keyword) ? 1 : 0),
+      0,
+    ),
+  }));
+  const bestScore = Math.max(...scores.map(({ score }) => score));
+  if (bestScore > 0) {
+    return scores.find(({ score }) => score === bestScore).lineId;
+  }
+
+  const stableIndex = Array.from(repo.name).reduce(
+    (total, character) => (total + character.codePointAt(0)) % CAPABILITY_LINE_IDS.length,
+    0,
+  );
+  return CAPABILITY_LINE_IDS[stableIndex];
+}
+
+function sortCapabilityProjects(projects) {
+  return [...projects].sort((first, second) => (
+    getProjectTimestamp(second) - getProjectTimestamp(first)
+    || second.stargazers_count - first.stargazers_count
+    || first.name.localeCompare(second.name, "en", { sensitivity: "base", numeric: true })
+  ));
+}
+
+function createCapabilityProjectLink(repo) {
+  const dict = i18n[currentLanguage];
+  const link = document.createElement("a");
+  link.href = getSafeGithubRepoUrl(repo.html_url, repo.name)
+    || `https://github.com/${GITHUB_USER}/${encodeURIComponent(repo.name)}`;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.dataset.capabilityProject = repo.name;
+  link.setAttribute("aria-label", `${dict.projects_open_repo_aria}${repo.name}`);
+
+  const index = document.createElement("span");
+  index.className = "evidence-index";
+  index.setAttribute("aria-hidden", "true");
+
+  const copy = document.createElement("span");
+  copy.className = "evidence-project-copy";
+  const name = document.createElement("span");
+  name.className = "evidence-project-name";
+  name.textContent = repo.name;
+  const metadata = document.createElement("small");
+  metadata.className = "evidence-project-meta";
+  const topic = (repo.topics || [])[0];
+  const metadataParts = [repo.language, topic ? localizeProjectTopic(topic) : ""]
+    .filter(Boolean)
+    .filter((value, index, values) => values.findIndex(
+      (candidate) => candidate.toLowerCase() === value.toLowerCase(),
+    ) === index);
+  metadata.textContent = metadataParts.join(" · ")
+    || i18n[currentLanguage].projects_language_unknown;
+  copy.append(name, metadata);
+
+  const arrow = document.createElement("span");
+  arrow.className = "evidence-arrow";
+  arrow.setAttribute("aria-hidden", "true");
+  arrow.textContent = "↗";
+  link.append(index, copy, arrow);
+  return link;
+}
+
+function updateCapabilityControls() {
+  const dict = i18n[currentLanguage];
+  if (capabilityCurrent) {
+    capabilityCurrent.textContent = String(capabilityPageIndex + 1);
+  }
+  if (capabilityCount) {
+    capabilityCount.textContent = String(capabilityPageTotal);
+  }
+  const controlsDisabled = capabilityPageTotal <= 1;
+  if (capabilityPrevious) {
+    capabilityPrevious.disabled = controlsDisabled;
+  }
+  if (capabilityNext) {
+    capabilityNext.disabled = controlsDisabled;
+  }
+  if (capabilityToggle) {
+    capabilityToggle.disabled = controlsDisabled;
+    const labelKey = capabilityManualPause ? "capability_resume" : "capability_pause";
+    capabilityToggle.setAttribute("aria-label", dict[labelKey]);
+    capabilityToggle.title = dict[labelKey];
+  }
+  if (capabilityToggleLabel) {
+    capabilityToggleLabel.textContent = dict[
+      capabilityManualPause ? "capability_resume_short" : "capability_pause_short"
+    ];
+  }
+  if (capabilityToggleIcon) {
+    capabilityToggleIcon.textContent = capabilityManualPause ? "▶" : "Ⅱ";
+  }
+}
+
+function clearCapabilityTimer() {
+  window.clearTimeout(capabilityTimer);
+  capabilityTimer = 0;
+}
+
+function scheduleCapabilityRotation() {
+  clearCapabilityTimer();
+  if (capabilityManualPause || capabilityPauseReasons.size > 0 || capabilityPageTotal <= 1) {
+    return;
+  }
+  capabilityTimer = window.setTimeout(() => {
+    capabilityPageIndex = (capabilityPageIndex + 1) % capabilityPageTotal;
+    renderCapabilityProjects();
+  }, CAPABILITY_INTERVAL);
+}
+
+function renderCapabilityProjects() {
+  const focusedProject = document.activeElement instanceof HTMLElement
+    ? document.activeElement.dataset.capabilityProject
+    : "";
+  CAPABILITY_LINE_IDS.forEach((lineId) => {
+    const container = document.querySelector(`[data-capability-projects="${lineId}"]`);
+    if (!container) {
+      return;
+    }
+    const repositories = capabilityProjectsByLine[lineId];
+    const pageCount = Math.max(1, Math.ceil(repositories.length / CAPABILITY_PAGE_SIZE));
+    const linePage = capabilityPageIndex % pageCount;
+    const visibleProjects = repositories.length === 0
+      ? []
+      : Array.from(
+          { length: Math.min(CAPABILITY_PAGE_SIZE, repositories.length) },
+          (_, offset) => repositories[
+            ((linePage * CAPABILITY_PAGE_SIZE) + offset) % repositories.length
+          ],
+        );
+    const fragment = document.createDocumentFragment();
+    if (visibleProjects.length === 0) {
+      const empty = document.createElement("span");
+      empty.className = "capability-empty";
+      empty.textContent = i18n[currentLanguage].capability_empty;
+      fragment.appendChild(empty);
+    } else {
+      visibleProjects.forEach((repository) => fragment.appendChild(createCapabilityProjectLink(repository)));
+    }
+    container.replaceChildren(fragment);
+    container.dataset.capabilityPage = String(linePage + 1);
+    container.dataset.capabilityPages = String(pageCount);
+    container.parentElement?.setAttribute("data-capability-project-count", String(repositories.length));
+  });
+  if (focusedProject) {
+    const replacement = Array.from(document.querySelectorAll("[data-capability-project]"))
+      .find((element) => element.dataset.capabilityProject === focusedProject);
+    replacement?.focus({ preventScroll: true });
+  }
+  updateCapabilityControls();
+  scheduleCapabilityRotation();
+}
+
+function updateCapabilityProjects(projects) {
+  const groupedProjects = Object.fromEntries(CAPABILITY_LINE_IDS.map((lineId) => [lineId, []]));
+  projects.forEach((repository) => {
+    groupedProjects[getCapabilityLine(repository)].push(repository);
+  });
+  CAPABILITY_LINE_IDS.forEach((lineId) => {
+    groupedProjects[lineId] = sortCapabilityProjects(groupedProjects[lineId]);
+  });
+  capabilityProjectsByLine = groupedProjects;
+  capabilityPageTotal = Math.max(
+    1,
+    ...CAPABILITY_LINE_IDS.map((lineId) => Math.ceil(groupedProjects[lineId].length / CAPABILITY_PAGE_SIZE)),
+  );
+  capabilityPageIndex %= capabilityPageTotal;
+  renderCapabilityProjects();
+}
+
+function changeCapabilityPage(delta) {
+  if (capabilityPageTotal <= 1) {
+    return;
+  }
+  capabilityPageIndex = (capabilityPageIndex + delta + capabilityPageTotal) % capabilityPageTotal;
+  renderCapabilityProjects();
+}
+
+function setCapabilityPauseReason(reason, paused) {
+  if (paused) {
+    capabilityPauseReasons.add(reason);
+    clearCapabilityTimer();
+  } else {
+    capabilityPauseReasons.delete(reason);
+    scheduleCapabilityRotation();
+  }
+}
+
+function setupCapabilityRotation() {
+  if (!capabilitySection || !capabilityList) {
+    return;
+  }
+  capabilityPrevious?.addEventListener("click", () => changeCapabilityPage(-1));
+  capabilityNext?.addEventListener("click", () => changeCapabilityPage(1));
+  capabilityToggle?.addEventListener("click", () => {
+    capabilityManualPause = !capabilityManualPause;
+    updateCapabilityControls();
+    scheduleCapabilityRotation();
+  });
+  capabilitySection.addEventListener("pointerenter", () => setCapabilityPauseReason("pointer", true));
+  capabilitySection.addEventListener("pointerleave", () => setCapabilityPauseReason("pointer", false));
+  capabilitySection.addEventListener("focusin", () => setCapabilityPauseReason("focus", true));
+  capabilitySection.addEventListener("focusout", () => {
+    window.requestAnimationFrame(() => {
+      setCapabilityPauseReason("focus", capabilitySection.matches(":focus-within"));
+    });
+  });
+  document.addEventListener("visibilitychange", () => {
+    setCapabilityPauseReason("document", document.hidden);
+  });
+  if (typeof IntersectionObserver === "function") {
+    capabilityVisibilityObserver = new IntersectionObserver(([entry]) => {
+      setCapabilityPauseReason("viewport", !entry?.isIntersecting || entry.intersectionRatio < 0.25);
+    }, { threshold: [0, 0.25, 1] });
+    capabilityVisibilityObserver.observe(capabilitySection);
+  }
+  updateCapabilityControls();
+}
+
 function createProjectElement(repo, index) {
   const dict = i18n[currentLanguage];
   const isBundled = repo.bundled === true;
-  const githubDescription = repo.description || dict.projects_no_description;
+  const isSynced = repo.synced === true;
+  const projectDescription = getProjectDescription(repo);
   const isFeatured = index === 0;
-  const isArchive = index >= PROJECT_INITIAL_COUNT;
   const card = document.createElement("article");
   card.className = [
     "work-card",
     "project-card",
     isFeatured ? "project-card-featured" : "",
-    isArchive ? "project-card-archive" : "",
   ].filter(Boolean).join(" ");
   card.dataset.reveal = "";
   card.dataset.projectName = repo.name;
@@ -2106,6 +2505,8 @@ function createProjectElement(repo, index) {
     featured.className = "project-featured-badge";
     featured.textContent = isBundled
       ? dict.projects_featured_bundled
+      : currentProjectSort === "name"
+        ? dict.projects_featured_name
       : currentProjectSort === "recent"
         ? dict.projects_featured_recent
         : dict.projects_featured_popular;
@@ -2131,7 +2532,11 @@ function createProjectElement(repo, index) {
 
   const primaryDescription = document.createElement("p");
   primaryDescription.className = "project-copy-primary";
-  primaryDescription.textContent = githubDescription;
+  primaryDescription.textContent = projectDescription;
+  if (currentLanguage === "zh" && repo.description && projectDescription !== repo.description) {
+    primaryDescription.title = `GitHub description: ${repo.description}`;
+    primaryDescription.dataset.sourceDescription = repo.description;
+  }
 
   copy.appendChild(primaryDescription);
 
@@ -2139,7 +2544,11 @@ function createProjectElement(repo, index) {
   topics.className = "project-topics";
   (repo.topics || []).forEach((topic) => {
     const pill = document.createElement("span");
-    pill.textContent = topic;
+    const localizedTopic = localizeProjectTopic(topic);
+    pill.textContent = localizedTopic;
+    pill.dataset.topicOriginal = topic;
+    pill.title = localizedTopic === topic ? `GitHub Topic: ${topic}` : `${localizedTopic} · GitHub Topic: ${topic}`;
+    pill.setAttribute("aria-label", pill.title);
     topics.appendChild(pill);
   });
 
@@ -2150,6 +2559,8 @@ function createProjectElement(repo, index) {
   const updatedAt = formatProjectDate(repo.updated_at || repo.pushed_at);
   updated.textContent = isBundled
     ? `${dict.projects_snapshot_prefix}: ${formatProjectDate(repo.snapshot_at)}`
+    : isSynced
+      ? `${dict.projects_synced_prefix}: ${formatProjectDate(repo.snapshot_at)}`
     : updatedAt ? `${dict.projects_updated_prefix}: ${updatedAt}` : dict.projects_updated_prefix;
 
   const links = document.createElement("div");
@@ -2242,28 +2653,6 @@ function revealProjectCards() {
   });
 }
 
-function updateProjectDisclosure(projects, state) {
-  if (!projectDisclosure || !projectToggle || !projectToggleLabel || !projectToggleIcon) {
-    return;
-  }
-
-  const archiveCount = Math.max(projects.length - PROJECT_INITIAL_COUNT, 0);
-  const canExpand = ["loaded", "refreshing", "cached"].includes(state) && archiveCount > 0;
-
-  if (!canExpand) {
-    projectsExpanded = false;
-  }
-
-  projectDisclosure.hidden = !canExpand;
-  projectToggle.setAttribute("aria-expanded", projectsExpanded ? "true" : "false");
-
-  const dict = i18n[currentLanguage];
-  projectToggleLabel.textContent = projectsExpanded
-    ? dict.projects_hide_archive
-    : dict.projects_show_archive.replace("{count}", String(archiveCount));
-  projectToggleIcon.textContent = projectsExpanded ? "−" : "+";
-}
-
 function updateProjectSyncControls(state) {
   const dict = i18n[currentLanguage];
   const labelKey = state === "loaded"
@@ -2272,6 +2661,8 @@ function updateProjectSyncControls(state) {
       ? "projects_sync_refreshing"
       : state === "cached"
         ? "projects_sync_cached"
+        : state === "synced"
+          ? "projects_sync_synced"
         : "projects_sync_snapshot";
   if (projectSyncStatus) {
     projectSyncStatus.textContent = dict[labelKey];
@@ -2313,7 +2704,7 @@ function renderGithubProjects(projects, state = "loaded") {
   }
 
   const focusedProjectAction = getFocusedProjectAction();
-  const canSortProjects = ["loaded", "refreshing", "cached", "fallback"].includes(state);
+  const canSortProjects = ["loaded", "refreshing", "cached", "synced", "fallback"].includes(state);
   const fragment = document.createDocumentFragment();
 
   if (state === "loading") {
@@ -2324,8 +2715,7 @@ function renderGithubProjects(projects, state = "loaded") {
     fragment.appendChild(createProjectStatusCard("projects_empty_title", "projects_empty_text"));
   } else {
     const sortedProjects = canSortProjects ? sortProjectsForDisplay(projects) : [...projects];
-    const visibleProjects = projectsExpanded ? sortedProjects : sortedProjects.slice(0, PROJECT_INITIAL_COUNT);
-    visibleProjects.forEach((repo, index) => {
+    sortedProjects.forEach((repo, index) => {
       fragment.appendChild(createProjectElement(repo, index));
     });
   }
@@ -2338,8 +2728,8 @@ function renderGithubProjects(projects, state = "loaded") {
   if (projectSortSelect) {
     projectSortSelect.disabled = !canSortProjects;
   }
-  updateProjectDisclosure(projects, state);
   updateProjectSyncControls(state);
+  updateCapabilityProjects(projects);
   revealProjectCards();
 }
 
@@ -2391,8 +2781,45 @@ function normalizeGithubRepos(repos) {
       stargazers_count: Number.isFinite(repo.stargazers_count)
         ? Math.max(0, Math.trunc(repo.stargazers_count))
         : 0,
+      snapshot_at: typeof repo.snapshot_at === "string" ? repo.snapshot_at.slice(0, 40) : "",
+      synced: repo.synced === true,
+      bundled: repo.bundled === true,
     }))
     .filter((repo) => !EXCLUDED_PROJECT_REPOS.has(repo.name));
+}
+
+function normalizeGithubProjectFeed(payload) {
+  if (!payload || typeof payload !== "object"
+    || payload.schema_version !== 1
+    || payload.owner !== GITHUB_USER
+    || payload.source !== `https://api.github.com/users/${GITHUB_USER}/repos`
+    || typeof payload.generated_at !== "string"
+    || Number.isNaN(Date.parse(payload.generated_at))) {
+    return [];
+  }
+
+  return normalizeGithubRepos(payload.repositories).map((repository) => ({
+    ...repository,
+    snapshot_at: payload.generated_at,
+    synced: true,
+    bundled: false,
+  }));
+}
+
+async function fetchGithubProjectFeed(signal) {
+  const response = await fetch(GITHUB_PROJECTS_FEED_URL, {
+    cache: "no-cache",
+    credentials: "same-origin",
+    signal,
+  });
+  if (!response.ok) {
+    throw new Error(`Project feed returned ${response.status}`);
+  }
+  const projects = normalizeGithubProjectFeed(await response.json());
+  if (projects.length === 0) {
+    throw new TypeError("Project feed returned no usable repositories");
+  }
+  return projects;
 }
 
 async function fetchGithubRepos(signal) {
@@ -2400,7 +2827,7 @@ async function fetchGithubRepos(signal) {
   let url = GITHUB_REPOS_URL;
   let pageCount = 0;
 
-  while (url && pageCount < 3) {
+  while (url && pageCount < 10) {
     pageCount += 1;
     const response = await fetch(url, {
       cache: "no-cache",
@@ -2443,13 +2870,27 @@ async function loadGithubProjects() {
   const visibleProjects = activeProjects.length > 0 && projectsLoadState !== "fallback"
     ? activeProjects
     : cachedProjects;
+  const hasFreshPreview = visibleProjects.length > 0;
 
   const controller = new AbortController();
   githubProjectsController = controller;
   activeProjects = visibleProjects;
   projectsLoadState = visibleProjects.length > 0 ? "refreshing" : "loading";
   renderGithubProjects(activeProjects, projectsLoadState);
-  const timeout = window.setTimeout(() => controller.abort(), 6500);
+  const timeout = window.setTimeout(() => controller.abort(), 7500);
+  const feedPromise = fetchGithubProjectFeed(controller.signal)
+    .then((feedProjects) => {
+      if (requestId !== githubProjectsRequestId) {
+        return [];
+      }
+      if (!hasFreshPreview && projectsLoadState !== "loaded") {
+        activeProjects = feedProjects;
+        projectsLoadState = "refreshing";
+        renderGithubProjects(activeProjects, projectsLoadState);
+      }
+      return feedProjects;
+    })
+    .catch(() => []);
 
   try {
     const repos = await fetchGithubRepos(controller.signal);
@@ -2471,8 +2912,17 @@ async function loadGithubProjects() {
       return;
     }
 
-    activeProjects = visibleProjects.length > 0 ? visibleProjects : BUNDLED_PROJECTS;
-    projectsLoadState = visibleProjects.length > 0 ? "cached" : "fallback";
+    const feedProjects = await feedPromise;
+    if (visibleProjects.length > 0) {
+      activeProjects = visibleProjects;
+      projectsLoadState = "cached";
+    } else if (feedProjects.length > 0) {
+      activeProjects = feedProjects;
+      projectsLoadState = "synced";
+    } else {
+      activeProjects = BUNDLED_PROJECTS;
+      projectsLoadState = "fallback";
+    }
     renderGithubProjects(activeProjects, projectsLoadState);
   } finally {
     window.clearTimeout(timeout);
@@ -2899,21 +3349,11 @@ document.addEventListener("visibilitychange", () => {
   scheduleHeroTitleStep(HERO_TYPE_RESUME_DELAY);
 });
 
-if (projectToggle) {
-  projectToggle.addEventListener("click", () => {
-    const shouldRestoreFocus = projectsExpanded;
-    projectsExpanded = !projectsExpanded;
-    renderGithubProjects(activeProjects, projectsLoadState);
-    if (shouldRestoreFocus) {
-      projectToggle.focus({ preventScroll: true });
-    }
-  });
-}
-
 if (projectSortSelect) {
   projectSortSelect.addEventListener("change", () => {
-    currentProjectSort = projectSortSelect.value === "recent" ? "recent" : "popular";
-    projectsExpanded = false;
+    currentProjectSort = ["popular", "recent", "name"].includes(projectSortSelect.value)
+      ? projectSortSelect.value
+      : "popular";
     renderGithubProjects(activeProjects, projectsLoadState);
   });
 }
@@ -2936,6 +3376,7 @@ motionQuery.addEventListener?.("change", (event) => {
 
 protectPage();
 setupReflectionRotator();
+setupCapabilityRotation();
 applyLanguage(currentLanguage);
 setupPageScale();
 setupHeaderState();
