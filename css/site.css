@@ -442,12 +442,6 @@ select:focus-visible {
   background: var(--surface-strong);
 }
 
-.control-button-icon {
-  min-width: 2rem;
-  padding: 0;
-  font-size: calc(1rem * var(--managed-font-scale));
-}
-
 .js-enabled .page-scale {
   display: none;
 }
@@ -652,6 +646,33 @@ select:focus-visible {
   max-width: var(--managed-heading-width);
   font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   text-wrap: balance;
+}
+
+.hero-title-trigger {
+  display: grid;
+  grid-area: 1 / 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0.04em;
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+}
+
+.hero-title-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 0.08em;
+}
+
+.hero-title-trigger:disabled {
+  color: inherit;
+  cursor: default;
+  opacity: 1;
 }
 
 .hero-title-reserve,

@@ -43,7 +43,7 @@
       }, 2000);
     }());
   </script>
-  <link rel="stylesheet" href="css/site.css?v=20260725-1">
+  <link rel="stylesheet" href="css/site.css?v=20260725-2">
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">跳到主要内容</a>
@@ -59,9 +59,6 @@
         <button class="control-button" id="theme-toggle" type="button" aria-label="切换暗色模式">
           <span data-theme-icon aria-hidden="true">☾</span>
           <span data-theme-label>暗色</span>
-        </button>
-        <button class="control-button control-button-icon" id="typewriter-replay" type="button" aria-label="重播标题打字动画" title="重播标题打字动画" data-i18n-attr="aria-label:typewriter_replay,title:typewriter_replay">
-          <span aria-hidden="true">↻</span>
         </button>
         <button class="control-button language-toggle" id="language-toggle" type="button" aria-label="切换到英文">
           <span data-lang-label>EN</span>
@@ -100,8 +97,10 @@
           <p class="eyebrow"><span class="section-index" aria-hidden="true">01</span><span data-i18n="hero_eyebrow">交易复盘 / 写作 / 本地工具</span></p>
           <div class="hero-intro">
             <h1 id="hero-title" data-i18n="hero_title" data-typewriter aria-label="向世界交付你的价值">
-              <span class="hero-title-reserve" data-typewriter-reserve aria-hidden="true">向世界交付你的价值</span>
-              <span class="hero-title-visual" data-typewriter-visual aria-hidden="true">向世界交付你的价值</span>
+              <button class="hero-title-trigger" type="button" data-typewriter-trigger aria-label="重播标题打字动画" title="重播标题打字动画" data-i18n-attr="aria-label:typewriter_replay,title:typewriter_replay" disabled>
+                <span class="hero-title-reserve" data-typewriter-reserve aria-hidden="true">向世界交付你的价值</span>
+                <span class="hero-title-visual" data-typewriter-visual aria-hidden="true">向世界交付你的价值</span>
+              </button>
             </h1>
             <a class="hero-thought hero-thought-link" href="https://nextweb4.github.io/Private/article/%E6%84%9F%E6%83%B3%E4%B8%80%E5%88%9924.11.6.html" target="_blank" rel="noopener noreferrer" aria-label="打开原文：感想一则24.11.6" data-blog-thought data-thought-link aria-live="polite">
               <figure class="hero-thought-content">
@@ -378,6 +377,6 @@
     <a href="https://nextweb4.github.io/Private/" target="_blank" rel="noopener noreferrer" data-i18n="footer_blog">博客</a>
   </footer>
 
-  <script src="js/site.js?v=20260725-1" defer></script>
+  <script src="js/site.js?v=20260725-2" defer></script>
 </body>
 </html>

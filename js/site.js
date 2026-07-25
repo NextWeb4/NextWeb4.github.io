@@ -4,7 +4,7 @@ root.classList.add("js-enabled");
 const year = document.getElementById("year");
 const themeToggle = document.getElementById("theme-toggle");
 const languageToggle = document.getElementById("language-toggle");
-const typewriterReplay = document.getElementById("typewriter-replay");
+const heroTitleTrigger = document.querySelector("[data-typewriter-trigger]");
 const githubProjects = document.querySelector("[data-github-projects]");
 const projectDisclosure = document.querySelector("[data-project-disclosure]");
 const projectToggle = document.querySelector("[data-project-toggle]");
@@ -699,7 +699,7 @@ function advanceHeroTitle() {
   scheduleHeroTitleStep(heroTitleDelay(segment));
 }
 
-function renderHeroTitle(value, { force = false, userInitiated = false } = {}) {
+function renderHeroTitle(value, { force = false } = {}) {
   if (!heroTitle || !heroTitleReserve || !heroTitleVisual) {
     return;
   }
@@ -711,11 +711,6 @@ function renderHeroTitle(value, { force = false, userInitiated = false } = {}) {
     return;
   }
   heroTitleRenderedValue = value;
-  if (!motionAllowed && !userInitiated) {
-    finishHeroTitle(value);
-    return;
-  }
-
   window.clearTimeout(heroTitleTimer);
   const animationId = ++heroTitleAnimationId;
   heroTitleRun = {
@@ -2874,9 +2869,10 @@ if (languageToggle) {
   });
 }
 
-if (typewriterReplay) {
-  typewriterReplay.addEventListener("click", () => {
-    renderHeroTitle(i18n[currentLanguage].hero_title, { force: true, userInitiated: true });
+if (heroTitleTrigger) {
+  heroTitleTrigger.disabled = false;
+  heroTitleTrigger.addEventListener("click", () => {
+    renderHeroTitle(i18n[currentLanguage].hero_title, { force: true });
   });
 }
 
@@ -2936,9 +2932,6 @@ window.addEventListener("pageshow", (event) => {
 
 motionQuery.addEventListener?.("change", (event) => {
   motionAllowed = !event.matches;
-  if (!motionAllowed) {
-    finishHeroTitle();
-  }
 });
 
 protectPage();

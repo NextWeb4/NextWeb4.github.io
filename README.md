@@ -29,7 +29,7 @@ The private source repository `NextWeb4/website-source` owns the editor, backend
 ## Reader experience
 
 - A dark-first fresh visit with persisted light/dark and Chinese/English switching; an explicitly stored light preference remains authoritative.
-- A grapheme-safe bilingual hero-title typewriter with a complete accessible name, reserved geometry, a visible completed-text caret hold, hidden-document pause, language-aware heading measures, an instant automatic reduced-motion fallback, and an explicit replay control.
+- A grapheme-safe bilingual hero-title typewriter with a complete accessible name, reserved geometry, a visible completed-text caret hold, hidden-document pause, and language-aware heading measures. It plays once on page entry even under reduced motion, then the title text itself is the click/keyboard replay target; no separate header replay icon is shown, and the no-JavaScript title remains complete.
 - A dated 100-entry thought archive: 31 Moments entries and 69 iCloud Notes entries per language.
 - Visibility-aware rotation that pauses during interaction, in hidden documents, or when less than one quarter of the panel remains visible; previous/next controls, reading progress, provenance, reading time, keyboard access, and a native full-text dialog remain available.
 - Live-first public GitHub project enrichment that revalidates descriptions, Topics, Stars, update times, and code-push times on every page entry; fresh cache may appear while refreshing, and a dated sortable four-repository snapshot remains the final fallback.
@@ -89,7 +89,7 @@ The public repository must never receive the private source tree, backend, admin
 
 - Confirm the artifact contains only the allowlisted runtime and documentation paths.
 - Open `/`, `/404.html`, both public language states, and representative archive entries through HTTP.
-- Check keyboard navigation, focus visibility, reduced-motion automatic rendering and explicit typewriter replay, the one-line Chinese desktop caption, mobile overflow, pause behavior, dialog close access, and fallback content.
+- Check keyboard navigation, focus visibility, one-time entry typing and title-text replay under reduced motion, absence of a separate header replay icon, the one-line Chinese desktop caption, mobile overflow, pause behavior, dialog close access, and fallback content.
 - Confirm live GitHub status/refresh, API descriptions and Topics, cache/snapshot fallback, project links, image paths, JSON loading, and canonical site URLs resolve.
 - Compare the public tree with the private build artifact before accepting a deployment.
 
