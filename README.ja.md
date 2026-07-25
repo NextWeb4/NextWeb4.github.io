@@ -6,7 +6,7 @@
 
 <div align="center">
 
-# NextWeb4 Public Website Runtime
+# NextWeb4 公開サイト・ランタイム
 
 **[nextweb4.github.io](https://nextweb4.github.io/) で配信する、生成済みのブラウザー専用公開サイトです。**
 
