@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
   <meta name="twitter:image" content="https://nextweb4.github.io/images/hero-campus.jpg">
   <meta name="twitter:image:alt" content="HaoXiang Huang 站在校园石刻前">
   <link rel="canonical" href="https://nextweb4.github.io/">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#080a0d">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/favicon.png">
   <script>
@@ -31,11 +31,19 @@
           document.documentElement.dataset.theme = theme;
         }
       } catch (error) {
-        document.documentElement.dataset.theme = "light";
+        document.documentElement.dataset.theme = "dark";
       }
+      var themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) {
+        themeMeta.setAttribute("content", document.documentElement.dataset.theme === "light" ? "#fafbfc" : "#080a0d");
+      }
+      document.documentElement.classList.add("js-title-pending");
+      window.setTimeout(function () {
+        document.documentElement.classList.remove("js-title-pending");
+      }, 2000);
     }());
   </script>
-  <link rel="stylesheet" href="css/site.css?v=20260724-3">
+  <link rel="stylesheet" href="css/site.css?v=20260724-4">
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">跳到主要内容</a>
@@ -88,7 +96,10 @@
         <div class="hero-copy" data-reveal>
           <p class="eyebrow"><span class="section-index" aria-hidden="true">01</span><span data-i18n="hero_eyebrow">交易复盘 / 写作 / 本地工具</span></p>
           <div class="hero-intro">
-            <h1 id="hero-title" data-i18n="hero_title">向世界交付你的价值</h1>
+            <h1 id="hero-title" data-i18n="hero_title" data-typewriter aria-label="向世界交付你的价值">
+              <span class="hero-title-reserve" data-typewriter-reserve aria-hidden="true">向世界交付你的价值</span>
+              <span class="hero-title-visual" data-typewriter-visual aria-hidden="true">向世界交付你的价值</span>
+            </h1>
             <a class="hero-thought hero-thought-link" href="https://nextweb4.github.io/Private/article/%E6%84%9F%E6%83%B3%E4%B8%80%E5%88%9924.11.6.html" target="_blank" rel="noopener noreferrer" aria-label="打开原文：感想一则24.11.6" data-blog-thought data-thought-link aria-live="polite">
               <figure class="hero-thought-content">
                 <blockquote data-thought-text>真正稳的交易，不是永远不亏，而是亏了以后仍然不伤根本。</blockquote>
@@ -137,7 +148,7 @@
             <img src="images/hero-campus.jpg" width="1600" height="900" alt="HaoXiang Huang 站在校园石刻前" draggable="false" decoding="async" fetchpriority="high" data-i18n-attr="alt:hero_visual_alt">
             <figcaption class="hero-card">
               <p class="photo-meta" data-i18n="photo_meta">2024.11.10 / 校园留影</p>
-              <p class="photo-line" data-i18n="photo_line">先把判断写清楚，再做成可以打开和验证的东西。</p>
+              <p class="photo-line managed-multiline" data-i18n="photo_line">接纳生命的潮汐，允许自己的颓唐；能热烈，也能坦然告别；能盛放，也能安顿荒芜。</p>
               <a href="https://nextweb4.github.io/Private/" target="_blank" rel="noopener noreferrer" data-i18n="photo_link">自我刻度·记录</a>
             </figcaption>
           </figure>
@@ -164,11 +175,11 @@
       <div class="section-shell two-column">
         <div data-reveal>
           <p class="section-label"><span class="section-index" aria-hidden="true">02</span><span data-i18n="about_label">关于</span></p>
-          <h2 id="about-title" data-i18n="about_title">这里不是简介，是一份持续更新的工作记录。</h2>
+          <h2 id="about-title" class="managed-multiline" data-i18n="about_title">且待繁花尽&#10;共话西窗时&#10;莫愁前路远&#10;自有故人知</h2>
         </div>
         <div class="prose" data-reveal>
-          <p data-i18n="about_p1">我不是只想做一张漂亮名片。这个站点更像我的公开工作台：一边把交易复盘、阅读思考和日常判断写下来，一边把 Web 练习、自动化脚本和小工具做成可访问的项目。</p>
-          <p data-i18n="about_p2">NextWeb4 是我给自己的交付系统。博客留下判断形成的过程，GitHub 保存能运行的实现，网页把入口整理清楚；如果一个想法还不能被打开、被使用、被复盘，它就还没有真正交付。</p>
+          <p data-i18n="about_p1">我不是只想做一张漂亮名片。这个站点更像我的公开工作台：一边把交易复盘、阅读思考和日常判断写下来，一边把 Web 练习、自动化脚本和工具做成可访问的项目。</p>
+          <p class="managed-multiline" data-i18n="about_p2">我无法告知你生命的意义，因为我也迷茫。正如我无法诠释你此刻的黑暗，因为我也毫无光亮。&#10;&#10;但我希望我们都是候鸟。迁徙从来都不是顺从和逃避，而是自然赋予的坚韧，是对困难的顽强抵抗。愿我们欣赏一路的崎岖，并在沿途种满理想。</p>
           <p data-i18n="about_p3">所以这里的“关于”不是一句包装好的自我介绍，而是一组正在更新的证据：我关心什么问题，怎样拆解它，用什么方式做出来，又如何根据反馈继续修正。</p>
           <dl class="about-ledger">
             <div>
@@ -176,7 +187,7 @@
               <dd data-i18n="about_ledger_1_text">把交易、阅读和阶段性判断沉淀成可回看的文字。</dd>
             </div>
             <div>
-              <dt data-i18n="about_ledger_2_label">建造</dt>
+              <dt data-i18n="about_ledger_2_label">构建</dt>
               <dd data-i18n="about_ledger_2_text">用前端页面、脚本和工具把想法做成能用的东西。</dd>
             </div>
             <div>
@@ -190,7 +201,7 @@
               <p data-i18n="about_focus_1_text">从交易复盘、阅读笔记和日常问题里找到真正要解决的变量。</p>
             </li>
             <li>
-              <span data-i18n="about_focus_2_title">建造</span>
+              <span data-i18n="about_focus_2_title">构建</span>
               <p data-i18n="about_focus_2_text">用前端和自动化把判断做成页面、脚本、数据整理或可复用流程。</p>
             </li>
             <li>
@@ -211,7 +222,7 @@
         <div class="section-heading" data-reveal>
           <div class="section-heading-main">
             <p class="section-label"><span class="section-index" aria-hidden="true">03</span><span data-i18n="work_label">GitHub 项目</span></p>
-            <h2 id="work-title" data-i18n="work_title">项目的使用和更新，直接从 GitHub 来。</h2>
+            <h2 id="work-title" data-i18n="work_title">项目的使用与更新</h2>
           </div>
           <div class="project-heading-aside">
             <p data-i18n="work_intro">Star 显示外部使用，更新时间显示最近交付；先看四个主要项目，需要时再展开全部仓库。</p>
@@ -258,7 +269,7 @@
         <div class="section-heading skills-heading" data-reveal>
           <div class="section-heading-main">
             <p class="section-label"><span class="section-index" aria-hidden="true">04</span><span data-i18n="skills_label">技术与方法</span></p>
-            <h2 id="skills-title" data-i18n="skills_title">四条能力线，都有公开证据。</h2>
+            <h2 id="skills-title" data-i18n="skills_title">四条能力线</h2>
           </div>
           <p data-i18n="skills_intro">从产品、基础设施、内容系统到安全交付，每条能力线都由可运行项目和公开实现共同验证。</p>
         </div>
@@ -306,8 +317,8 @@
     <section class="journal" id="journal" data-module="journal" aria-labelledby="journal-title">
       <div class="journal-inner" data-reveal>
         <p class="section-label"><span class="section-index" aria-hidden="true">05</span><span data-i18n="journal_label">博客</span></p>
-        <h2 id="journal-title" data-i18n="journal_title">还没做成工具的判断，先写进博客。</h2>
-        <p data-i18n="journal_text">交易、阅读和项目复盘先在自我刻度里留下过程；值得重复解决的问题，再继续变成项目。</p>
+        <h2 id="journal-title" class="managed-multiline" data-i18n="journal_title">大梦谁先觉？&#10;平生我自知。&#10;闽江河畔望真神&#10;今日方知我是我</h2>
+        <p class="managed-multiline" data-i18n="journal_text">常常觉得，人与人之间的相遇像是一种无声的共鸣。我在这里写字、画画，而你恰好路过、停留，偶尔被某句话或某个画面轻轻触碰——这样的连接，虽然隔着屏幕，却真实地照亮过我许多个创作的片刻。&#10;&#10;生命本是一段流动的旅程，每个同行者都有各自的轨迹与时限。就像四季更迭，能在这段路上与你相伴一程，已是值得深深感激的缘分。</p>
         <a class="button button-primary" href="https://nextweb4.github.io/Private/" target="_blank" rel="noopener noreferrer"><span data-i18n="journal_button">阅读自我刻度·记录</span><span class="journal-arrow" aria-hidden="true">↗</span></a>
       </div>
     </section>
@@ -356,6 +367,6 @@
     <a href="https://nextweb4.github.io/Private/" target="_blank" rel="noopener noreferrer" data-i18n="footer_blog">博客</a>
   </footer>
 
-  <script src="js/site.js?v=20260724-3" defer></script>
+  <script src="js/site.js?v=20260724-4" defer></script>
 </body>
 </html>

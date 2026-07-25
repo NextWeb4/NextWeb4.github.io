@@ -28,7 +28,8 @@ The private source repository `NextWeb4/website-source` owns the editor, backend
 
 ## Reader experience
 
-- Light and dark themes with Chinese/English interface switching.
+- A dark-first fresh visit with persisted light/dark and Chinese/English switching; an explicitly stored light preference remains authoritative.
+- A grapheme-safe bilingual hero-title typewriter with a complete accessible name, reserved geometry, language-aware heading measures, and an instant reduced-motion fallback.
 - A dated 100-entry thought archive: 31 Moments entries and 69 iCloud Notes entries per language.
 - Visibility-aware rotation that pauses during interaction, in hidden documents, or when less than one quarter of the panel remains visible; previous/next controls, reading progress, provenance, reading time, keyboard access, and a native full-text dialog remain available.
 - Public GitHub project enrichment with a dated, sortable four-repository snapshot when the API is unavailable; “latest delivery” uses code-push time rather than metadata-only updates.
@@ -56,7 +57,7 @@ Source-only paths such as `admin/`, `backend/`, `tests/`, `.github/`, `scripts/`
 
 ## Content and fallback
 
-The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The overlay may set independent 85-115% font scales for all seven managed modules, CJK-safe compact/standard/wide primary-heading widths for all six sections, a complete six-section order, and three bounded section sizes; responsive limits remain authoritative on narrow screens. Missing heading settings use standard widths, while legacy global font scale values apply to all seven modules. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages.
+The page first renders complete bundled content and may overlay `content/site-content.json` from the same origin. If the JSON is missing, invalid, slow, or unavailable, the bundled page remains usable. The overlay may set independent 85-115% font scales for all seven managed modules, language-aware compact/standard/wide primary-heading widths for all six sections, a complete six-section order, and three bounded section sizes; responsive limits remain authoritative on narrow screens. Missing heading settings use standard widths, while legacy global font scale values apply to all seven modules. The managed archive keeps exactly 31 dated Moments records plus 69 dated iCloud Notes records in matching source/date order for both languages.
 
 Public JavaScript treats managed text as untrusted and assigns visible dates, provenance, titles, and bodies safely. The runtime does not expose iCloud storage labels as visible titles and does not run translation services in the browser.
 

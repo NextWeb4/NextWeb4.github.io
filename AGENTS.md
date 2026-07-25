@@ -19,10 +19,11 @@
 - Preserve UTF-8, semantic HTML, safe text assignment, fixed responsive dimensions, and nonempty image alt text.
 
 ## 6. Module boundaries
-- Public markup belongs in `index.html` and `404.html`; presentation belongs in `css/site.css`; browser behavior belongs in `js/site.js`; managed overlay data belongs in `content/site-content.json`. Managed presentation is limited to exact 85-115% font scales in 5% steps for `site`, `hero`, `about`, `work`, `skills`, `journal`, and `contact`, `compact`/`standard`/`wide` CJK-safe primary-heading widths for all six sections, one complete six-section order, and three section-size presets. Each font value affects only its complete module typography; heading widths use module-owned `em` caps and must not introduce another wrap into a desktop Han line that fits its section.
+- Public markup belongs in `index.html` and `404.html`; presentation belongs in `css/site.css`; browser behavior belongs in `js/site.js`; managed overlay data belongs in `content/site-content.json`. Managed presentation is limited to exact 85-115% font scales in 5% steps for `site`, `hero`, `about`, `work`, `skills`, `journal`, and `contact`, `compact`/`standard`/`wide` language-aware primary-heading widths for all six sections, one complete six-section order, and three section-size presets. Each font value affects only its complete module typography; heading widths use module-owned `em` caps and must avoid unintended extra wraps in both Han and English display text.
+- A fresh page and 404 render dark before CSS; an explicit stored light/dark preference remains authoritative. Only the hero H1 uses grapheme-safe typewriter motion; keep its complete accessible name and reserved geometry, and render it instantly under reduced motion or without JavaScript.
 - The `images/` files are the only runtime media. Admin, backend, tests, deployment scripts, credentials, and private history remain in `NextWeb4/website-source`.
 - Documentation describes the generated artifact; authoring changes happen in the private source repository.
-- The public tree must preserve the visibility-aware thought rotator, dated four-project fallback snapshot, safe text assignment, equal project-card layout, and wrapping evidence links; these are runtime behavior owned by `js/site.js` and `css/site.css`.
+- The public tree must preserve the dark-first theme, bilingual hero typewriter, language-aware heading measures, visibility-aware thought rotator, dated four-project fallback snapshot, safe text assignment, equal project-card layout, and wrapping evidence links; these are runtime behavior owned by `js/site.js` and `css/site.css`.
 
 ## 7. Prohibited changes
 - Do not edit the runtime as a durable content workflow; the next private-source deployment replaces it.
@@ -37,7 +38,7 @@
 
 ## 9. Review criteria
 - Compare the public tree with `NextWeb4/website-source` build output before accepting deployment.
-- Check desktop/mobile overflow, focus visibility, reduced motion, language switching, archive pause/dialog behavior, image paths, and JSON fallback.
+- Check desktop/mobile overflow, dark-first and stored-light behavior, complete typewriter accessibility/geometry, English heading line lengths, focus visibility, reduced motion, language switching, archive pause/dialog behavior, image paths, and JSON fallback.
 - Run the private source tests and `git diff --check`; never claim runtime-only review is equivalent to source regression coverage.
 
 ## 10. Common risks

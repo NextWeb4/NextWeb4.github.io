@@ -642,9 +642,47 @@ select:focus-visible {
 
 .hero h1 {
   --managed-heading-size: 5.75rem;
+  display: grid;
   max-width: var(--managed-heading-width);
   font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   text-wrap: balance;
+}
+
+.hero-title-reserve,
+.hero-title-visual {
+  grid-area: 1 / 1;
+  white-space: pre-line;
+}
+
+.hero-title-reserve {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hero-title-visual {
+  position: relative;
+  align-self: start;
+}
+
+.js-title-pending .hero-title-visual {
+  visibility: hidden;
+}
+
+[data-typewriter-state="typing"] .hero-title-visual::after {
+  display: inline-block;
+  width: 0;
+  height: 0.82em;
+  margin-left: 0.08em;
+  content: "";
+  border-right: 0.055em solid currentColor;
+  animation: typewriter-caret 720ms steps(1, end) 6;
+  vertical-align: -0.04em;
+}
+
+@keyframes typewriter-caret {
+  50% {
+    opacity: 0;
+  }
 }
 
 .hero-reflections {
@@ -1304,6 +1342,34 @@ select:focus-visible {
   color: var(--ink);
   font-size: calc(var(--managed-heading-size) * var(--managed-font-scale));
   text-wrap: balance;
+}
+
+:lang(en) .hero h1 {
+  --managed-heading-size: 5.1rem;
+  line-height: 0.98;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+:lang(en) .section h2,
+:lang(en) .journal h2 {
+  --managed-heading-size: 3.2rem;
+  line-height: 1.04;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: auto;
+}
+
+:lang(en) .prose > p {
+  max-width: 46rem;
+  line-height: 1.78;
+}
+
+@media (min-width: 1101px) {
+  :lang(en) .section-about .two-column {
+    grid-template-columns: minmax(24rem, 1.05fr) minmax(28rem, 0.95fr);
+    gap: 4rem;
+  }
 }
 
 .section-heading {
@@ -2536,6 +2602,36 @@ body.is-devtools-detected .devtools-shield strong {
   --module-heading-width-wide: none;
 }
 
+:lang(en) [data-module] {
+  --module-heading-width-compact: 8.5em;
+  --module-heading-width-standard: 12em;
+  --module-heading-width-wide: 16em;
+}
+
+:lang(en) .hero {
+  --module-heading-width-compact: 7em;
+  --module-heading-width-standard: 10em;
+  --module-heading-width-wide: 13em;
+}
+
+:lang(en) .section-about {
+  --module-heading-width-compact: 9em;
+  --module-heading-width-standard: 13em;
+  --module-heading-width-wide: 17em;
+}
+
+:lang(en) .journal {
+  --module-heading-width-compact: 10em;
+  --module-heading-width-standard: 14em;
+  --module-heading-width-wide: 18em;
+}
+
+:lang(en) .section-contact {
+  --module-heading-width-compact: 9em;
+  --module-heading-width-standard: 14em;
+  --module-heading-width-wide: none;
+}
+
 [data-module][data-heading-width="compact"] {
   --managed-heading-width: var(--module-heading-width-compact);
 }
@@ -2973,6 +3069,12 @@ body.is-devtools-detected .devtools-shield strong {
   .section h2,
   .journal h2 {
     --managed-heading-size: 2.7rem;
+  }
+
+  :lang(en) .section h2,
+  :lang(en) .journal h2 {
+    --managed-heading-size: 2.35rem;
+    line-height: 1.08;
   }
 
   .skill-list li > span {
