@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HaoXiang Huang | 向世界交付你的价值</title>
   <meta name="description" content="HaoXiang Huang 的个人主页：持续更新的思考、交易复盘、公开写作，以及可验证的 Web 与本地自动化工具。">
-  <meta name="keywords" content="HaoXiang Huang, NextWeb4, 个人网站, 作品集, Web 开发">
   <meta property="og:title" content="HaoXiang Huang | 向世界交付你的价值">
   <meta property="og:description" content="记录判断，交付价值，把值得重复解决的问题做成可以打开、使用和修正的工具。">
   <meta property="og:type" content="website">
@@ -14,6 +13,7 @@
   <meta property="og:image:alt" content="HaoXiang Huang 站在校园石刻前">
   <meta property="og:site_name" content="HaoXiang Huang">
   <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="HaoXiang Huang | 向世界交付你的价值">
   <meta name="twitter:description" content="记录判断，交付价值，把值得重复解决的问题做成可以打开、使用和修正的工具。">
@@ -21,6 +21,7 @@
   <meta name="twitter:image:alt" content="HaoXiang Huang 站在校园石刻前">
   <link rel="canonical" href="https://nextweb4.github.io/">
   <meta name="theme-color" content="#080a0d">
+  <link rel="preconnect" href="https://api.github.com" crossorigin>
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/favicon.png">
   <script>
@@ -43,7 +44,28 @@
       }, 2000);
     }());
   </script>
-  <link rel="stylesheet" href="css/site.css?v=20260726-4">
+  <link rel="stylesheet" href="css/site.css?v=20260726-5">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "name": "HaoXiang Huang",
+          "url": "https://nextweb4.github.io/",
+          "image": "https://nextweb4.github.io/images/hero-campus.jpg",
+          "email": "mailto:Rays688888@Gmail.com",
+          "sameAs": ["https://github.com/NextWeb4"]
+        },
+        {
+          "@type": "WebSite",
+          "name": "HaoXiang Huang",
+          "url": "https://nextweb4.github.io/",
+          "inLanguage": ["zh-CN", "en"]
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">跳到主要内容</a>
@@ -392,6 +414,6 @@
     <a href="https://nextweb4.github.io/Private/" target="_blank" rel="noopener noreferrer" data-i18n="footer_blog">博客</a>
   </footer>
 
-  <script src="js/site.js?v=20260726-4" defer></script>
+  <script src="js/site.js?v=20260726-5" defer></script>
 </body>
 </html>

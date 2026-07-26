@@ -1257,7 +1257,16 @@ function getReflectionMeasure() {
   return reflectionMeasure;
 }
 
-function measureReflectionLines(value, density) {
+function createReflectionMeasureContext() {
+  // Computed line heights depend only on density and language, so one fitting
+  // pass caches them instead of calling getComputedStyle() in every iteration
+  // of the binary-search fit. The stage width is intentionally NOT cached:
+  // re-reading it per call preserves the measurement feedback the truncation
+  // behavior (and its regression coverage) depends on.
+  return { lineHeights: new Map() };
+}
+
+function measureReflectionLines(value, density, context = null) {
   const measure = getReflectionMeasure();
   const availableWidth = reflectionStage?.getBoundingClientRect().width
     || reflectionPreview?.getBoundingClientRect().width
@@ -1267,7 +1276,11 @@ function measureReflectionLines(value, density) {
   measure.style.width = `${Math.max(240, availableWidth)}px`;
   measure.textContent = value;
 
-  const lineHeight = Number.parseFloat(window.getComputedStyle(measure).lineHeight);
+  let lineHeight = context?.lineHeights.get(density);
+  if (lineHeight === undefined) {
+    lineHeight = Number.parseFloat(window.getComputedStyle(measure).lineHeight);
+    context?.lineHeights.set(density, lineHeight);
+  }
   if (!Number.isFinite(lineHeight) || lineHeight <= 0) {
     return REFLECTION_PREVIEW_MAX_LINES + 1;
   }
@@ -1307,7 +1320,8 @@ function findReflectionSemanticBreak(value, maximum, language) {
   return maximum;
 }
 
-function fitReflectionPreview(value, density, language) {
+function fitReflectionPreview(value, density, language, context = null) {
+  const measureContext = context || createReflectionMeasureContext();
   const characters = Array.from(value);
   let low = 1;
   let high = characters.length - 1;
@@ -1316,7 +1330,7 @@ function fitReflectionPreview(value, density, language) {
   while (low <= high) {
     const middle = Math.floor((low + high) / 2);
     const candidate = `${characters.slice(0, middle).join("").trim()}…`;
-    if (measureReflectionLines(candidate, density) <= REFLECTION_PREVIEW_MAX_LINES) {
+    if (measureReflectionLines(candidate, density, measureContext) <= REFLECTION_PREVIEW_MAX_LINES) {
       maximum = middle;
       low = middle + 1;
     } else {
@@ -1331,7 +1345,10 @@ function fitReflectionPreview(value, density, language) {
     ? prefix
     : `${prefix.replace(/[，,；;：:\s]+$/u, "")}…`;
 
-  while (reflectionTextLength(preview) > 1 && measureReflectionLines(preview, density) > REFLECTION_PREVIEW_MAX_LINES) {
+  while (
+    reflectionTextLength(preview) > 1
+    && measureReflectionLines(preview, density, measureContext) > REFLECTION_PREVIEW_MAX_LINES
+  ) {
     preview = `${Array.from(preview.replace(/…$/u, "")).slice(0, -1).join("").trimEnd()}…`;
   }
   return preview;
@@ -1348,8 +1365,9 @@ function getReflectionReadingMinutes(value, language) {
 function buildReflectionPreview(value, language = currentLanguage) {
   const normalized = normalizeReflectionPreviewText(value);
   const readingMinutes = getReflectionReadingMinutes(normalized, language);
+  const measureContext = createReflectionMeasureContext();
 
-  if (measureReflectionLines(normalized, "short") <= REFLECTION_SHORT_MAX_LINES) {
+  if (measureReflectionLines(normalized, "short", measureContext) <= REFLECTION_SHORT_MAX_LINES) {
     return {
       text: normalized,
       density: "short",
@@ -1358,7 +1376,7 @@ function buildReflectionPreview(value, language = currentLanguage) {
     };
   }
 
-  if (measureReflectionLines(normalized, "medium") <= REFLECTION_PREVIEW_MAX_LINES) {
+  if (measureReflectionLines(normalized, "medium", measureContext) <= REFLECTION_PREVIEW_MAX_LINES) {
     return {
       text: normalized,
       density: "medium",
@@ -1368,7 +1386,7 @@ function buildReflectionPreview(value, language = currentLanguage) {
   }
 
   return {
-    text: fitReflectionPreview(normalized, "long", language),
+    text: fitReflectionPreview(normalized, "long", language, measureContext),
     density: "long",
     truncated: true,
     readingMinutes,
