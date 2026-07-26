@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## 1. Project structure
-- This is a generated public runtime tree. Keep `.nojekyll`, `index.html`, `404.html`, `content/site-content.json`, `content/github-projects.json`, `css/site.css`, `js/site.js`, `images/favicon.png`, `images/hero-campus.jpg`, the three README files, and this `AGENTS.md` as the complete public artifact.
+- This is a generated public runtime tree. Keep `.nojekyll`, `index.html`, `404.html`, `content/site-content.json`, `content/github-projects.json`, `css/site.css`, `js/site.js`, `images/favicon.png`, `images/hero-campus.jpg`, the three README files, this `AGENTS.md`, and `LICENSE` as the complete public artifact.
 - `NextWeb4/website-source` is the private source of truth; this repository is not a development checkout.
 
 ## 2. Run commands
@@ -14,6 +14,7 @@
 - Current runtime tree has no build command; `python scripts/build-public.py` belongs to private `NextWeb4/website-source`.
 
 ## 5. Code style
+- The root `LICENSE` is a rights and provenance notice, not an open-source license. Preserve its no-grant language, third-party carve-out, rights holder, and exact contact address; do not replace it with an SPDX license without explicit authorization.
 - Keep the exact centered Shields language row with visible labels `English`, `简体中文`, and `日本語` in all three README files.
 - Keep README facts, paths, numbers, links, images, and code fences aligned across languages; do not add private-source paths or credentials.
 - Preserve UTF-8, semantic HTML, safe text assignment, fixed responsive dimensions, and nonempty image alt text.
@@ -32,7 +33,7 @@
 - Do not replace the SVG language row with browser-translatable plain text or add unlicensed decorative assets.
 
 ## 8. Completion criteria
-- The public tree matches the private build allowlist exactly: nine browser runtime files plus the three README files and this `AGENTS.md` (13 files total).
+- The public tree matches the private build allowlist exactly: nine browser runtime files plus the three README files, this `AGENTS.md`, and `LICENSE` (14 files total).
 - All three README files contain the same runtime facts and reciprocal language links.
 - The homepage, 404 page, local JSON overlay, images, keyboard interactions, fallback content, and canonical URLs work through an HTTP preview.
 
@@ -45,4 +46,4 @@
 - Manual runtime edits are temporary and may be overwritten by deployment.
 - The public tree is inspectable by design; it must not contain source-only files or secrets.
 - GitHub API availability and unauthenticated rate limits, scheduled metadata freshness, wallpaper, Shields, and Pages are external dependencies; fresh cache, the dated same-origin feed, the complete emergency project snapshot, and the solid-color fallback must remain usable.
-- No license file was detected; reuse rights for code, writing, JSON, and images are not granted by public visibility.
+- The root rights and provenance notice confirms that public visibility grants no reuse rights for code, writing, JSON, or images.

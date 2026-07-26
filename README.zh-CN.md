@@ -53,6 +53,7 @@
 | `images/hero-campus.jpg` | 首页首屏照片 |
 | `README.md`、`README.zh-CN.md`、`README.ja.md` | 独立的英文、简体中文和日文运行版说明 |
 | `AGENTS.md` | 审查生成运行版仓库的规则 |
+| `LICENSE` | 权利与来源声明；不授予开源许可 |
 
 `admin/`、`backend/`、`tests/`、`.github/`、`scripts/`、私有历史和备份等仅源码路径会被有意排除。
 
@@ -100,4 +101,6 @@ python -m http.server 8000 --bind 127.0.0.1
 
 ## 状态、贡献与许可证
 
-截至 2026-07-22 审计时，本仓库公开、活跃、未归档且启用了 Pages。贡献应在 `NextWeb4/website-source` 中完成；若公开仓库启用了 Issue，可在那里报告可复现的运行版问题。当前未发现许可证文件，公开可见不等于获得代码、文字、JSON 或图片的复用权利。
+请参阅 [LICENSE](LICENSE)。该文件是权利与来源声明，并非开源许可证；它不授予使用、复制、修改、部署或再分发项目自有材料的许可。第三方材料仍受其各自权利与条款约束。
+
+截至 2026-07-22 审计时，本仓库公开、活跃、未归档且启用了 Pages。贡献应在 `NextWeb4/website-source` 中完成；若公开仓库启用了 Issue，可在那里报告可复现的运行版问题。

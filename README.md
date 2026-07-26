@@ -53,6 +53,7 @@ The deployment workflow replaces the public tree from a private-source allowlist
 | `images/hero-campus.jpg` | Homepage hero photograph |
 | `README.md`, `README.zh-CN.md`, `README.ja.md` | Independent English, Simplified Chinese, and Japanese runtime guides |
 | `AGENTS.md` | Rules for reviewing this generated runtime repository |
+| `LICENSE` | Rights and provenance notice; it grants no open-source permission |
 
 Source-only paths such as `admin/`, `backend/`, `tests/`, `.github/`, `scripts/`, private history, and backups are intentionally absent.
 
@@ -100,4 +101,6 @@ The public repository must never receive the private source tree, backend, admin
 
 ## Status, contribution, and license
 
-At the 2026-07-22 audit, this repository was public, active, unarchived, and Pages-enabled. Contributions should be made in `NextWeb4/website-source`; report reproducible runtime issues with the public repository issue tracker when enabled. No license file was detected, so public availability does not by itself grant reuse rights for the code, writing, JSON, or images.
+See [LICENSE](LICENSE). It is a rights and provenance notice, not an open-source license: it grants no permission to use, copy, modify, deploy, or redistribute original project material. Third-party material remains subject to its own rights and terms.
+
+At the 2026-07-22 audit, this repository was public, active, unarchived, and Pages-enabled. Contributions should be made in `NextWeb4/website-source`; report reproducible runtime issues with the public repository issue tracker when enabled.
