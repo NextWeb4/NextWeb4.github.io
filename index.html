@@ -43,7 +43,7 @@
       }, 2000);
     }());
   </script>
-  <link rel="stylesheet" href="css/site.css?v=20260726-1">
+  <link rel="stylesheet" href="css/site.css?v=20260726-4">
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">跳到主要内容</a>
@@ -97,7 +97,7 @@
           <p class="eyebrow"><span class="section-index" aria-hidden="true">01</span><span data-i18n="hero_eyebrow">交易复盘 / 写作 / 本地工具</span></p>
           <div class="hero-intro">
             <h1 id="hero-title" data-i18n="hero_title" data-typewriter aria-label="向世界交付你的价值">
-              <button class="hero-title-trigger" type="button" data-typewriter-trigger aria-label="重播标题打字动画" title="重播标题打字动画" data-i18n-attr="aria-label:typewriter_replay,title:typewriter_replay" disabled>
+              <button class="hero-title-trigger" type="button" data-typewriter-trigger aria-label="切换随机标题" title="切换随机标题" data-i18n-attr="aria-label:typewriter_switch,title:typewriter_switch" disabled>
                 <span class="hero-title-reserve" data-typewriter-reserve aria-hidden="true">向世界交付你的价值</span>
                 <span class="hero-title-visual" data-typewriter-visual aria-hidden="true">向世界交付你的价值</span>
               </button>
@@ -227,7 +227,7 @@
             <h2 id="work-title" data-i18n="work_title">项目的使用与更新</h2>
           </div>
           <div class="project-heading-aside">
-            <p data-i18n="work_intro">完整读取 NextWeb4 的公开项目：优先连接 GitHub 实时数据，并在限流时使用最近同步结果；描述、Topics、Stars 与交付时间都可核对和排序。</p>
+            <p data-i18n="work_intro">描述、Topics、Stars 和更新时间直接同步 GitHub；先看四个主要项目，需要时再展开全部仓库。</p>
             <div class="project-controls js-only-inline">
               <span class="project-sync-status" role="status" aria-live="polite" data-project-sync-status data-project-sync-state="loading">正在同步 GitHub</span>
               <div class="project-control-actions">
@@ -266,6 +266,13 @@
             </article>
           </noscript>
         </div>
+        <div class="project-disclosure" data-project-disclosure hidden>
+          <button class="project-toggle" type="button" aria-controls="github-projects" aria-expanded="false" aria-label="展开全部项目" data-project-toggle>
+            <span data-project-toggle-label>展开全部项目</span>
+            <span class="project-toggle-count" data-project-toggle-count aria-hidden="true">04 / 04</span>
+            <span class="project-toggle-icon" data-project-toggle-icon aria-hidden="true">↓</span>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -290,7 +297,8 @@
         <ul class="skill-list" aria-label="技能与技术" data-i18n-attr="aria-label:skills_list_aria">
           <li data-reveal data-capability-line="automation">
             <span data-i18n="skill_automation_title">桌面产品与本地优先工具</span>
-            <p data-i18n="skill_automation_text">用 Python / PySide6、.NET / WinUI 和 Tauri，把局域网传输、翻译、号码与邮箱管理做成可安装、可备份、可审计的桌面产品。</p>
+            <p data-i18n="skill_automation_text" data-capability-summary="automation">用 Python / PySide6、.NET / WinUI 和 Tauri，把局域网传输、翻译、号码与邮箱管理做成可安装、可备份、可审计的桌面产品。</p>
+            <div class="capability-tags" data-capability-tags="automation" hidden></div>
             <div class="skill-evidence" data-capability-projects="automation">
               <a href="https://github.com/NextWeb4/lan-file-transfer" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_automation_link_1">局域网文件传输</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
               <a href="https://github.com/NextWeb4/deepseek-translation-studio" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_automation_link_2">DeepSeek 翻译工作台</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
@@ -299,15 +307,18 @@
           </li>
           <li data-reveal data-capability-line="network">
             <span data-i18n="skill_network_title">配置、网络与离线工作流</span>
-            <p data-i18n="skill_network_text">围绕 Clash / OpenClash / Mihomo YAML、字幕处理和文件夹保护，把高频本地操作整理成可检查、可导出、可回滚的离线流程。</p>
+            <p data-i18n="skill_network_text" data-capability-summary="network">围绕 Clash / OpenClash / Mihomo YAML、字幕处理和文件夹保护，把高频本地操作整理成可检查、可导出、可回滚的离线流程。</p>
+            <div class="capability-tags" data-capability-tags="network" hidden></div>
             <div class="skill-evidence" data-capability-projects="network">
               <a href="https://github.com/NextWeb4/yaml-proxy-editor" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_network_link_1">YAML 配置工作台</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
               <a href="https://github.com/NextWeb4/offline-utility-suite" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_network_link_2">离线工具套件</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
+              <a href="https://github.com/NextWeb4/hacking.script" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_network_link_3">安全脚本练习</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
             </div>
           </li>
           <li data-reveal data-capability-line="search">
             <span data-i18n="skill_search_title">检索、提示词与内容工程</span>
-            <p data-i18n="skill_search_text">把 NFKC 归一化、中文二元分词与字段加权用于博客检索，同时把提示词和照片元数据整理成可搜索、可复用的本地内容资产。</p>
+            <p data-i18n="skill_search_text" data-capability-summary="search">把 NFKC 归一化、中文二元分词与字段加权用于博客检索，同时把提示词和照片元数据整理成可搜索、可复用的本地内容资产。</p>
+            <div class="capability-tags" data-capability-tags="search" hidden></div>
             <div class="skill-evidence" data-capability-projects="search">
               <a href="https://github.com/NextWeb4/tips-prompt-manager" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_search_link_1">提示词管理器</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
               <a href="https://github.com/NextWeb4/Private" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_search_link_2">博客检索实现</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
@@ -316,7 +327,8 @@
           </li>
           <li data-reveal data-capability-line="delivery">
             <span data-i18n="skill_delivery_title">权限、安全与可恢复交付</span>
-            <p data-i18n="skill_delivery_text">把用户组权限、操作审计、AES-256-GCM 加密、SQLite 备份与发布校验放进交付链路，让工具不仅能运行，也能恢复和追责。</p>
+            <p data-i18n="skill_delivery_text" data-capability-summary="delivery">把用户组权限、操作审计、AES-256-GCM 加密、SQLite 备份与发布校验放进交付链路，让工具不仅能运行，也能恢复和追责。</p>
+            <div class="capability-tags" data-capability-tags="delivery" hidden></div>
             <div class="skill-evidence" data-capability-projects="delivery">
               <a href="https://github.com/NextWeb4/lan-file-transfer" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_delivery_link_1">权限与操作审计</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
               <a href="https://github.com/NextWeb4/folder-locker" target="_blank" rel="noopener noreferrer"><span class="evidence-index" aria-hidden="true"></span><span data-i18n="skill_delivery_link_2">离线文件夹加密</span><span class="evidence-arrow" aria-hidden="true">↗</span></a>
@@ -380,6 +392,6 @@
     <a href="https://nextweb4.github.io/Private/" target="_blank" rel="noopener noreferrer" data-i18n="footer_blog">博客</a>
   </footer>
 
-  <script src="js/site.js?v=20260726-1" defer></script>
+  <script src="js/site.js?v=20260726-4" defer></script>
 </body>
 </html>
