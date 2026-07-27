@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-07-27T12:15:57Z",
+  "generated_at": "2026-07-27T15:37:26Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -103,7 +103,7 @@
       "name": "deepseek-translation-studio",
       "description": "Windows Python/PySide6 translation studio for DeepSeek Web/API workflows, SRT continuation, capture, and packaging.",
       "language": "Python",
-      "updated_at": "2026-07-27T02:15:24Z",
+      "updated_at": "2026-07-27T12:55:40Z",
       "pushed_at": "2026-07-22T14:14:37Z",
       "html_url": "https://github.com/NextWeb4/deepseek-translation-studio",
       "homepage": "https://nextweb4.github.io/",
@@ -119,13 +119,13 @@
         "translation",
         "windows"
       ],
-      "stargazers_count": 164
+      "stargazers_count": 165
     },
     {
       "name": "folder-locker",
       "description": "Offline folder locker with AES-256-GCM encrypted containers and optional Windows ACL quick lock",
       "language": "Python",
-      "updated_at": "2026-07-27T02:15:25Z",
+      "updated_at": "2026-07-27T12:46:02Z",
       "pushed_at": "2026-07-22T14:14:48Z",
       "html_url": "https://github.com/NextWeb4/folder-locker",
       "homepage": "https://nextweb4.github.io/",
@@ -140,14 +140,14 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 168
+      "stargazers_count": 169
     },
     {
       "name": "gw",
       "description": "HxHwang Gw 公文事务与写作管理系统",
       "language": "HTML",
-      "updated_at": "2026-07-27T12:15:57Z",
-      "pushed_at": "2026-07-27T12:13:58Z",
+      "updated_at": "2026-07-27T15:37:26Z",
+      "pushed_at": "2026-07-27T15:34:43Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
       "topics": [],
@@ -176,7 +176,7 @@
       "name": "lan-file-transfer",
       "description": "Local LAN file transfer desktop app with user/group permissions and audit logs.",
       "language": "Python",
-      "updated_at": "2026-07-27T09:56:57Z",
+      "updated_at": "2026-07-27T15:23:53Z",
       "pushed_at": "2026-07-22T14:15:04Z",
       "html_url": "https://github.com/NextWeb4/lan-file-transfer",
       "homepage": "https://nextweb4.github.io/",
@@ -191,7 +191,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 263
+      "stargazers_count": 264
     },
     {
       "name": "NextWeb4",
