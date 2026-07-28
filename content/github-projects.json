@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-07-28T07:44:36Z",
+  "generated_at": "2026-07-28T10:20:16Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -146,8 +146,8 @@
       "name": "gw",
       "description": "HxHwang Gw 公文事务与写作管理系统",
       "language": "HTML",
-      "updated_at": "2026-07-28T07:44:36Z",
-      "pushed_at": "2026-07-28T07:43:29Z",
+      "updated_at": "2026-07-28T10:20:01Z",
+      "pushed_at": "2026-07-28T10:20:16Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
       "topics": [],
