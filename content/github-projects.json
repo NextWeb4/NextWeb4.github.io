@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-01T09:04:22Z",
+  "generated_at": "2026-08-01T09:22:05Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -146,8 +146,8 @@
       "name": "gw",
       "description": "Local-first official-document, task, drafting, reporting, and controlled-sync system for Web and Electron.",
       "language": "HTML",
-      "updated_at": "2026-08-01T09:04:22Z",
-      "pushed_at": "2026-08-01T09:04:10Z",
+      "updated_at": "2026-08-01T09:22:05Z",
+      "pushed_at": "2026-08-01T09:22:00Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
       "topics": [
