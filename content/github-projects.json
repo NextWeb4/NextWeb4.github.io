@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-04T04:30:26Z",
+  "generated_at": "2026-08-04T06:05:19Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -27,7 +27,7 @@
       "name": "alias-cockpit",
       "description": "Windows local email-alias cockpit built with .NET and WinUI for alias generation, markers, local storage, and release packaging.",
       "language": "C#",
-      "updated_at": "2026-07-30T04:35:01Z",
+      "updated_at": "2026-08-04T06:04:25Z",
       "pushed_at": "2026-07-30T04:34:50Z",
       "html_url": "https://github.com/NextWeb4/alias-cockpit",
       "homepage": "https://nextweb4.github.io/",
@@ -40,7 +40,7 @@
         "windows",
         "winui"
       ],
-      "stargazers_count": 162
+      "stargazers_count": 161
     },
     {
       "name": "C-practice",
@@ -103,7 +103,7 @@
       "name": "deepseek-translation-studio",
       "description": "Windows Python/PySide6 translation studio for DeepSeek Web/API workflows, SRT continuation, capture, and packaging.",
       "language": "Python",
-      "updated_at": "2026-07-30T04:35:17Z",
+      "updated_at": "2026-08-04T06:04:23Z",
       "pushed_at": "2026-07-30T04:35:10Z",
       "html_url": "https://github.com/NextWeb4/deepseek-translation-studio",
       "homepage": "https://nextweb4.github.io/",
@@ -119,13 +119,13 @@
         "translation",
         "windows"
       ],
-      "stargazers_count": 166
+      "stargazers_count": 165
     },
     {
       "name": "folder-locker",
       "description": "Offline folder locker with AES-256-GCM encrypted containers and optional Windows ACL quick lock",
       "language": "Python",
-      "updated_at": "2026-07-29T20:23:04Z",
+      "updated_at": "2026-08-04T06:04:32Z",
       "pushed_at": "2026-07-22T14:14:48Z",
       "html_url": "https://github.com/NextWeb4/folder-locker",
       "homepage": "https://nextweb4.github.io/",
@@ -140,13 +140,13 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 171
+      "stargazers_count": 170
     },
     {
       "name": "gw",
       "description": "Local-first official-document, task, drafting, reporting, and controlled-sync system for Web and Electron.",
       "language": "HTML",
-      "updated_at": "2026-08-04T04:30:26Z",
+      "updated_at": "2026-08-04T06:03:38Z",
       "pushed_at": "2026-08-04T04:30:01Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
@@ -162,7 +162,7 @@
         "typescript",
         "writing-assistant"
       ],
-      "stargazers_count": 160
+      "stargazers_count": 159
     },
     {
       "name": "hacking.script",
@@ -187,7 +187,7 @@
       "name": "lan-file-transfer",
       "description": "Local LAN file transfer desktop app with user/group permissions and audit logs.",
       "language": "Python",
-      "updated_at": "2026-08-04T04:21:17Z",
+      "updated_at": "2026-08-04T06:03:38Z",
       "pushed_at": "2026-07-22T14:15:04Z",
       "html_url": "https://github.com/NextWeb4/lan-file-transfer",
       "homepage": "https://nextweb4.github.io/",
@@ -202,7 +202,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 278
+      "stargazers_count": 277
     },
     {
       "name": "NextWeb4",
@@ -224,7 +224,7 @@
       "name": "official-document-ai-assistant",
       "description": "Local official-document review, formatting repair, and compliant export desktop assistant.",
       "language": "Python",
-      "updated_at": "2026-07-30T05:07:02Z",
+      "updated_at": "2026-08-04T06:04:17Z",
       "pushed_at": "2026-07-30T05:05:55Z",
       "html_url": "https://github.com/NextWeb4/official-document-ai-assistant",
       "homepage": "",
@@ -240,13 +240,13 @@
         "typescript",
         "writing-assistant"
       ],
-      "stargazers_count": 164
+      "stargazers_count": 163
     },
     {
       "name": "offline-utility-suite",
       "description": "Offline folder protection and SRT subtitle utilities",
       "language": "Python",
-      "updated_at": "2026-07-27T02:15:25Z",
+      "updated_at": "2026-08-04T06:05:19Z",
       "pushed_at": "2026-07-22T14:15:25Z",
       "html_url": "https://github.com/NextWeb4/offline-utility-suite",
       "homepage": "https://nextweb4.github.io/",
@@ -262,13 +262,13 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 158
+      "stargazers_count": 157
     },
     {
       "name": "phone-record-manager",
       "description": "Local Windows phone-number binding record manager built with Python, PySide6, SQLite, backups, and release packaging.",
       "language": "Python",
-      "updated_at": "2026-07-30T04:36:19Z",
+      "updated_at": "2026-08-04T06:04:21Z",
       "pushed_at": "2026-07-30T04:36:08Z",
       "html_url": "https://github.com/NextWeb4/phone-record-manager",
       "homepage": "https://nextweb4.github.io/",
@@ -282,13 +282,13 @@
         "sqlite",
         "windows"
       ],
-      "stargazers_count": 163
+      "stargazers_count": 162
     },
     {
       "name": "photo-metadata-editor",
       "description": "Windows desktop EXIF/XMP/IPTC photo metadata editor powered by ExifTool.",
       "language": "Python",
-      "updated_at": "2026-07-30T04:32:10Z",
+      "updated_at": "2026-08-04T06:04:27Z",
       "pushed_at": "2026-07-22T14:15:38Z",
       "html_url": "https://github.com/NextWeb4/photo-metadata-editor",
       "homepage": "",
@@ -304,7 +304,7 @@
         "windows",
         "xmp"
       ],
-      "stargazers_count": 162
+      "stargazers_count": 161
     },
     {
       "name": "Python-Basic",
@@ -328,7 +328,7 @@
       "name": "tips-prompt-manager",
       "description": "Offline prompt engineering manager for Windows",
       "language": "Python",
-      "updated_at": "2026-07-27T02:15:25Z",
+      "updated_at": "2026-08-04T06:05:17Z",
       "pushed_at": "2026-07-22T14:15:55Z",
       "html_url": "https://github.com/NextWeb4/tips-prompt-manager",
       "homepage": "https://nextweb4.github.io/",
@@ -343,7 +343,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 157
+      "stargazers_count": 156
     },
     {
       "name": "VB-practice",
@@ -385,7 +385,7 @@
       "name": "yaml-proxy-editor",
       "description": "Tauri, React, and TypeScript desktop workbench for local Clash/OpenClash/Mihomo YAML editing, audit, and export.",
       "language": "TypeScript",
-      "updated_at": "2026-07-30T04:37:05Z",
+      "updated_at": "2026-08-04T06:04:19Z",
       "pushed_at": "2026-07-30T04:36:44Z",
       "html_url": "https://github.com/NextWeb4/yaml-proxy-editor",
       "homepage": "https://nextweb4.github.io/",
@@ -401,7 +401,7 @@
         "typescript",
         "yaml"
       ],
-      "stargazers_count": 165
+      "stargazers_count": 164
     }
   ]
 }
