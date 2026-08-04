@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-03T16:18:34Z",
+  "generated_at": "2026-08-04T04:30:26Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -146,8 +146,8 @@
       "name": "gw",
       "description": "Local-first official-document, task, drafting, reporting, and controlled-sync system for Web and Electron.",
       "language": "HTML",
-      "updated_at": "2026-08-01T17:02:26Z",
-      "pushed_at": "2026-08-01T17:05:04Z",
+      "updated_at": "2026-08-04T04:30:26Z",
+      "pushed_at": "2026-08-04T04:30:01Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
       "topics": [
@@ -187,7 +187,7 @@
       "name": "lan-file-transfer",
       "description": "Local LAN file transfer desktop app with user/group permissions and audit logs.",
       "language": "Python",
-      "updated_at": "2026-08-03T16:18:34Z",
+      "updated_at": "2026-08-04T04:21:17Z",
       "pushed_at": "2026-07-22T14:15:04Z",
       "html_url": "https://github.com/NextWeb4/lan-file-transfer",
       "homepage": "https://nextweb4.github.io/",
@@ -202,7 +202,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 277
+      "stargazers_count": 278
     },
     {
       "name": "NextWeb4",
