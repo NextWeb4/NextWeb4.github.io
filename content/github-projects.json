@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-05T05:26:13Z",
+  "generated_at": "2026-08-05T14:01:06Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -103,7 +103,7 @@
       "name": "deepseek-translation-studio",
       "description": "Windows Python/PySide6 translation studio for DeepSeek Web/API workflows, SRT continuation, capture, and packaging.",
       "language": "Python",
-      "updated_at": "2026-08-04T06:04:23Z",
+      "updated_at": "2026-08-05T13:31:01Z",
       "pushed_at": "2026-07-30T04:35:10Z",
       "html_url": "https://github.com/NextWeb4/deepseek-translation-studio",
       "homepage": "https://nextweb4.github.io/",
@@ -119,7 +119,7 @@
         "translation",
         "windows"
       ],
-      "stargazers_count": 165
+      "stargazers_count": 166
     },
     {
       "name": "folder-locker",
@@ -146,8 +146,8 @@
       "name": "gw",
       "description": "Local-first official-document, task, drafting, reporting, and controlled-sync system for Web and Electron.",
       "language": "HTML",
-      "updated_at": "2026-08-04T13:33:44Z",
-      "pushed_at": "2026-08-04T13:32:31Z",
+      "updated_at": "2026-08-05T14:01:06Z",
+      "pushed_at": "2026-08-05T14:00:21Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
       "topics": [
