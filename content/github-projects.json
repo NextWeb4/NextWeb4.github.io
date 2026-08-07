@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-06T14:05:25Z",
+  "generated_at": "2026-08-06T22:45:20Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -146,8 +146,8 @@
       "name": "gw",
       "description": "Local-first official-document, task, drafting, reporting, and controlled-sync system for Web and Electron.",
       "language": "HTML",
-      "updated_at": "2026-08-06T14:05:25Z",
-      "pushed_at": "2026-08-06T14:02:34Z",
+      "updated_at": "2026-08-06T16:46:46Z",
+      "pushed_at": "2026-08-06T16:46:49Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
       "topics": [
@@ -187,7 +187,7 @@
       "name": "lan-file-transfer",
       "description": "Local LAN file transfer desktop app with user/group permissions and audit logs.",
       "language": "Python",
-      "updated_at": "2026-08-06T08:01:40Z",
+      "updated_at": "2026-08-06T22:45:20Z",
       "pushed_at": "2026-07-22T14:15:04Z",
       "html_url": "https://github.com/NextWeb4/lan-file-transfer",
       "homepage": "https://nextweb4.github.io/",
@@ -202,7 +202,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 279
+      "stargazers_count": 281
     },
     {
       "name": "NextWeb4",
@@ -378,6 +378,27 @@
         "practice-exercises",
         "skills-test",
         "visual-basic"
+      ],
+      "stargazers_count": 0
+    },
+    {
+      "name": "WhisperAPIClient",
+      "description": "Windows desktop client for whole-file transcription through OpenAI-compatible Whisper APIs.",
+      "language": "Python",
+      "updated_at": "2026-08-06T14:22:47Z",
+      "pushed_at": "2026-08-06T14:23:00Z",
+      "html_url": "https://github.com/NextWeb4/WhisperAPIClient",
+      "homepage": "",
+      "topics": [
+        "audio-transcription",
+        "desktop-app",
+        "large-file-upload",
+        "openai-compatible",
+        "pyside6",
+        "python",
+        "speech-to-text",
+        "whisper",
+        "windows"
       ],
       "stargazers_count": 0
     },
