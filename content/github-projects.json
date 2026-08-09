@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-09T05:03:17Z",
+  "generated_at": "2026-08-09T09:31:45Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -328,7 +328,7 @@
       "name": "tips-prompt-manager",
       "description": "Offline prompt engineering manager for Windows",
       "language": "Python",
-      "updated_at": "2026-08-04T06:05:17Z",
+      "updated_at": "2026-08-09T09:31:45Z",
       "pushed_at": "2026-07-22T14:15:55Z",
       "html_url": "https://github.com/NextWeb4/tips-prompt-manager",
       "homepage": "https://nextweb4.github.io/",
@@ -343,7 +343,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 156
+      "stargazers_count": 157
     },
     {
       "name": "VB-practice",
