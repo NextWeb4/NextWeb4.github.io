@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-09T21:30:27Z",
+  "generated_at": "2026-08-10T09:04:02Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -125,7 +125,7 @@
       "name": "folder-locker",
       "description": "Offline folder locker with AES-256-GCM encrypted containers and optional Windows ACL quick lock",
       "language": "Python",
-      "updated_at": "2026-08-05T05:26:13Z",
+      "updated_at": "2026-08-10T09:04:02Z",
       "pushed_at": "2026-07-22T14:14:48Z",
       "html_url": "https://github.com/NextWeb4/folder-locker",
       "homepage": "https://nextweb4.github.io/",
@@ -140,7 +140,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 171
+      "stargazers_count": 172
     },
     {
       "name": "gw",
