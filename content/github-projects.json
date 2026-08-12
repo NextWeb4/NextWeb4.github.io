@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-12T06:07:32Z",
+  "generated_at": "2026-08-12T07:22:55Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -288,7 +288,7 @@
       "name": "photo-metadata-editor",
       "description": "Windows desktop EXIF/XMP/IPTC photo metadata editor powered by ExifTool.",
       "language": "Python",
-      "updated_at": "2026-08-06T08:16:11Z",
+      "updated_at": "2026-08-12T07:22:55Z",
       "pushed_at": "2026-07-22T14:15:38Z",
       "html_url": "https://github.com/NextWeb4/photo-metadata-editor",
       "homepage": "",
@@ -304,7 +304,7 @@
         "windows",
         "xmp"
       ],
-      "stargazers_count": 162
+      "stargazers_count": 163
     },
     {
       "name": "Python-Basic",
