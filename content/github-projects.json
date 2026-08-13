@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-13T05:19:48Z",
+  "generated_at": "2026-08-13T20:31:57Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -103,7 +103,7 @@
       "name": "deepseek-translation-studio",
       "description": "Windows Python/PySide6 translation studio for DeepSeek Web/API workflows, SRT continuation, capture, and packaging.",
       "language": "Python",
-      "updated_at": "2026-08-12T06:07:32Z",
+      "updated_at": "2026-08-13T19:21:38Z",
       "pushed_at": "2026-07-30T04:35:10Z",
       "html_url": "https://github.com/NextWeb4/deepseek-translation-studio",
       "homepage": "https://nextweb4.github.io/",
@@ -119,7 +119,7 @@
         "translation",
         "windows"
       ],
-      "stargazers_count": 167
+      "stargazers_count": 168
     },
     {
       "name": "folder-locker",
@@ -268,7 +268,7 @@
       "name": "phone-record-manager",
       "description": "Local Windows phone-number binding record manager built with Python, PySide6, SQLite, backups, and release packaging.",
       "language": "Python",
-      "updated_at": "2026-08-04T06:04:21Z",
+      "updated_at": "2026-08-13T20:31:57Z",
       "pushed_at": "2026-07-30T04:36:08Z",
       "html_url": "https://github.com/NextWeb4/phone-record-manager",
       "homepage": "https://nextweb4.github.io/",
@@ -282,7 +282,7 @@
         "sqlite",
         "windows"
       ],
-      "stargazers_count": 162
+      "stargazers_count": 163
     },
     {
       "name": "photo-metadata-editor",
