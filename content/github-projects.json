@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-14T16:43:25Z",
+  "generated_at": "2026-08-14T17:04:53Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -27,7 +27,7 @@
       "name": "alias-cockpit",
       "description": "Windows local email-alias cockpit built with .NET and WinUI for alias generation, markers, local storage, and release packaging.",
       "language": "C#",
-      "updated_at": "2026-08-13T05:19:48Z",
+      "updated_at": "2026-08-14T17:04:53Z",
       "pushed_at": "2026-07-30T04:34:50Z",
       "html_url": "https://github.com/NextWeb4/alias-cockpit",
       "homepage": "https://nextweb4.github.io/",
@@ -40,7 +40,7 @@
         "windows",
         "winui"
       ],
-      "stargazers_count": 162
+      "stargazers_count": 163
     },
     {
       "name": "C-practice",
