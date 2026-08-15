@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-15T12:50:15Z",
+  "generated_at": "2026-08-15T18:12:21Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -187,7 +187,7 @@
       "name": "lan-file-transfer",
       "description": "Local LAN file transfer desktop app with user/group permissions and audit logs.",
       "language": "Python",
-      "updated_at": "2026-08-14T11:44:07Z",
+      "updated_at": "2026-08-15T17:33:49Z",
       "pushed_at": "2026-07-22T14:15:04Z",
       "html_url": "https://github.com/NextWeb4/lan-file-transfer",
       "homepage": "https://nextweb4.github.io/",
@@ -202,7 +202,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 295
+      "stargazers_count": 294
     },
     {
       "name": "NextWeb4",
@@ -406,7 +406,7 @@
       "name": "yaml-proxy-editor",
       "description": "Tauri, React, and TypeScript desktop workbench for local Clash/OpenClash/Mihomo YAML editing, audit, and export.",
       "language": "TypeScript",
-      "updated_at": "2026-08-06T05:57:56Z",
+      "updated_at": "2026-08-15T18:12:21Z",
       "pushed_at": "2026-07-30T04:36:44Z",
       "html_url": "https://github.com/NextWeb4/yaml-proxy-editor",
       "homepage": "https://nextweb4.github.io/",
@@ -422,7 +422,7 @@
         "typescript",
         "yaml"
       ],
-      "stargazers_count": 165
+      "stargazers_count": 166
     }
   ]
 }
