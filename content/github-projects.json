@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-15T12:29:23Z",
+  "generated_at": "2026-08-15T12:50:15Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -246,7 +246,7 @@
       "name": "offline-utility-suite",
       "description": "Offline folder protection and SRT subtitle utilities",
       "language": "Python",
-      "updated_at": "2026-08-04T06:05:19Z",
+      "updated_at": "2026-08-15T12:50:15Z",
       "pushed_at": "2026-07-22T14:15:25Z",
       "html_url": "https://github.com/NextWeb4/offline-utility-suite",
       "homepage": "https://nextweb4.github.io/",
@@ -262,7 +262,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 157
+      "stargazers_count": 158
     },
     {
       "name": "phone-record-manager",
