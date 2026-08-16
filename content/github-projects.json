@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-08-16T15:01:41Z",
+  "generated_at": "2026-08-16T16:06:09Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -146,8 +146,8 @@
       "name": "gw",
       "description": "Local-first official-document, task, drafting, reporting, and controlled-sync system for Web and Electron.",
       "language": "HTML",
-      "updated_at": "2026-08-16T15:01:41Z",
-      "pushed_at": "2026-08-16T15:01:38Z",
+      "updated_at": "2026-08-16T15:30:52Z",
+      "pushed_at": "2026-08-16T15:30:33Z",
       "html_url": "https://github.com/NextWeb4/gw",
       "homepage": "https://nextweb4.github.io/gw/",
       "topics": [
@@ -187,7 +187,7 @@
       "name": "lan-file-transfer",
       "description": "Local LAN file transfer desktop app with user/group permissions and audit logs.",
       "language": "Python",
-      "updated_at": "2026-08-16T05:45:42Z",
+      "updated_at": "2026-08-16T15:47:41Z",
       "pushed_at": "2026-07-22T14:15:04Z",
       "html_url": "https://github.com/NextWeb4/lan-file-transfer",
       "homepage": "https://nextweb4.github.io/",
@@ -202,7 +202,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 295
+      "stargazers_count": 296
     },
     {
       "name": "NextWeb4",
@@ -246,7 +246,7 @@
       "name": "offline-utility-suite",
       "description": "Offline folder protection and SRT subtitle utilities",
       "language": "Python",
-      "updated_at": "2026-08-15T12:50:15Z",
+      "updated_at": "2026-08-16T16:06:09Z",
       "pushed_at": "2026-07-22T14:15:25Z",
       "html_url": "https://github.com/NextWeb4/offline-utility-suite",
       "homepage": "https://nextweb4.github.io/",
@@ -262,7 +262,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 158
+      "stargazers_count": 159
     },
     {
       "name": "phone-record-manager",
@@ -328,7 +328,7 @@
       "name": "tips-prompt-manager",
       "description": "Offline prompt engineering manager for Windows",
       "language": "Python",
-      "updated_at": "2026-08-14T16:43:25Z",
+      "updated_at": "2026-08-16T15:31:21Z",
       "pushed_at": "2026-07-22T14:15:55Z",
       "html_url": "https://github.com/NextWeb4/tips-prompt-manager",
       "homepage": "https://nextweb4.github.io/",
@@ -343,7 +343,7 @@
         "tkinter",
         "windows"
       ],
-      "stargazers_count": 158
+      "stargazers_count": 159
     },
     {
       "name": "VB-practice",
