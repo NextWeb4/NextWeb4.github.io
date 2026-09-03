@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-09-02T12:10:39Z",
+  "generated_at": "2026-09-03T13:12:52Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -224,7 +224,7 @@
       "name": "official-document-ai-assistant",
       "description": "Local official-document review, formatting repair, and compliant export desktop assistant.",
       "language": "Python",
-      "updated_at": "2026-08-21T12:48:01Z",
+      "updated_at": "2026-09-03T13:12:52Z",
       "pushed_at": "2026-07-30T05:05:55Z",
       "html_url": "https://github.com/NextWeb4/official-document-ai-assistant",
       "homepage": "",
@@ -240,7 +240,7 @@
         "typescript",
         "writing-assistant"
       ],
-      "stargazers_count": 166
+      "stargazers_count": 167
     },
     {
       "name": "offline-utility-suite",
