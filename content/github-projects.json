@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "owner": "NextWeb4",
-  "generated_at": "2026-10-26T03:15:45Z",
+  "generated_at": "2026-10-26T18:15:43Z",
   "source": "https://api.github.com/users/NextWeb4/repos",
   "repositories": [
     {
@@ -224,7 +224,7 @@
       "name": "official-document-ai-assistant",
       "description": "Local official-document review, formatting repair, and compliant export desktop assistant.",
       "language": "Python",
-      "updated_at": "2026-10-21T20:17:11Z",
+      "updated_at": "2026-10-26T18:15:43Z",
       "pushed_at": "2026-07-30T05:05:55Z",
       "html_url": "https://github.com/NextWeb4/official-document-ai-assistant",
       "homepage": "",
@@ -240,7 +240,7 @@
         "typescript",
         "writing-assistant"
       ],
-      "stargazers_count": 165
+      "stargazers_count": 166
     },
     {
       "name": "offline-utility-suite",
@@ -406,7 +406,7 @@
       "name": "yaml-proxy-editor",
       "description": "Tauri, React, and TypeScript desktop workbench for local Clash/OpenClash/Mihomo YAML editing, audit, and export.",
       "language": "TypeScript",
-      "updated_at": "2026-10-17T07:06:13Z",
+      "updated_at": "2026-10-26T18:12:49Z",
       "pushed_at": "2026-07-30T04:36:44Z",
       "html_url": "https://github.com/NextWeb4/yaml-proxy-editor",
       "homepage": "https://nextweb4.github.io/",
@@ -422,7 +422,7 @@
         "typescript",
         "yaml"
       ],
-      "stargazers_count": 162
+      "stargazers_count": 163
     }
   ]
 }
